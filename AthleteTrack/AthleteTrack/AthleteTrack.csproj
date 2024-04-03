@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\img\Magnifying_glass_icon.svg.png" />
+  </ItemGroup>
+
 </Project>
