@@ -17,6 +17,10 @@
       "PackagePath": "staticwebassets\\img\\FullLogoAthleteTrack.png"
     },
     {
+      "Id": "C:\\Users\\User\\Documents\\GitHub\\AtheleteTrack-Olivier-van-Gelder\\AthleteTrack\\AthleteTrack\\wwwroot\\img\\GroupIcon.jpg",
+      "PackagePath": "staticwebassets\\img\\GroupIcon.jpg"
+    },
+    {
       "Id": "C:\\Users\\User\\Documents\\GitHub\\AtheleteTrack-Olivier-van-Gelder\\AthleteTrack\\AthleteTrack\\wwwroot\\img\\LogoAthleteTrack.png",
       "PackagePath": "staticwebassets\\img\\LogoAthleteTrack.png"
     },

@@ -1,22 +1,27 @@
 ﻿@{
-    ViewData["Title"] = "Trainingsschema";
+    ViewData["Title"] = "Wedstrijdschema";
 }
 <div class="container">
     <div class="row text-center mb-5">
         <div class="col mt-4">
-            <h2>-Trainingsschema naam-</h2>
+            <h2>-Wedstrijdschema naam-</h2>
         </div>
     </div>
     <div class="row">
         <div class="col ms-5 me-5">
             <div class="row">
-                <h4>Tijdsduur:</h4>
+                <div class="col">
+                    <h4>Datum:</h4>
+                </div>
+                <div class="col">
+                    <h4>Tijdsduur:</h4>
+                </div>
             </div>
             <div class="row border border-dark">
                 <div class="row ms-2 mt-2">
                     <div class="col ms-2">
                         <h5>
-                            Oefeningen
+                            Onderdelen
                         </h5>
                     </div>
                     <div class="col ms-2">
@@ -39,7 +44,7 @@
                     <div class="col">
                         <ul class="list-group">
                             @{
-                                for (int i = 1; i <= 3; i++)    
+                                for (int i = 1; i <= 3; i++)
                                 {
                                     <li class="list-group-item me-2 ms-2">1@(i):00</li>
                                 }
@@ -54,13 +59,23 @@
                 <h4>Info:</h4>
             </div>
             <div class="row border border-dark">
-                <div class="row ms-3 mt-3">
-                    <h6>Repetities:</h6>
+                <div class="row ms-0 mt-3">
+                    <h5><img height="50px" src="~/img/GroupIcon.jpg" />:</h5>
                 </div>
-                <div class="row ms-3 mt-2 mb-3">
-                    <h6>Beschrijving:</h6>
+                <div class="row ms-1 mt-1">
+                    <ul class="list-group">
+                        @{
+                            for (int i = 1; i <= 4; i++)
+                            {
+                                <li style="max-width:300px" class="list-group-item py-1 me-1 ms-1">Atleet @i</li>
+                            }
+                        }
+                    </ul>
+                </div>
+                <div class="row ms-1 mt-2 mb-3">
+                    <h6>Regelgeving:</h6>
                 </div>
             </div>
         </div>
     </div>
-</div>
+    </div>
