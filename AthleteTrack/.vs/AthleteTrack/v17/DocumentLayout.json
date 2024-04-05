@@ -3,24 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\User\\Documents\\GitHub\\AtheleteTrack-Olivier-van-Gelder\\AthleteTrack\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F83A472F-DAC6-4AD0-8DC9-4CA63D24CD6C}|AthleteTrack\\AthleteTrack.csproj|c:\\users\\user\\documents\\github\\atheletetrack-olivier-van-gelder\\athletetrack\\athletetrack\\models\\homemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F83A472F-DAC6-4AD0-8DC9-4CA63D24CD6C}|AthleteTrack\\AthleteTrack.csproj|solutionrelative:athletetrack\\models\\homemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F83A472F-DAC6-4AD0-8DC9-4CA63D24CD6C}|AthleteTrack\\AthleteTrack.csproj|c:\\users\\user\\documents\\github\\atheletetrack-olivier-van-gelder\\athletetrack\\athletetrack\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F83A472F-DAC6-4AD0-8DC9-4CA63D24CD6C}|AthleteTrack\\AthleteTrack.csproj|solutionrelative:athletetrack\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F83A472F-DAC6-4AD0-8DC9-4CA63D24CD6C}|AthleteTrack\\AthleteTrack.csproj|c:\\users\\user\\documents\\github\\atheletetrack-olivier-van-gelder\\athletetrack\\athletetrack\\models\\searchresultmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{F83A472F-DAC6-4AD0-8DC9-4CA63D24CD6C}|AthleteTrack\\AthleteTrack.csproj|c:\\users\\user\\documents\\github\\atheletetrack-olivier-van-gelder\\athletetrack\\athletetrack\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F83A472F-DAC6-4AD0-8DC9-4CA63D24CD6C}|AthleteTrack\\AthleteTrack.csproj|solutionrelative:athletetrack\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F83A472F-DAC6-4AD0-8DC9-4CA63D24CD6C}|AthleteTrack\\AthleteTrack.csproj|C:\\Users\\User\\Documents\\GitHub\\AtheleteTrack-Olivier-van-Gelder\\AthleteTrack\\athletetrack\\models\\searchresultmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F83A472F-DAC6-4AD0-8DC9-4CA63D24CD6C}|AthleteTrack\\AthleteTrack.csproj|solutionrelative:athletetrack\\models\\searchresultmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F83A472F-DAC6-4AD0-8DC9-4CA63D24CD6C}|AthleteTrack\\AthleteTrack.csproj|c:\\users\\user\\documents\\github\\atheletetrack-olivier-van-gelder\\athletetrack\\athletetrack\\views\\schemapages\\trainingsschema.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{F83A472F-DAC6-4AD0-8DC9-4CA63D24CD6C}|AthleteTrack\\AthleteTrack.csproj|solutionrelative:athletetrack\\views\\schemapages\\trainingsschema.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F83A472F-DAC6-4AD0-8DC9-4CA63D24CD6C}|AthleteTrack\\AthleteTrack.csproj|C:\\Users\\User\\Documents\\GitHub\\AtheleteTrack-Olivier-van-Gelder\\AthleteTrack\\athletetrack\\controllers\\schemapagescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F83A472F-DAC6-4AD0-8DC9-4CA63D24CD6C}|AthleteTrack\\AthleteTrack.csproj|solutionrelative:athletetrack\\controllers\\schemapagescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F83A472F-DAC6-4AD0-8DC9-4CA63D24CD6C}|AthleteTrack\\AthleteTrack.csproj|C:\\Users\\User\\Documents\\GitHub\\AtheleteTrack-Olivier-van-Gelder\\AthleteTrack\\athletetrack\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F83A472F-DAC6-4AD0-8DC9-4CA63D24CD6C}|AthleteTrack\\AthleteTrack.csproj|solutionrelative:athletetrack\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F83A472F-DAC6-4AD0-8DC9-4CA63D24CD6C}|AthleteTrack\\AthleteTrack.csproj|C:\\Users\\User\\Documents\\GitHub\\AtheleteTrack-Olivier-van-Gelder\\AthleteTrack\\athletetrack\\models\\homemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F83A472F-DAC6-4AD0-8DC9-4CA63D24CD6C}|AthleteTrack\\AthleteTrack.csproj|solutionrelative:athletetrack\\models\\homemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,11 +26,37 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\AtheleteTrack-Olivier-van-Gelder\\AthleteTrack\\AthleteTrack\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "AthleteTrack\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\AtheleteTrack-Olivier-van-Gelder\\AthleteTrack\\AthleteTrack\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "AthleteTrack\\Controllers\\HomeController.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAABkAAAAtAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-05T11:41:33.986Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\AtheleteTrack-Olivier-van-Gelder\\AthleteTrack\\AthleteTrack\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "AthleteTrack\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\AtheleteTrack-Olivier-van-Gelder\\AthleteTrack\\AthleteTrack\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "AthleteTrack\\Views\\Home\\Index.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-05T11:32:57.947Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "SearchResultModel.cs",
               "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\AtheleteTrack-Olivier-van-Gelder\\AthleteTrack\\AthleteTrack\\Models\\SearchResultModel.cs",
               "RelativeDocumentMoniker": "AthleteTrack\\Models\\SearchResultModel.cs",
@@ -47,53 +69,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "HomeModel.cs",
               "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\AtheleteTrack-Olivier-van-Gelder\\AthleteTrack\\AthleteTrack\\Models\\HomeModel.cs",
               "RelativeDocumentMoniker": "AthleteTrack\\Models\\HomeModel.cs",
               "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\AtheleteTrack-Olivier-van-Gelder\\AthleteTrack\\AthleteTrack\\Models\\HomeModel.cs",
               "RelativeToolTip": "AthleteTrack\\Models\\HomeModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAABAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-05T09:53:18.455Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Trainingsschema.cshtml",
-              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\AtheleteTrack-Olivier-van-Gelder\\AthleteTrack\\AthleteTrack\\Views\\Schemapages\\Trainingsschema.cshtml",
-              "RelativeDocumentMoniker": "AthleteTrack\\Views\\Schemapages\\Trainingsschema.cshtml",
-              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\AtheleteTrack-Olivier-van-Gelder\\AthleteTrack\\AthleteTrack\\Views\\Schemapages\\Trainingsschema.cshtml",
-              "RelativeToolTip": "AthleteTrack\\Views\\Schemapages\\Trainingsschema.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAADgAAAArAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-03T09:42:54.733Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "SchemapagesController.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\AtheleteTrack-Olivier-van-Gelder\\AthleteTrack\\AthleteTrack\\Controllers\\SchemapagesController.cs",
-              "RelativeDocumentMoniker": "AthleteTrack\\Controllers\\SchemapagesController.cs",
-              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\AtheleteTrack-Olivier-van-Gelder\\AthleteTrack\\AthleteTrack\\Controllers\\SchemapagesController.cs",
-              "RelativeToolTip": "AthleteTrack\\Controllers\\SchemapagesController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAuwBEAAAAaAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-03T09:24:09.117Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\AtheleteTrack-Olivier-van-Gelder\\AthleteTrack\\AthleteTrack\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "AthleteTrack\\Controllers\\HomeController.cs",
-              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\AtheleteTrack-Olivier-van-Gelder\\AthleteTrack\\AthleteTrack\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "AthleteTrack\\Controllers\\HomeController.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAsAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-03T09:24:45.388Z"
             }
           ]
         }

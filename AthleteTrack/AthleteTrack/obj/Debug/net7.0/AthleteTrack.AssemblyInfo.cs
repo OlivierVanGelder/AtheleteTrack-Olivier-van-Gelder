@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AthleteTrack")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fa10d8d8d1a3ed50910d874150239ac67b9afdba")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4a497e8dc1f3226c9de5fe19662c23b36b688f3a")]
 [assembly: System.Reflection.AssemblyProductAttribute("AthleteTrack")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AthleteTrack")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

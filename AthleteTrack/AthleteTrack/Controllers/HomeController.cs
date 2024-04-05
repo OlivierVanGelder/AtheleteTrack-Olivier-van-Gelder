@@ -15,7 +15,26 @@ namespace AthleteTrack.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var model = new HomeModel();
+            model.Results = GetMockResults();
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Index(HomeModel model)
+        {
+            model.Results = GetMockResults();
+            return View(model);
+        }
+
+        private List<SearchResultModel> GetMockResults()
+        {
+            return new List<SearchResultModel>
+            {
+                new SearchResultModel("First result", 1),
+                new SearchResultModel("Second result", 2),
+                new SearchResultModel("Third result", 3),
+            };
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
