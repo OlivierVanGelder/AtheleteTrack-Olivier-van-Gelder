@@ -32,7 +32,7 @@
               "RelativeDocumentMoniker": "AthleteTrack\\Views\\Schemapages\\Trainingsschema.cshtml",
               "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\AtheleteTrack-Olivier-van-Gelder\\AthleteTrack\\AthleteTrack\\Views\\Schemapages\\Trainingsschema.cshtml",
               "RelativeToolTip": "AthleteTrack\\Views\\Schemapages\\Trainingsschema.cshtml",
-              "ViewState": "AQIAAB4AAAAAAAAAAAAAACkAAABAAAAA",
+              "ViewState": "AQIAAB4AAAAAAAAAAAAAACMAAAAdAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-04-03T09:42:54.733Z",
               "EditorCaption": ""
@@ -47,8 +47,7 @@
               "RelativeToolTip": "AthleteTrack\\Controllers\\SchemapagesController.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAuwBEAAAAaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-03T09:24:09.117Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-03T09:24:09.117Z"
             },
             {
               "$type": "Document",
@@ -60,8 +59,7 @@
               "RelativeToolTip": "AthleteTrack\\Controllers\\HomeController.cs",
               "ViewState": "AQIAAAYAAAAAAAAAAAAAAAsAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-03T09:24:45.388Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-03T09:24:45.388Z"
             }
           ]
         }
