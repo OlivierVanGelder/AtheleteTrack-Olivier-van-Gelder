@@ -17,16 +17,20 @@ namespace AthleteTrack.Controllers
 
         public IActionResult Index()
         {
+            HomeModel model = new HomeModel();
+            model.Searchtext = string.Empty;
+
             string connectionstring = "Server=mssqlstud.fhict.local;Database=dbi536130_athletet;User Id=dbi536130_athletet;Password=123;TrustServerCertificate=True;";
             SqlConnection s = new SqlConnection(connectionstring);
-            SqlCommand cmd = new SqlCommand("SELECT Naam FROM Wedstrijdschema", s);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Wedstrijdschema", s);
             s.Open();
             SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                Console.WriteLine(reader.GetString(0));
+                SearchResultModel item = new(reader.GetString(1), reader.GetInt32(0));
+                model.Results.Add(item);
             } 
-            return View();
+            return View(model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
