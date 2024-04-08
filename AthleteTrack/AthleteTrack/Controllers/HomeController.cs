@@ -1,6 +1,8 @@
 ﻿using AthleteTrack.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using System.Diagnostics;
+using System.Data;
 
 namespace AthleteTrack.Controllers
 {
@@ -15,26 +17,16 @@ namespace AthleteTrack.Controllers
 
         public IActionResult Index()
         {
-            var model = new HomeModel();
-            model.Results = GetMockResults();
-            return View(model);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Index(HomeModel model)
-        {
-            model.Results = GetMockResults();
-            return View(model);
-        }
-
-        private List<SearchResultModel> GetMockResults()
-        {
-            return new List<SearchResultModel>
+            string connectionstring = "Server=mssqlstud.fhict.local;Database=dbi536130_athletet;User Id=dbi536130_athletet;Password=123;TrustServerCertificate=True;";
+            SqlConnection s = new SqlConnection(connectionstring);
+            SqlCommand cmd = new SqlCommand("SELECT Naam FROM Wedstrijdschema", s);
+            s.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
             {
-                new SearchResultModel("First result", 1),
-                new SearchResultModel("Second result", 2),
-                new SearchResultModel("Third result", 3),
-            };
+                Console.WriteLine(reader.GetString(0));
+            } 
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

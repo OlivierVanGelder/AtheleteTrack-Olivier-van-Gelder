@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ogtqQiiNCa693rQaPuYyMfXErsEXcx7zlPpXYaFmH28=",
+  "Hash": "Ltfc/M5+0g6AgK9WukT4Lp2LA9uTJEde6Cq2bmypPqg=",
   "Source": "AthleteTrack",
   "BasePath": "_content/AthleteTrack",
   "Mode": "Default",
@@ -110,6 +110,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\img\\FullLogoAthleteTrack.png"
+    },
+    {
+      "Identity": "C:\\Users\\User\\Documents\\GitHub\\AtheleteTrack-Olivier-van-Gelder\\AthleteTrack\\AthleteTrack\\wwwroot\\img\\GroupIcon.jpg",
+      "SourceId": "AthleteTrack",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\Documents\\GitHub\\AtheleteTrack-Olivier-van-Gelder\\AthleteTrack\\AthleteTrack\\wwwroot\\",
+      "BasePath": "_content/AthleteTrack",
+      "RelativePath": "img/GroupIcon.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\GroupIcon.jpg"
     },
     {
       "Identity": "C:\\Users\\User\\Documents\\GitHub\\AtheleteTrack-Olivier-van-Gelder\\AthleteTrack\\AthleteTrack\\wwwroot\\img\\LogoAthleteTrack.png",
