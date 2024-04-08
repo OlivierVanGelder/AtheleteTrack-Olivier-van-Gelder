@@ -23,6 +23,16 @@ namespace AthleteTrack.Controllers
             return View();
         }
 
+        public IActionResult CreateWedstrijdschema()
+        { 
+            return View(); 
+        }
+
+        public IActionResult CreateTrainingsschema()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
