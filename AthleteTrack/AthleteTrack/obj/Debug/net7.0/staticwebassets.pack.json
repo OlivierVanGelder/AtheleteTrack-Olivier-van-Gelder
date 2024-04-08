@@ -13,6 +13,22 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\User\\Documents\\GitHub\\AtheleteTrack-Olivier-van-Gelder\\AthleteTrack\\AthleteTrack\\wwwroot\\img\\FullLogoAthleteTrack.png",
+      "PackagePath": "staticwebassets\\img\\FullLogoAthleteTrack.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Documents\\GitHub\\AtheleteTrack-Olivier-van-Gelder\\AthleteTrack\\AthleteTrack\\wwwroot\\img\\LogoAthleteTrack.png",
+      "PackagePath": "staticwebassets\\img\\LogoAthleteTrack.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Documents\\GitHub\\AtheleteTrack-Olivier-van-Gelder\\AthleteTrack\\AthleteTrack\\wwwroot\\img\\Magnifying_glass_icon.svg.png",
+      "PackagePath": "staticwebassets\\img\\Magnifying_glass_icon.svg.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Documents\\GitHub\\AtheleteTrack-Olivier-van-Gelder\\AthleteTrack\\AthleteTrack\\wwwroot\\img\\WhiteMagnifyingGlass.png",
+      "PackagePath": "staticwebassets\\img\\WhiteMagnifyingGlass.png"
+    },
+    {
       "Id": "C:\\Users\\User\\Documents\\GitHub\\AtheleteTrack-Olivier-van-Gelder\\AthleteTrack\\AthleteTrack\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
