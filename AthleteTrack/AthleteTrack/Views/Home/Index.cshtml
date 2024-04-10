@@ -13,14 +13,11 @@
                 <button type="submit" class=" flex-grow-0 btn btn-dark"><img class="mb-1" height="15px" src="~/img/WhiteMagnifyingGlass.png" /></button>
             </form>
         </div>
-
-        <div class="row m-4">
-            <ul class="list-group"> 
-                @foreach (var result in Model.Results)
-                {
-                    <li class="list-group-item me-5 ms-5">@result.Name</li>
-                }
-            </ul>
+        <div class="list-group row m-4">
+            @foreach (var result in Model.Results)
+            {
+                <a href="/Schemapages/Wedstrijdschema?ID=@result.ID" class="list-group-item me-5 ms-5">@result.Name</a>
+            }
         </div>
     </div>
 </div>

@@ -3,12 +3,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using System.Diagnostics;
 using System.Data;
+using AthleteTrack.Data;
 
 namespace AthleteTrack.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+
+        private readonly Dataconnection _connection = new();
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -19,17 +22,7 @@ namespace AthleteTrack.Controllers
         {
             HomeModel model = new HomeModel();
             model.Searchtext = string.Empty;
-
-            string connectionstring = "Server=mssqlstud.fhict.local;Database=dbi536130_athletet;User Id=dbi536130_athletet;Password=123;TrustServerCertificate=True;";
-            SqlConnection s = new SqlConnection(connectionstring);
-            SqlCommand cmd = new SqlCommand("SELECT * FROM Wedstrijdschema", s);
-            s.Open();
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                SearchResultModel item = new(reader.GetString(1), reader.GetInt32(0));
-                model.Results.Add(item);
-            } 
+            model.Results = _connection.GetWedstrijdschemas();
             return View(model);
         }
 

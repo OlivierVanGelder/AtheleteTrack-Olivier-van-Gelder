@@ -18,8 +18,9 @@ namespace AthleteTrack.Controllers
             return View();
         }
 
-        public IActionResult Wedstrijdschema()
+        public IActionResult Wedstrijdschema(int ID)
         {
+            Debug.WriteLine($"ID: {ID}");
             return View();
         }
 
