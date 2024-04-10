@@ -21,8 +21,7 @@ namespace AthleteTrack.Controllers
         public IActionResult Index()
         {
             HomeModel model = new HomeModel();
-            model.Searchtext = string.Empty;
-            model.Results = _connection.GetWedstrijdschemas();
+            model.Results = _connection.GetWedstrijdschemas(model.Searchtext);
             return View(model);
         }
 

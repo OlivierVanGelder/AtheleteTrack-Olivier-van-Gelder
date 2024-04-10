@@ -1,4 +1,5 @@
-﻿using AthleteTrack.Models;
+﻿using AthleteTrack.Data;
+using AthleteTrack.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,6 +8,8 @@ namespace AthleteTrack.Controllers
     public class SchemapagesController : Controller
     {
         private readonly ILogger<SchemapagesController> _logger;
+
+        private readonly Dataconnection _connection = new();
 
         public SchemapagesController(ILogger<SchemapagesController> logger)
         {
@@ -18,10 +21,17 @@ namespace AthleteTrack.Controllers
             return View();
         }
 
-        public IActionResult Wedstrijdschema(int ID)
+        public IActionResult Wedstrijdschema(int ID, int OnderdeelID)
         {
             Debug.WriteLine($"ID: {ID}");
-            return View();
+            _ = new WedstrijdPageModel();
+            WedstrijdPageModel model = _connection.GetWedstrijdDetails(ID);
+            if (OnderdeelID != null)
+            {
+                model.Atleten = _connection.GetAtleet(OnderdeelID);
+                model.OnderdeelID = OnderdeelID;
+            }
+            return View(model);
         }
 
         public IActionResult CreateWedstrijdschema()
