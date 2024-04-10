@@ -23,7 +23,7 @@ namespace AthleteTrack.Data
         {
             List<SearchResultModel> results = new();
 
-            SqlCommand cmd = new SqlCommand($"SELECT * FROM Wedstrijdschema \r\nWHERE Wedstrijdschema.Naam LIKE '{naam}';", s);
+            SqlCommand cmd = new SqlCommand($"SELECT * FROM Wedstrijdschema \r\nWHERE Wedstrijdschema.Naam LIKE '%{naam}%';", s);
             using SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
