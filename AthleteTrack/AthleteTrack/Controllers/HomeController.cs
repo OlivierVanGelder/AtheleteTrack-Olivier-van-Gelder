@@ -25,6 +25,15 @@ namespace AthleteTrack.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public IActionResult Index(string Searchtext)
+        {
+            HomeModel model = new HomeModel();
+            model.Searchtext = Searchtext;
+            model.Results = _connection.GetWedstrijdschemas(model.Searchtext);
+            return View(model);
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
