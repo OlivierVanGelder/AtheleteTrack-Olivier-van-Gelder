@@ -29,7 +29,14 @@ namespace AthleteTrack.Controllers
         public IActionResult Index(string Searchtext)
         {
             HomeModel model = new HomeModel();
-            model.Searchtext = Searchtext;
+            if (Searchtext != null)
+            {
+                model.Searchtext = Searchtext;
+            }
+            else
+            {
+                model.Searchtext = " ";
+            }
             model.Results = _connection.GetWedstrijdschemas(model.Searchtext);
             return View(model);
         }

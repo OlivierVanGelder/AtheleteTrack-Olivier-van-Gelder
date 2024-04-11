@@ -23,12 +23,30 @@ namespace AthleteTrack.Data
         {
             List<SearchResultModel> results = new();
 
-            SqlCommand cmd = new SqlCommand($"SELECT * FROM Wedstrijdschema \r\nWHERE Wedstrijdschema.Naam LIKE '%{naam}%';", s);
-            using SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Wedstrijdschema \r\nWHERE Wedstrijdschema.Naam LIKE '%' + @name + '%';", s);
+            cmd.Parameters.AddWithValue("@name", naam);
+            using (SqlDataReader reader = cmd.ExecuteReader())
             {
-                SearchResultModel item = new(reader.GetString(1), reader.GetInt32(0));
-                results.Add(item);
+                while (reader.Read())
+                {
+                    SearchResultModel.SearchType searchType = new();
+                    searchType = SearchResultModel.SearchType.Wedstrijdschema;
+                    SearchResultModel item = new(reader.GetString(1), reader.GetInt32(0), searchType);
+                    results.Add(item);
+                }
+            }
+
+            cmd = new SqlCommand("SELECT * FROM Trainingsschema \r\nWHERE Trainingsschema.Naam LIKE '%' + @name + '%';", s);
+            cmd.Parameters.AddWithValue("@name", naam);
+            using (SqlDataReader newreader = cmd.ExecuteReader())
+            {
+                while (newreader.Read())
+                {
+                    SearchResultModel.SearchType searchType = new();
+                    searchType = SearchResultModel.SearchType.Trainingsschema;
+                    SearchResultModel item = new(newreader.GetString(1), newreader.GetInt32(0), searchType);
+                    results.Add(item);
+                }
             }
             return results;
         }
