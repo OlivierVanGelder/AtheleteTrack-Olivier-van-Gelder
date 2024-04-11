@@ -38,7 +38,7 @@
                         @{
                             foreach (OnderdeelModel onderdeel in Model.Onderdelen)
                             {
-                                <a href="?ID=@Model.ID&OnderdeelID=@onderdeel.OnderdeelID" class="list-group-item me-2 ms-2">@onderdeel.Name</a>
+                                <a href="?ID=@Model.ID&DisciplineID=@onderdeel.OnderdeelID" class="list-group-item me-2 ms-2">@onderdeel.Name</a>
                             }
                         }
                     </div>
@@ -63,7 +63,7 @@
                 <div class="row ms-0 mt-3">
                     <h5><img height="50px" src="~/img/GroupIcon.jpg" />:</h5>
                 </div>
-                <div class="row ms-1 mt-1">
+                <div class="row ms-1">
                     <ul class="list-group">
                         @{
                             foreach (Atleet atleet in Model.Atleten)
@@ -73,7 +73,7 @@
                         }
                     </ul>
                 </div>
-                <div class="row ms-1 mt-2 mb-3">
+                <div class="row ms-1 mt-3 mb-3">
                     <h6>Regelgeving: 
                         @{
                             foreach (OnderdeelModel onderdeel in Model.Onderdelen)

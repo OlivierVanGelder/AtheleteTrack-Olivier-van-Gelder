@@ -1,16 +1,19 @@
 ﻿@{
     ViewData["Title"] = "Trainingsschema";
 }
+
+@model TrainingsPageModel
+
 <div class="container">
     <div class="row text-center mb-5">
         <div class="col mt-4">
-            <h2>-Trainingsschema naam-</h2>
+            <h2>@Model.Name</h2>
         </div>
     </div>
     <div class="row">
         <div class="col ms-5 me-5">
             <div class="row">
-                <h4>Tijdsduur:</h4>
+                <h4>Tijdsduur: @Model.StartTime tot @Model.EndTime</h4>
             </div>
             <div class="row border border-dark">
                 <div class="row ms-2 mt-2">
@@ -26,39 +29,67 @@
                     </div>
                 </div>
                 <div class="row m-3 ms-2 mt-2">
-                    <div class="col">
-                        <ul class="list-group">
-                            @{
-                                for (int i = 1; i <= 3; i++)
-                                {
-                                    <li class="list-group-item me-2 ms-2">Oefening @i</li>
-                                }
+                    <div class="col list-group">
+                        @{
+                            foreach (Exercise exercise in Model.Exercises)
+                            {
+                                <a href="?ID=@Model.ID&ExerciseID=@exercise.ID" class="list-group-item me-2 ms-2">@exercise.Name</a>
                             }
-                        </ul>
+                        }
                     </div>
-                    <div class="col">
-                        <ul class="list-group">
-                            @{
-                                for (int i = 1; i <= 3; i++)    
-                                {
-                                    <li class="list-group-item me-2 ms-2">1@(i):00</li>
-                                }
+                    <div class="col list-group">
+                        @{
+                            foreach (Exercise exercise in Model.Exercises)
+                            {
+                                <a class="list-group-item me-2 ms-2">@exercise.Time</a>
                             }
-                        </ul>
+                        }
                     </div>
                 </div>
             </div>
         </div>
         <div class="col ms-5 me-5">
             <div class="row">
-                <h4>Info:</h4>
+                <h4>Info:
+                    @{
+                        foreach (Exercise exercise in Model.Exercises)
+                        {
+                            if (exercise.ID == Model.ExerciseID)
+                            {
+                                <p style="font-weight: normal">@exercise.Name</p>
+                            }
+                        }
+                    }
+                </h4>
             </div>
             <div class="row border border-dark">
                 <div class="row ms-3 mt-3">
-                    <h6>Repetities:</h6>
+                    <h6>Herhalingen:
+
+                        @{
+                            foreach (Exercise exercise in Model.Exercises)
+                            {
+                                if (exercise.ID == Model.ExerciseID)
+                                {
+                                    <p style="font-weight: normal">@exercise.Repetitions</p>
+                                }
+                            }
+                        }
+                    </h6>
                 </div>
-                <div class="row ms-3 mt-2 mb-3">
-                    <h6>Beschrijving:</h6>
+                <div class="row ms-3 mb-3">
+                    <h6>Beschrijving:
+
+                        @{
+                            foreach (Exercise exercise in Model.Exercises)
+                            {
+                                if (exercise.ID == Model.ExerciseID)
+                                {
+                                    <p style="font-weight: normal">@exercise.Description</p>
+                                }
+                            }
+                        }
+                    </h6>
                 </div>
             </div>
         </div>

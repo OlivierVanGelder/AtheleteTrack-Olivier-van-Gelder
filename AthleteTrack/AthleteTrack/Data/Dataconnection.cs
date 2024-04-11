@@ -71,6 +71,25 @@ namespace AthleteTrack.Data
             return wedstrijd;
         }
 
+        public TrainingsPageModel GetTrainingsDetails(int ID)
+        {
+            TrainingsPageModel training = new();
+
+            SqlCommand cmd = new SqlCommand($"SELECT * FROM Trainingsschema WHERE ID = {ID}", s);
+            using (SqlDataReader reader = cmd.ExecuteReader())
+            {
+                foreach (DbDataRecord record in reader)
+                {
+                    training.ID = record.GetInt32(0);
+                    training.Name = record.GetString(1);
+                    training.StartTime = ((TimeSpan)record.GetValue(2)).ToString(@"hh\:mm");
+                    training.EndTime = ((TimeSpan)record.GetValue(3)).ToString(@"hh\:mm");
+                }
+            }
+            training.Exercises = GetExercises(ID);
+            return training;
+        }
+
         private List<OnderdeelModel> GetOnderdelen(int ID)
         {
             List<OnderdeelModel> onderdelen = new();
@@ -83,6 +102,20 @@ namespace AthleteTrack.Data
                 onderdelen.Add(o);
             }
             return onderdelen;
+        }
+
+        public List<Exercise> GetExercises(int ID)
+        {
+            List<Exercise> exercises = new();
+
+            SqlCommand cmd = new SqlCommand($"SELECT Trainingsschema.ID, TrainingsschemaOefening.Tijdsduur, Oefening.Naam, Oefening.Beschrijving, TrainingsschemaOefening.Herhalingen, TrainingsschemaOefening.Oefening_ID\r\nFROM Trainingsschema\r\nINNER JOIN TrainingsschemaOefening ON TrainingsschemaOefening.Trainingsschema_ID = Trainingsschema.ID\r\nINNER JOIN Oefening ON TrainingsschemaOefening.Oefening_ID = Oefening.ID\r\nWHERE Trainingsschema_ID = {ID}", s);
+            using SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                Exercise e = new(reader.GetString(2),reader.GetString(3),reader.GetInt32(4), ((TimeSpan)reader.GetValue(1)).ToString(@"hh\:mm"), reader.GetInt32(5));
+                exercises.Add(e);
+            }
+            return exercises;
         }
 
         public List<Atleet> GetAtleet(int ID)

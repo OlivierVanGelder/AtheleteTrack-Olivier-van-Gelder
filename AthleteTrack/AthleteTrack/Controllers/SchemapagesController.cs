@@ -16,20 +16,25 @@ namespace AthleteTrack.Controllers
             _logger = logger;
         }
 
-        public IActionResult Trainingsschema()
+        public IActionResult Trainingsschema(int ID, int ExerciseID)
         {
-            return View();
+            _ = new TrainingsPageModel();
+            TrainingsPageModel model = _connection.GetTrainingsDetails(ID);
+            if (ExerciseID != null)
+            {
+                model.ExerciseID = ExerciseID;
+            }
+            return View(model);
         }
 
-        public IActionResult Wedstrijdschema(int ID, int OnderdeelID)
+        public IActionResult Wedstrijdschema(int ID, int DisciplineID)
         {
-            Debug.WriteLine($"ID: {ID}");
             _ = new WedstrijdPageModel();
             WedstrijdPageModel model = _connection.GetWedstrijdDetails(ID);
-            if (OnderdeelID != null)
+            if (DisciplineID != null)
             {
-                model.Atleten = _connection.GetAtleet(OnderdeelID);
-                model.OnderdeelID = OnderdeelID;
+                model.Atleten = _connection.GetAtleet(DisciplineID);
+                model.OnderdeelID = DisciplineID;
             }
             return View(model);
         }
