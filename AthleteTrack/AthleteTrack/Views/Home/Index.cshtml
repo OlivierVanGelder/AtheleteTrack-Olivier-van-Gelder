@@ -5,7 +5,11 @@
 @model HomeModel
 
 <div class="text-center">
-    <img class="mb-3" height="200px" src="~/img/FullLogoAthleteTrack.png"/>
+    <div class="row">
+        <div class="col"></div>
+        <img class="col mb-3" height="200px" src="~/img/FullLogoAthleteTrack.png"/>
+        <div class="col justify-content-end"><button class="m-2"><a class="text-dark" style="text-decoration : none" asp-area="" asp-controller="Schemapages" asp-action="CreateWedstrijdschema">Wedstrijd +</a></button><button class="m-2"><a class="text-dark" style="text-decoration : none" asp-area="" asp-controller="Schemapages" asp-action="CreateTrainingsschema">Training +</a></button></div>
+    </div>
     <div class="container text-center">
         <div class="row">
             <form class="col border-2" action="/" method="post">

@@ -31,7 +31,7 @@
                 <div class="row m-3 ms-2 mt-2">
                     <div class="col list-group">
                         @{
-                            foreach (Exercise exercise in Model.Exercises)
+                            foreach (AthleteTrack.Logic.Exercise exercise in Model.Exercises)
                             {
                                 <a href="?ID=@Model.ID&ExerciseID=@exercise.ID" class="list-group-item me-2 ms-2">@exercise.Name</a>
                             }
@@ -39,7 +39,7 @@
                     </div>
                     <div class="col list-group">
                         @{
-                            foreach (Exercise exercise in Model.Exercises)
+                            foreach (AthleteTrack.Logic.Exercise exercise in Model.Exercises)
                             {
                                 <a class="list-group-item me-2 ms-2">@exercise.Time</a>
                             }
@@ -52,7 +52,7 @@
             <div class="row">
                 <h4>Info:
                     @{
-                        foreach (Exercise exercise in Model.Exercises)
+                        foreach (AthleteTrack.Logic.Exercise exercise in Model.Exercises)
                         {
                             if (exercise.ID == Model.ExerciseID)
                             {
@@ -67,7 +67,7 @@
                     <h6>Herhalingen:
 
                         @{
-                            foreach (Exercise exercise in Model.Exercises)
+                            foreach (AthleteTrack.Logic.Exercise exercise in Model.Exercises)
                             {
                                 if (exercise.ID == Model.ExerciseID)
                                 {
@@ -81,7 +81,7 @@
                     <h6>Beschrijving:
 
                         @{
-                            foreach (Exercise exercise in Model.Exercises)
+                            foreach (AthleteTrack.Logic.Exercise exercise in Model.Exercises)
                             {
                                 if (exercise.ID == Model.ExerciseID)
                                 {

@@ -1,4 +1,6 @@
-﻿namespace AthleteTrack.Models
+﻿using AthleteTrack.Logic;
+
+namespace AthleteTrack.Models
 {
     public class HomeModel
     {

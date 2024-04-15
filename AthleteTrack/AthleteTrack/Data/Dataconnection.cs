@@ -1,4 +1,5 @@
-﻿using AthleteTrack.Models;
+﻿using AthleteTrack.Logic;
+using AthleteTrack.Models;
 using Microsoft.Data.SqlClient;
 using System.Data.Common;
 using System.Reflection;
@@ -67,7 +68,7 @@ namespace AthleteTrack.Data
                     wedstrijd.Datum = record.GetDateTime(4).ToShortDateString().ToString();
                 }
             }
-            wedstrijd.Onderdelen = GetOnderdelen(ID);
+            wedstrijd.Onderdelen = GetDisciplines(ID);
             return wedstrijd;
         }
 
@@ -90,18 +91,46 @@ namespace AthleteTrack.Data
             return training;
         }
 
-        private List<OnderdeelModel> GetOnderdelen(int ID)
+        private List<Discipline> GetDisciplines(int ID)
         {
-            List<OnderdeelModel> onderdelen = new();
-           
+            List<Discipline> onderdelen = new();
+
             SqlCommand cmd = new SqlCommand($"SELECT Wedstrijdschema.ID, WedstrijdschemaOnderdeel.Begintijd, WedstrijdschemaOnderdeel.Tijdsduur, Onderdeel.Naam, Onderdeel.Regelgeving, WedstrijdschemaOnderdeel.ID\r\nFROM Wedstrijdschema\r\nINNER JOIN WedstrijdschemaOnderdeel ON WedstrijdschemaOnderdeel.Wedstrijdschema_ID = Wedstrijdschema.ID\r\nINNER JOIN Onderdeel ON WedstrijdschemaOnderdeel.Onderdeel_ID = Onderdeel.ID\r\nWHERE Wedstrijdschema_ID = {ID}", s);
             using SqlDataReader reader = cmd.ExecuteReader();
-            while(reader.Read())
+            while (reader.Read())
             {
-                OnderdeelModel o = new(reader.GetInt32(0),reader.GetString(3), ((TimeSpan)reader.GetValue(1)).ToString(@"hh\:mm"), ((TimeSpan)reader.GetValue(2)).ToString(@"hh\:mm"), reader.GetString(4), reader.GetInt32(5));
+                Discipline o = new(reader.GetInt32(0), reader.GetString(3), ((TimeSpan)reader.GetValue(1)).ToString(@"hh\:mm"), ((TimeSpan)reader.GetValue(2)).ToString(@"hh\:mm"), reader.GetString(4), reader.GetInt32(5));
                 onderdelen.Add(o);
             }
             return onderdelen;
+        }
+
+        public List<Discipline> GetAllDisciplines()
+        {
+            List<Discipline> onderdelen = new();
+
+            SqlCommand cmd = new SqlCommand($"SELECT Onderdeel.Naam, Onderdeel.ID \r\nFROM Onderdeel", s);
+            using SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                Discipline o = new(reader.GetInt32(1), reader.GetString(0), "00:00", "00:00", " ",0);
+                onderdelen.Add(o);
+            }
+            return onderdelen;
+        }
+
+        public List<Exercise> GetAllExercises()
+        {
+            List<Exercise> exercise = new();
+
+            SqlCommand cmd = new SqlCommand($"SELECT Oefening.Naam, Oefening.ID, Oefening.Beschrijving \r\nFROM Oefening", s);
+            using SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                Exercise o = new(reader.GetString(0), reader.GetString(2), 0, "00:00", reader.GetInt32(1));
+                exercise.Add(o);
+            }
+            return exercise;
         }
 
         public List<Exercise> GetExercises(int ID)
@@ -112,21 +141,21 @@ namespace AthleteTrack.Data
             using SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                Exercise e = new(reader.GetString(2),reader.GetString(3),reader.GetInt32(4), ((TimeSpan)reader.GetValue(1)).ToString(@"hh\:mm"), reader.GetInt32(5));
+                Exercise e = new(reader.GetString(2), reader.GetString(3), reader.GetInt32(4), ((TimeSpan)reader.GetValue(1)).ToString(@"hh\:mm"), reader.GetInt32(5));
                 exercises.Add(e);
             }
             return exercises;
         }
 
-        public List<Atleet> GetAtleet(int ID)
+        public List<Athlete> GetAtleet(int ID)
         {
-            List<Atleet> atleten = new();
+            List<Athlete> atleten = new();
 
             SqlCommand cmd = new SqlCommand($"SELECT Atleet.Naam \r\nFROM WedstrijdschemaOnderdeel\r\nINNER JOIN WedstrijdschemaOnderdeelAtleet ON WedstrijdschemaOnderdeelAtleet.WedstrijdschemaOnderdeel_ID = WedstrijdschemaOnderdeel.ID\r\nINNER JOIN Atleet ON WedstrijdschemaOnderdeelAtleet.Atleet_ID = Atleet.ID\r\nWHERE WedstrijdschemaOnderdeel.ID = {ID}", s);
             using SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                Atleet a = new(reader.GetString(0));
+                Athlete a = new(reader.GetString(0));
                 atleten.Add(a);
             }
 

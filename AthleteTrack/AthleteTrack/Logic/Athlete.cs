@@ -1,10 +1,10 @@
-﻿namespace AthleteTrack.Models
+﻿namespace AthleteTrack.Logic
 {
-    public class Atleet
+    public class Athlete
     {
         public string Name { get; set; }
 
-        public Atleet(string name)
+        public Athlete(string name)
         {
             Name = name;
         }

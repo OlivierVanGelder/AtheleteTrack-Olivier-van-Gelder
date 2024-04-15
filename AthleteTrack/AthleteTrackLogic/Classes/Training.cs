@@ -1,8 +1,8 @@
-﻿using AthleteTrack.Logic;
+﻿using AthleteTrackLogic.Classes;
 
-namespace AthleteTrack.Models
+namespace AthleteTrackLogic.Classes
 {
-    public class TrainingsPageModel
+    public class Training
     {
         public string Name { get; set; }
         public int ID { get; set; }

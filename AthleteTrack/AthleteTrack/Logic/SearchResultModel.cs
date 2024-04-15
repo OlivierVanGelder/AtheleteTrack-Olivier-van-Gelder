@@ -1,4 +1,4 @@
-﻿namespace AthleteTrack.Models
+﻿namespace AthleteTrack.Logic
 {
     public class SearchResultModel
     {

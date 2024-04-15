@@ -1,6 +1,9 @@
 ﻿@{
     ViewData["Title"] = "Nieuw wedstrijdschema";
 }
+
+@model CreateWedstrijdPageModel
+
 <div class="container">
     <form>
         <div class="row text-center mb-5">
@@ -77,11 +80,10 @@
                     <div class="row ms-1 mt-3 mb-3">
                         <ul class="list-group">
                             @{
-                                List<string> onderdelen = new() { "60m sprint", "100m sprint", "200m sprint", "Hoogspringen", "Verspringen"};
 
-                                foreach (string onderdeel in onderdelen)
+                                foreach (AthleteTrack.Logic.Discipline discipline in Model.Disciplines)
                                 {
-                                    <li style="max-width:300px" class="list-group-item py-1 me-1 ms-1">@onderdeel</li>
+                                    <li style="max-width:300px" class="list-group-item py-1 me-1 ms-1">@discipline.Name</li>
                                 }
                             }
                         </ul>

@@ -9,13 +9,16 @@ namespace AthleteTrack.Controllers
 {
     public class HomeController : Controller
     {
+        
+
         private readonly ILogger<HomeController> _logger;
 
         private readonly Dataconnection _connection = new();
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IConfiguration configuration)
         {
             _logger = logger;
+            _configuration = configuration;
         }
 
         public IActionResult Index()
