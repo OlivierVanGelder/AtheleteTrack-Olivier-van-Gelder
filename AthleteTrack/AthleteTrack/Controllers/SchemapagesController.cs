@@ -19,7 +19,6 @@ namespace AthleteTrack.Controllers
 
         public IActionResult Trainingsschema(int ID, int ExerciseID)
         {
-            _ = new TrainingsPageModel();
             TrainingsPageModel model = _connection.GetTrainingsDetails(ID);
             if (ExerciseID != null)
             {
@@ -38,13 +37,6 @@ namespace AthleteTrack.Controllers
                 model.Atleten = atleetLogic.GetAtleten(DisciplineID);
                 model.OnderdeelID = DisciplineID;
             }
-
-            //WedstrijdPageModel model = _connection.GetWedstrijdDetails(ID);
-            //if (DisciplineID != null)
-            //{
-            //    model.Atleten = _connection.GetAtleet(DisciplineID);
-            //    model.OnderdeelID = DisciplineID;
-            //}
             return View(model);
         }
 

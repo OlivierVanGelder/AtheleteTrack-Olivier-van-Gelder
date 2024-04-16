@@ -4,6 +4,7 @@ using Microsoft.Data.SqlClient;
 using System.Diagnostics;
 using System.Data;
 using AthleteTrack.Data;
+using AthleteTrackLogic;
 
 namespace AthleteTrack.Controllers
 {
@@ -21,7 +22,9 @@ namespace AthleteTrack.Controllers
         public IActionResult Index()
         {
             HomeModel model = new HomeModel();
-            model.Results = _connection.GetWedstrijdschemas(model.Searchtext);
+            SchemasLogic schemasLogic = new SchemasLogic();
+
+            model.Results = schemasLogic.GetSchemas(model.Searchtext);
             return View(model);
         }
 
@@ -29,6 +32,8 @@ namespace AthleteTrack.Controllers
         public IActionResult Index(string Searchtext)
         {
             HomeModel model = new HomeModel();
+            SchemasLogic schemasLogic = new SchemasLogic();
+
             if (Searchtext != null)
             {
                 model.Searchtext = Searchtext;
@@ -37,7 +42,7 @@ namespace AthleteTrack.Controllers
             {
                 model.Searchtext = " ";
             }
-            model.Results = _connection.GetWedstrijdschemas(model.Searchtext);
+            model.Results = schemasLogic.GetSchemas(model.Searchtext);
             return View(model);
         }
 

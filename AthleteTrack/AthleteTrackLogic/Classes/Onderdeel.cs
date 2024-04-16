@@ -1,4 +1,4 @@
-﻿namespace AthleteTrack.Models
+﻿namespace AthleteTrackDAL.Classes
 {
     public class Onderdeel
     {

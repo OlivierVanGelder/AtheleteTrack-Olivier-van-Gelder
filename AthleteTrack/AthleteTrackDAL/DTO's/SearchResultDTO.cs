@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AthleteTrackDAL.DTO_s
 {
-    internal class SearchResultDTO
+    public class SearchResultDTO
     {
         public string Name { get; set; } = "";
         public int ID { get; set; }
@@ -16,6 +16,11 @@ namespace AthleteTrackDAL.DTO_s
         {
             Wedstrijdschema,
             Trainingsschema
+        }
+
+        public SearchResultDTO(SearchType searchtype) 
+        {
+            searchType = searchtype;
         }
     }
 }
