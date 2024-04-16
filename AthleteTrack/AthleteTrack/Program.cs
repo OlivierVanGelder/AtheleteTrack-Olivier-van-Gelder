@@ -1,3 +1,10 @@
+using AthleteTrackDAL;
+using AthleteTrackLogic.Classes;
+using AthleteTrackLogic.Interfaces;
+
+IExerciseDAL exerciseDAL = new ExerciseDAL();
+ExerciseLogic exerciseLogic = new(exerciseDAL);
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

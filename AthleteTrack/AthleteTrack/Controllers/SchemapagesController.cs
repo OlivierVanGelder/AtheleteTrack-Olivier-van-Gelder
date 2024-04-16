@@ -35,9 +35,6 @@ namespace AthleteTrack.Controllers
 
         public IActionResult Wedstrijdschema(int ID, int DisciplineID)
         {
-            IExerciseDAL exerciseDAL = new ExerciseDAL(_configuration.GetConnectionString("Database"));
-            ExerciseLogic exerciseLogic = new(exerciseDAL);
-
 
 
             WedstrijdPageModel model = _connection.GetWedstrijdDetails(ID);
