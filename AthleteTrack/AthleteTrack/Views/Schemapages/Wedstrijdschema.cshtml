@@ -36,7 +36,7 @@
                 <div class="row m-3 ms-2 mt-2">
                     <div class="col list-group">
                         @{
-                            foreach (OnderdeelModel onderdeel in Model.Onderdelen)
+                            foreach (Onderdeel onderdeel in Model.Onderdelen)
                             {
                                 <a href="?ID=@Model.ID&DisciplineID=@onderdeel.OnderdeelID" class="list-group-item me-2 ms-2">@onderdeel.Name</a>
                             }
@@ -45,7 +45,7 @@
                     <div class="col">
                         <ul class="list-group">
                             @{
-                                foreach (OnderdeelModel onderdeel in Model.Onderdelen)
+                                foreach (Onderdeel onderdeel in Model.Onderdelen)
                                 {
                                     <li class="list-group-item me-2 ms-2">@onderdeel.Begintijd - @onderdeel.Tijdsduur</li>
                                 }
@@ -76,7 +76,7 @@
                 <div class="row ms-1 mt-3 mb-3">
                     <h6>Regelgeving: 
                         @{
-                            foreach (OnderdeelModel onderdeel in Model.Onderdelen)
+                            foreach (Onderdeel onderdeel in Model.Onderdelen)
                             {
                                 if (onderdeel.OnderdeelID == Model.OnderdeelID)
                                 {

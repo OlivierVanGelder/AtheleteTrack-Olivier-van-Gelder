@@ -8,7 +8,7 @@
         public string Begintijd { get; set; }
         public string Eindtijd { get; set; }
         public int OnderdeelID {  get; set; }
-        public List<OnderdeelModel> Onderdelen {  get; set; }
+        public List<Onderdeel> Onderdelen {  get; set; }
         public List<Atleet> Atleten { get; set; }
     }
 }

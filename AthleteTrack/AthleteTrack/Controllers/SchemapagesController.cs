@@ -1,5 +1,6 @@
 ﻿using AthleteTrack.Data;
 using AthleteTrack.Models;
+using AthleteTrackLogic;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -29,13 +30,21 @@ namespace AthleteTrack.Controllers
 
         public IActionResult Wedstrijdschema(int ID, int DisciplineID)
         {
-            _ = new WedstrijdPageModel();
-            WedstrijdPageModel model = _connection.GetWedstrijdDetails(ID);
-            if (DisciplineID != null)
+            AtleetLogic atleetLogic = new();
+
+            WedstrijdPageModel model = new WedstrijdPageModel();
+            if (DisciplineID != 0)
             {
-                model.Atleten = _connection.GetAtleet(DisciplineID);
+                model.Atleten = atleetLogic.GetAtleten(DisciplineID);
                 model.OnderdeelID = DisciplineID;
             }
+
+            //WedstrijdPageModel model = _connection.GetWedstrijdDetails(ID);
+            //if (DisciplineID != null)
+            //{
+            //    model.Atleten = _connection.GetAtleet(DisciplineID);
+            //    model.OnderdeelID = DisciplineID;
+            //}
             return View(model);
         }
 
