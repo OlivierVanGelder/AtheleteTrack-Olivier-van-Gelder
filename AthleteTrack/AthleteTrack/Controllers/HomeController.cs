@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using System.Diagnostics;
 using System.Data;
-using AthleteTrack.Data;
 using AthleteTrackLogic;
 
 namespace AthleteTrack.Controllers
@@ -11,8 +10,6 @@ namespace AthleteTrack.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        private readonly Dataconnection _connection = new();
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -40,7 +37,7 @@ namespace AthleteTrack.Controllers
             }
             else
             {
-                model.Searchtext = " ";
+                model.Searchtext = "";
             }
             model.Results = schemasLogic.GetSchemas(model.Searchtext);
             return View(model);

@@ -25,7 +25,7 @@ namespace AthleteTrackDAL
                 "WHERE WedstrijdschemaOnderdeel.ID = @id";
             cmd.Parameters.AddWithValue("@id", ID);
             cmd.Connection = new SqlConnection(connectionString);
-
+            cmd.Connection.Open();
             using SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
@@ -33,7 +33,7 @@ namespace AthleteTrackDAL
                 atleet.Name = reader["Naam"].ToString()!;
                 atleten.Add(atleet);
             }
-
+            cmd.Connection.Close();
             return atleten;
         }
     }

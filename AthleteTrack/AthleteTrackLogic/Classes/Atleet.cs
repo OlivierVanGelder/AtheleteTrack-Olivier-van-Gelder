@@ -1,4 +1,4 @@
-﻿namespace AthleteTrackDAL.Classes
+﻿namespace AthleteTrackLogic.Classes
 {
     public class Atleet
     {

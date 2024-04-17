@@ -12,7 +12,9 @@ namespace AthleteTrackDAL
             List<SearchResultDTO> results = new();
 
             SqlCommand cmd = new SqlCommand("SELECT * FROM Wedstrijdschema \r\nWHERE Wedstrijdschema.Naam LIKE '%' + @name + '%';");
+            cmd.Connection = new SqlConnection(connectionString);
             cmd.Parameters.AddWithValue("@name", naam);
+            cmd.Connection.Open();
             using (SqlDataReader reader = cmd.ExecuteReader())
             {
                 while (reader.Read())
@@ -25,10 +27,12 @@ namespace AthleteTrackDAL
                     results.Add(item);
                 }
             }
+            cmd.Connection.Close();
 
             cmd = new SqlCommand("SELECT * FROM Trainingsschema \r\nWHERE Trainingsschema.Naam LIKE '%' + @name + '%';");
             cmd.Connection = new SqlConnection(connectionString);
             cmd.Parameters.AddWithValue("@name", naam);
+            cmd.Connection.Open();
             using (SqlDataReader newreader = cmd.ExecuteReader())
             {
                 while (newreader.Read())
@@ -41,6 +45,7 @@ namespace AthleteTrackDAL
                     results.Add(item);
                 }
             }
+            cmd.Connection.Close();
             return results;
         }
     }

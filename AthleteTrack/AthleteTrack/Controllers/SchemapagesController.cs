@@ -1,6 +1,6 @@
-﻿using AthleteTrack.Data;
-using AthleteTrack.Models;
+﻿using AthleteTrack.Models;
 using AthleteTrackLogic;
+using AthleteTrackLogic.Classes;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -10,8 +10,6 @@ namespace AthleteTrack.Controllers
     {
         private readonly ILogger<SchemapagesController> _logger;
 
-        private readonly Dataconnection _connection = new();
-
         public SchemapagesController(ILogger<SchemapagesController> logger)
         {
             _logger = logger;
@@ -19,7 +17,14 @@ namespace AthleteTrack.Controllers
 
         public IActionResult Trainingsschema(int ID, int ExerciseID)
         {
-            TrainingsPageModel model = _connection.GetTrainingsDetails(ID);
+            TrainingLogic trainingLogic = new TrainingLogic();
+            TrainingsPageModel model = new();
+            Training training = trainingLogic.GetTraining(ID);
+            model.ID = training.ID;
+            model.StartTime = training.StartTime;
+            model.EndTime = training.EndTime;
+            model.Name = training.Name;
+            model.Exercises = training.Exercises;
             if (ExerciseID != null)
             {
                 model.ExerciseID = ExerciseID;
@@ -30,8 +35,17 @@ namespace AthleteTrack.Controllers
         public IActionResult Wedstrijdschema(int ID, int DisciplineID)
         {
             AtleetLogic atleetLogic = new();
+            EventLogic eventLogic = new();
 
-            WedstrijdPageModel model = new WedstrijdPageModel();
+            WedstrijdPageModel model = new();
+            Event @event = eventLogic.GetEvent(ID);
+            model.ID = @event.ID;
+            model.StartTime = @event.StartTime;
+            model.EndTime = @event.EndTime;
+            model.Name = @event.Name;
+            model.Date = @event.Date;
+            model.Disciplines = @event.Disciplines;
+            model.Atleten = new();
             if (DisciplineID != 0)
             {
                 model.Atleten = atleetLogic.GetAtleten(DisciplineID);

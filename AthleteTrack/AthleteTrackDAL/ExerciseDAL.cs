@@ -14,13 +14,13 @@ namespace AthleteTrackDAL
             SqlCommand cmd = new();
 
             cmd.CommandText = 
-                "SELECT Trainingsschema.ID, TrainingsschemaOefening.Tijdsduur, Oefening.Naam, Oefening.Beschrijving, TrainingsschemaOefening.Herhalingen, TrainingsschemaOefening.Oefening_ID " +
+                "SELECT Trainingsschema.ID, TrainingsschemaOefening.Time, Oefening.Naam, Oefening.Beschrijving, TrainingsschemaOefening.Herhalingen, TrainingsschemaOefening.Oefening_ID " +
                 $"FROM Trainingsschema " +
                 $"INNER JOIN TrainingsschemaOefening ON TrainingsschemaOefening.Trainingsschema_ID = Trainingsschema.ID\r\nINNER JOIN Oefening ON TrainingsschemaOefening.Oefening_ID = Oefening.ID " +
                 $"WHERE Trainingsschema_ID = @id";
             cmd.Parameters.AddWithValue("@id", ID);
             cmd.Connection = new SqlConnection(connectionString);
-
+            cmd.Connection.Open();
             using SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
@@ -33,6 +33,7 @@ namespace AthleteTrackDAL
 
                 exercises.Add(e);
             }
+            cmd.Connection.Close();
             return exercises;
         }
     }

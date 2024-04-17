@@ -4,6 +4,6 @@
     {
         public string Searchtext { get; set; } = "";
 
-        public List<SearchResultModel> Results { get; set; } = new();
+        public List<AthleteTrackLogic.Classes.SearchResult> Results { get; set; } = new();
     }
 }

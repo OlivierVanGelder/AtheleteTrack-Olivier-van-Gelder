@@ -1,4 +1,6 @@
-﻿namespace AthleteTrack.Models
+﻿using AthleteTrackLogic.Classes;
+
+namespace AthleteTrack.Models
 {
     public class TrainingsPageModel
     {

@@ -1,5 +1,4 @@
-﻿using AthleteTrack.Models;
-using AthleteTrackDAL.DTO_s;
+﻿using AthleteTrackDAL.DTO_s;
 using AthleteTrackDAL;
 using System;
 using System.Collections.Generic;
