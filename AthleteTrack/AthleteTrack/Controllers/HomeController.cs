@@ -1,4 +1,4 @@
-﻿using AthleteTrack.Models;
+﻿using AthleteTrackMVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using System.Diagnostics;

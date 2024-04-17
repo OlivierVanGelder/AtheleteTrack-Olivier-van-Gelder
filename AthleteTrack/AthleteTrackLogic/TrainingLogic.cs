@@ -32,5 +32,27 @@ namespace AthleteTrackLogic
 
             return training;
         }
+
+        public List<Exercise> GetAllExercises()
+        {
+            List<Exercise> exercises = new();
+
+            ExerciseDAL exerciseDAL = new();
+
+            List<ExerciseDTO> exerciseDTO = exerciseDAL.GetAllExercises();
+
+            foreach (ExerciseDTO exercise in exerciseDTO)
+            {
+                Exercise ex = new Exercise();
+                ex.ID = exercise.ID;
+                ex.Name = exercise.Name;
+                ex.Description = exercise.Description;
+                ex.Time = exercise.Time;
+                ex.Repetitions = exercise.Repetitions;
+                exercises.Add(ex);
+            }
+
+            return exercises;
+        }
     }
 }

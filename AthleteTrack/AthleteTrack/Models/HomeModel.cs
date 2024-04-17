@@ -1,4 +1,4 @@
-﻿namespace AthleteTrack.Models
+﻿namespace AthleteTrackMVC.Models
 {
     public class HomeModel
     {

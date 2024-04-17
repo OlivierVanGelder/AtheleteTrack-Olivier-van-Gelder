@@ -2,7 +2,7 @@
     ViewData["Title"] = "Nieuw trainingsschema";
 }
 
-@model CreateTrainingsPageModel
+@model CreateTrainingPageModel
 
 <div class="container">
     <form>
@@ -81,7 +81,7 @@
                         <ul class="list-group">
                             @{
 
-                                foreach (AthleteTrack.Logic.Exercise exercise in Model.Exercises)
+                                foreach (AthleteTrackLogic.Classes.Exercise exercise in Model.Exercises)
                                 {
                                     <li style="max-width:300px" class="list-group-item py-1 me-1 ms-1">@exercise.Name</li>
                                 }

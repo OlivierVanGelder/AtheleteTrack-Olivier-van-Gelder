@@ -36,5 +36,31 @@ namespace AthleteTrackDAL
             cmd.Connection.Close();
             return exercises;
         }
+
+        public List<ExerciseDTO> GetAllExercises()
+        {
+            List<ExerciseDTO> exercises = new();
+
+            SqlCommand cmd = new();
+
+            cmd.CommandText =
+                "SELECT [ID], [Naam], [Beschrijving]" +
+                "FROM [dbi536130_athletet].[dbo].[Oefening]";            
+            cmd.Connection = new SqlConnection(connectionString);
+            cmd.Connection.Open();
+            using SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                ExerciseDTO e = new();
+                e.Name = reader.GetString(1);
+                e.Description = reader.GetString(2);
+                e.Repetitions = 1;
+                e.Time = "";
+                e.ID = reader.GetInt32(0);
+                exercises.Add(e);
+            }
+            cmd.Connection.Close();
+            return exercises;
+        }
     }
 }

@@ -38,5 +38,33 @@ namespace AthleteTrackDAL
             cmd.Connection.Close();
             return disciplines;
         }
+
+        public List<DisciplineDTO> GetAllDisciplines()
+        {
+            List<DisciplineDTO> disciplines = new();
+
+            SqlCommand cmd = new();
+
+            cmd.CommandText =
+                "SELECT [ID], [Naam], [Regelgeving] " +
+                "FROM [dbi536130_athletet].[dbo].[Onderdeel] ";
+            cmd.Connection = new SqlConnection(connectionString);
+            cmd.Connection.Open();
+            using SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                DisciplineDTO o = new();
+                o.StartTime = "";
+                o.Rules = reader.GetString(2);
+                o.Time = "";
+                o.DisciplineID = 1;
+                o.Name = reader.GetString(1);
+                o.ID = reader.GetInt32(0);
+
+                disciplines.Add(o);
+            }
+            cmd.Connection.Close();
+            return disciplines;
+        }
     }
 }

@@ -33,5 +33,28 @@ namespace AthleteTrackLogic
 
             return @event;
         }
+
+        public List<Discipline> GetAllDisciplines()
+        {
+            List<Discipline> exercises = new();
+
+            DisciplinesDAL exerciseDAL = new();
+
+            List<DisciplineDTO> disciplineDTO = exerciseDAL.GetAllDisciplines();
+
+            foreach (DisciplineDTO discipline in disciplineDTO)
+            {
+                Discipline di = new();
+                di.ID = discipline.ID;
+                di.Name = discipline.Name;
+                di.DisciplineID = discipline.DisciplineID;
+                di.Time = discipline.Time;
+                di.StartTime = discipline.StartTime;
+                di.Rules = discipline.Rules;
+                exercises.Add(di);
+            }
+
+            return exercises;
+        }
     }
 }

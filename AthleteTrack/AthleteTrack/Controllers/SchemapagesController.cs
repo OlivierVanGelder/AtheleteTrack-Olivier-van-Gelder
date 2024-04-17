@@ -1,7 +1,8 @@
-﻿using AthleteTrack.Models;
+﻿using AthleteTrackMVC.Models;
 using AthleteTrackLogic;
 using AthleteTrackLogic.Classes;
 using Microsoft.AspNetCore.Mvc;
+using System.Data.Common;
 using System.Diagnostics;
 
 namespace AthleteTrack.Controllers
@@ -55,13 +56,21 @@ namespace AthleteTrack.Controllers
         }
 
         public IActionResult CreateWedstrijdschema()
-        { 
-            return View(); 
+        {
+            CreateEventPageModel model = new();
+            EventLogic eventLogic = new();
+
+            model.Disciplines = eventLogic.GetAllDisciplines();
+            return View(model);
         }
 
         public IActionResult CreateTrainingsschema()
         {
-            return View();
+            CreateTrainingPageModel model = new();
+            TrainingLogic trainingLogic = new();
+
+            model.Exercises = trainingLogic.GetAllExercises();
+            return View(model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
