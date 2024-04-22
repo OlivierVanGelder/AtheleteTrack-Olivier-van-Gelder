@@ -8,9 +8,9 @@
     <form>
         <div class="row text-center mb-5">
             <div class="col mt-4">
-                    <div class="input-group input-group-lg">
-                        <input class="form-control text-center me-5 ms-5" type="text" placeholder="Nieuw wedstrijdschema" />
-                    </div>
+                <div class="input-group input-group-lg">
+                    <input class="form-control text-center me-5 ms-5" type="text" placeholder="Nieuw wedstrijdschema" />
+                </div>
             </div>
         </div>
         <div class="row">
@@ -82,7 +82,7 @@
                             @{
                                 foreach (AthleteTrackLogic.Classes.Discipline discipline in Model.Disciplines)
                                 {
-                                    <li style="max-width:300px" class="list-group-item py-1 me-1 ms-1">@discipline.Name</li>
+                                    <li style="max-width:300px" class="list-group-item py-1 me-1 ms-1">@discipline.Name <button class="btn-secondary m-1">+</button> </li>
                                 }
                             }
                         </ul>
