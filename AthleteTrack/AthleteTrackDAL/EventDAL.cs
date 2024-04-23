@@ -2,6 +2,7 @@
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data.Common;
 using System.Linq;
 using System.Text;
@@ -38,6 +39,47 @@ namespace AthleteTrackDAL
             DisciplinesDAL disciplinesDAL = new();
             @event.Disciplines = disciplinesDAL.GetDisciplines(ID);
             return @event;
+        }
+
+        public void AddEvent(EventDTO @event)
+        {
+            SqlConnection conn = new(connectionString);
+            conn.Open();
+            SqlCommand cmd = new(
+                "INSERT INTO Wedstrijdschema (Naam, Begintijd, Eindtijd, Datum)" +
+                "VALUES ('@name', '@starttime', '@endtime', '@date');", conn);
+            cmd.Parameters.AddWithValue("@date", @event.Date);
+            cmd.Parameters.AddWithValue("@name", @event.Name);
+            cmd.Parameters.AddWithValue("@starttime", @event.StartTime);
+            cmd.Parameters.AddWithValue("@endtime", @event.EndTime);
+            cmd.ExecuteNonQuery();
+            foreach (DisciplineDTO discipline in @event.Disciplines)
+            {
+                SqlCommand disciplineCmd = new("", conn);
+            }
+            conn.Close();
+        }
+
+        public void _AddEvent(EventDTO @event)
+        {
+            SqlCommand cmd = new();
+
+            cmd.CommandText =
+                "INSERT INTO Wedstrijdschema (Naam, Begintijd, Eindtijd, Datum)" +
+                "VALUES ('@name', '@starttime', '@endtime', '@date');";
+            cmd.Parameters.AddWithValue("@date", @event.Date);
+            cmd.Parameters.AddWithValue("@name", @event.Name);
+            cmd.Parameters.AddWithValue("@starttime", @event.StartTime);
+            cmd.Parameters.AddWithValue("@endtime", @event.EndTime);
+            cmd.Connection = new SqlConnection(connectionString);
+            cmd.Connection.Open();
+            cmd.ExecuteNonQuery();
+            foreach (DisciplineDTO discipline in @event.Disciplines)
+            {
+
+            }
+
+            cmd.Connection.Close();
         }
     }
 }
