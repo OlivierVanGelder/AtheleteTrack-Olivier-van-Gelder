@@ -61,6 +61,19 @@ namespace AthleteTrack.Controllers
             EventLogic eventLogic = new();
 
             model.Disciplines = eventLogic.GetAllDisciplines();
+            model.SelectedDisciplines = new();
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult CreateWedstrijdschema(Discipline SelectedDiscipline)
+        {
+            CreateEventPageModel model = new();
+            EventLogic eventLogic = new();
+
+            model.Disciplines = eventLogic.GetAllDisciplines();
+            model.SelectedDisciplines = new() {SelectedDiscipline};
+
             return View(model);
         }
 
