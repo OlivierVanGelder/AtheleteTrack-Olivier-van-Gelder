@@ -65,6 +65,18 @@ namespace AthleteTrackDAL
                 disciplineCmd.Parameters.AddWithValue("@starttime", discipline.StartTime);
                 disciplineCmd.Parameters.AddWithValue("@endtime", discipline.Time);
                 disciplineCmd.ExecuteNonQuery();
+
+                SqlCommand eventdisciplineIDcmd = new("SELECT TOP 1 ID FROM WedstrijdschemaOnderdeel ORDER BY ID DESC;", conn);
+                int eventdisciplineID = (int)eventIDcmd.ExecuteScalar();
+
+                foreach (AthleteDTO athlete in discipline.Athletes)
+                {
+                    SqlCommand athleteCmd = new("INSERT INTO WedstrijdschemaOnderdeelAtleet(WedstrijdschemaOnderdeel_ID, Atleet_ID)" +
+                        "VALUES ('@eventdisciplineID', '@athleteID');", conn);
+                    athleteCmd.Parameters.AddWithValue("@eventdisciplineID", eventdisciplineID);
+                    athleteCmd.Parameters.AddWithValue("@athleteID", athlete.ID);
+                    athleteCmd.ExecuteNonQuery();
+                }
             }
             conn.Close();
         }

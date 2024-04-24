@@ -14,5 +14,7 @@ namespace AthleteTrackDAL.DTO_s
         public string Time { get; set; }
         public string Rules { get; set; }
         public int DisciplineID { get; set; }
+
+        public List<AthleteDTO>? Athletes { get; set; } = new();
     }
 }

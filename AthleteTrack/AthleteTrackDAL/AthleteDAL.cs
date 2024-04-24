@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 
 namespace AthleteTrackDAL
 {
-    public class AtleetDAL
+    public class AthleteDAL
     {
         string connectionString = "Server=mssqlstud.fhict.local;Database=dbi536130_athletet;User Id=dbi536130_athletet;Password=123;TrustServerCertificate=True;";
 
-        public List<AtleetDTO> GetAtleten(int ID)
+        public List<AthleteDTO> GetAtleten(int ID)
         {
-            List<AtleetDTO> atleten = new();
+            List<AthleteDTO> atleten = new();
             SqlCommand cmd = new();
 
-            cmd.CommandText = 
-                "SELECT Atleet.Naam " +
+            cmd.CommandText =
+                "SELECT Atleet.Naam, Atleet.ID " +
                 "FROM WedstrijdschemaOnderdeel " +
                 "INNER JOIN WedstrijdschemaOnderdeelAtleet ON WedstrijdschemaOnderdeelAtleet.WedstrijdschemaOnderdeel_ID = WedstrijdschemaOnderdeel.ID " +
                 "INNER JOIN Atleet ON WedstrijdschemaOnderdeelAtleet.Atleet_ID = Atleet.ID " +
@@ -29,8 +29,9 @@ namespace AthleteTrackDAL
             using SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                AtleetDTO atleet = new AtleetDTO();
+                AthleteDTO atleet = new AthleteDTO();
                 atleet.Name = reader["Naam"].ToString()!;
+                atleet.ID = Convert.ToInt32(reader["ID"]);
                 atleten.Add(atleet);
             }
             cmd.Connection.Close();

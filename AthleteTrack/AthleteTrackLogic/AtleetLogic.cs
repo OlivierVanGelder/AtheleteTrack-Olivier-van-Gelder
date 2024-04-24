@@ -13,13 +13,14 @@ namespace AthleteTrackLogic
     {
         public List<Atleet> GetAtleten(int id)
         {
-            AtleetDAL atleetDAL = new AtleetDAL();
+            AthleteDAL atleetDAL = new AthleteDAL();
             List<Atleet> atleten = new List<Atleet>();
 
-            foreach (AtleetDTO atleet in atleetDAL.GetAtleten(id))
+            foreach (AthleteDTO atleet in atleetDAL.GetAtleten(id))
             {
                 Atleet newAtleet = new();
 
+                newAtleet.ID = atleet.ID;
                 newAtleet.Name = atleet.Name;
                 atleten.Add(newAtleet);
             }

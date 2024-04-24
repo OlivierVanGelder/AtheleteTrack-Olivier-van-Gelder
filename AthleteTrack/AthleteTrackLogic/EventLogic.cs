@@ -25,7 +25,7 @@ namespace AthleteTrackLogic
                 di.ID = disciplineDTO.ID;
                 di.Name = disciplineDTO.Name;
                 di.Rules = disciplineDTO.Rules;
-                di.Time = disciplineDTO.Time;
+                di.EndTime = disciplineDTO.Time;
                 di.StartTime = disciplineDTO.StartTime;
                 di.DisciplineID = disciplineDTO.DisciplineID;
                 @event.Disciplines.Add(di);
@@ -48,7 +48,7 @@ namespace AthleteTrackLogic
                 di.ID = discipline.ID;
                 di.Name = discipline.Name;
                 di.DisciplineID = discipline.DisciplineID;
-                di.Time = discipline.Time;
+                di.EndTime = discipline.Time;
                 di.StartTime = discipline.StartTime;
                 di.Rules = discipline.Rules;
                 exercises.Add(di);

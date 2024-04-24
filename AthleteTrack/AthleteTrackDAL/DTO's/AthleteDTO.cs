@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace AthleteTrackDAL.DTO_s
 {
-    public class AtleetDTO
+    public class AthleteDTO
     {
+        public int? ID { get; set; }
         public string Name { get; set; }
     }
 }
