@@ -10,10 +10,13 @@ namespace AthleteTrack.Controllers
     public class SchemapagesController : Controller
     {
         private readonly ILogger<SchemapagesController> _logger;
+        public CreateEventPageModel createEventPageModel = new();
 
         public SchemapagesController(ILogger<SchemapagesController> logger)
         {
             _logger = logger;
+
+            createEventPageModel.SelectedDisciplines = new();
         }
 
         public IActionResult Trainingsschema(int ID, int ExerciseID)
@@ -66,15 +69,14 @@ namespace AthleteTrack.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateWedstrijdschema(Discipline SelectedDiscipline)
+        public IActionResult CreateWedstrijdschema(string? SelectedDiscipline)
         {
-            CreateEventPageModel model = new();
             EventLogic eventLogic = new();
 
-            model.Disciplines = eventLogic.GetAllDisciplines();
-            model.SelectedDisciplines = new() {SelectedDiscipline};
-
-            return View(model);
+            createEventPageModel.Disciplines = eventLogic.GetAllDisciplines();
+            createEventPageModel.SelectedDisciplines.Add(new Discipline { Name = SelectedDiscipline });
+                
+            return View(createEventPageModel);
         }
 
         public IActionResult CreateTrainingsschema()
