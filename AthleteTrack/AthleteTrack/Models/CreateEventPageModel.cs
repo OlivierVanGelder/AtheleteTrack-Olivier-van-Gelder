@@ -8,8 +8,8 @@ namespace AthleteTrackMVC.Models
         public string? Date {  get; set; }
         public string? StartTime { get; set; }
         public string? EndTime { get; set; }
-        public Discipline? SelectedDiscipline { get; set; }
-        public List<Discipline>? Disciplines { get; set; }
-        public List<Discipline>? SelectedDisciplines { get; set; }
+        public List<Discipline> Disciplines { get; set; } = new();
+        public List<Discipline> SelectedDisciplines { get; set; } = new();
+        public string Action { get; set; } = "New";
     }
 }

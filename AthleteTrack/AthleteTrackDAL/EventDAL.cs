@@ -47,7 +47,7 @@ namespace AthleteTrackDAL
             conn.Open();
             SqlCommand cmd = new(
                 "INSERT INTO Wedstrijdschema (Naam, Begintijd, Eindtijd, Datum)" +
-                "VALUES ('@name', '@starttime', '@endtime', '@date');", conn);
+                "VALUES (@name, @starttime, @endtime, @date);", conn);
             cmd.Parameters.AddWithValue("@date", @event.Date);
             cmd.Parameters.AddWithValue("@name", @event.Name);
             cmd.Parameters.AddWithValue("@starttime", @event.StartTime);
@@ -59,48 +59,29 @@ namespace AthleteTrackDAL
             foreach (DisciplineDTO discipline in @event.Disciplines)
             {
                 SqlCommand disciplineCmd = new("INSERT INTO WedstrijdschemaOnderdeel(Wedstrijdschema_ID, Onderdeel_ID, Begintijd, Tijdsduur)" +
-                    "VALUES ('@eventID', '@disciplineID', '@starttime', '@endtime');", conn);
+                    "VALUES (@eventID, @disciplineID, @starttime, @endtime);", conn);
                 disciplineCmd.Parameters.AddWithValue("@eventID",eventID);
                 disciplineCmd.Parameters.AddWithValue("@disciplineID", discipline.ID);
                 disciplineCmd.Parameters.AddWithValue("@starttime", discipline.StartTime);
-                disciplineCmd.Parameters.AddWithValue("@endtime", discipline.Time);
+                disciplineCmd.Parameters.AddWithValue("@endtime", discipline.EndTime);
                 disciplineCmd.ExecuteNonQuery();
 
                 SqlCommand eventdisciplineIDcmd = new("SELECT TOP 1 ID FROM WedstrijdschemaOnderdeel ORDER BY ID DESC;", conn);
                 int eventdisciplineID = (int)eventIDcmd.ExecuteScalar();
 
-                foreach (AthleteDTO athlete in discipline.Athletes)
+                if(discipline.Athletes != null)
                 {
-                    SqlCommand athleteCmd = new("INSERT INTO WedstrijdschemaOnderdeelAtleet(WedstrijdschemaOnderdeel_ID, Atleet_ID)" +
-                        "VALUES ('@eventdisciplineID', '@athleteID');", conn);
-                    athleteCmd.Parameters.AddWithValue("@eventdisciplineID", eventdisciplineID);
-                    athleteCmd.Parameters.AddWithValue("@athleteID", athlete.ID);
-                    athleteCmd.ExecuteNonQuery();
+                    foreach (AthleteDTO athlete in discipline.Athletes)
+                    {
+                        SqlCommand athleteCmd = new("INSERT INTO WedstrijdschemaOnderdeelAtleet(WedstrijdschemaOnderdeel_ID, Atleet_ID)" +
+                            "VALUES (@eventdisciplineID, @athleteID);", conn);
+                        athleteCmd.Parameters.AddWithValue("@eventdisciplineID", eventdisciplineID);
+                        athleteCmd.Parameters.AddWithValue("@athleteID", athlete.ID);
+                        athleteCmd.ExecuteNonQuery();
+                    }
                 }
             }
             conn.Close();
-        }
-
-        public void _AddEvent(EventDTO @event)
-        {
-            SqlCommand cmd = new();
-
-            cmd.CommandText =
-                "INSERT INTO Wedstrijdschema (Naam, Begintijd, Eindtijd, Datum)" +
-                "VALUES ('@name', '@starttime', '@endtime', '@date');";
-            cmd.Parameters.AddWithValue("@date", @event.Date);
-            cmd.Parameters.AddWithValue("@name", @event.Name);
-            cmd.Parameters.AddWithValue("@starttime", @event.StartTime);
-            cmd.Parameters.AddWithValue("@endtime", @event.EndTime);
-            cmd.Connection = new SqlConnection(connectionString);
-            cmd.Connection.Open();
-            cmd.ExecuteNonQuery();
-            foreach (DisciplineDTO discipline in @event.Disciplines)
-            {
-
-            }
-
-            cmd.Connection.Close();
         }
     }
 }

@@ -2,7 +2,6 @@
 using AthleteTrackLogic;
 using AthleteTrackLogic.Classes;
 using Microsoft.AspNetCore.Mvc;
-using System.Data.Common;
 using System.Diagnostics;
 
 namespace AthleteTrack.Controllers
@@ -10,13 +9,10 @@ namespace AthleteTrack.Controllers
     public class SchemapagesController : Controller
     {
         private readonly ILogger<SchemapagesController> _logger;
-        public CreateEventPageModel createEventPageModel = new();
 
         public SchemapagesController(ILogger<SchemapagesController> logger)
         {
             _logger = logger;
-
-            createEventPageModel.SelectedDisciplines = new();
         }
 
         public IActionResult Trainingsschema(int ID, int ExerciseID)
@@ -64,19 +60,43 @@ namespace AthleteTrack.Controllers
             EventLogic eventLogic = new();
 
             model.Disciplines = eventLogic.GetAllDisciplines();
-            model.SelectedDisciplines = new();
+            model.SelectedDisciplines.Add(new Discipline { Name = "60m sprint", StartTime = "00:00", EndTime = "00:00"});
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult CreateWedstrijdschema(string? SelectedDiscipline)
+        public IActionResult CreateWedstrijdschema(CreateEventPageModel model)
         {
             EventLogic eventLogic = new();
 
-            createEventPageModel.Disciplines = eventLogic.GetAllDisciplines();
-            createEventPageModel.SelectedDisciplines.Add(new Discipline { Name = SelectedDiscipline });
-                
-            return View(createEventPageModel);
+            model.Disciplines = eventLogic.GetAllDisciplines();
+            if(model.Action == "New")
+                model.SelectedDisciplines.Add(new Discipline { Name = "", StartTime = "00:00", EndTime = "00:00" });
+            
+            if (model.Action == "Save")
+            {
+                Event @event = new();
+
+                @event.StartTime = model.StartTime;
+                @event.EndTime = model.EndTime;
+                @event.Date = model.Date;
+                @event.Name = model.Name;
+
+                foreach (var selecteddiscipline in model.SelectedDisciplines)
+                {
+                    foreach(var discipline in model.Disciplines)
+                    {
+                        if(discipline.Name == selecteddiscipline.Name)
+                        {
+                            selecteddiscipline.ID = discipline.ID;
+                        }
+                    }
+                }
+
+                @event.Disciplines = model.SelectedDisciplines;
+                eventLogic.AddEvent(@event);
+            }
+            return View(model);
         }
 
         public IActionResult CreateTrainingsschema()

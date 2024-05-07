@@ -28,7 +28,7 @@ namespace AthleteTrackDAL
                 DisciplineDTO o = new();
                 o.StartTime = ((TimeSpan)reader.GetValue(1)).ToString(@"hh\:mm");
                 o.Rules = reader.GetString(4);
-                o.Time = ((TimeSpan)reader.GetValue(2)).ToString(@"hh\:mm");
+                o.EndTime = ((TimeSpan)reader.GetValue(2)).ToString(@"hh\:mm");
                 o.DisciplineID = reader.GetInt32(5);
                 o.Name = reader.GetString(3);
                 o.ID = reader.GetInt32(0);
@@ -56,7 +56,7 @@ namespace AthleteTrackDAL
                 DisciplineDTO o = new();
                 o.StartTime = "";
                 o.Rules = reader.GetString(2);
-                o.Time = "";
+                o.EndTime = "";
                 o.DisciplineID = 1;
                 o.Name = reader.GetString(1);
                 o.ID = reader.GetInt32(0);

@@ -25,7 +25,7 @@ namespace AthleteTrackLogic
                 di.ID = disciplineDTO.ID;
                 di.Name = disciplineDTO.Name;
                 di.Rules = disciplineDTO.Rules;
-                di.EndTime = disciplineDTO.Time;
+                di.EndTime = disciplineDTO.EndTime;
                 di.StartTime = disciplineDTO.StartTime;
                 di.DisciplineID = disciplineDTO.DisciplineID;
                 @event.Disciplines.Add(di);
@@ -48,13 +48,48 @@ namespace AthleteTrackLogic
                 di.ID = discipline.ID;
                 di.Name = discipline.Name;
                 di.DisciplineID = discipline.DisciplineID;
-                di.EndTime = discipline.Time;
+                di.EndTime = discipline.EndTime;
                 di.StartTime = discipline.StartTime;
                 di.Rules = discipline.Rules;
                 exercises.Add(di);
             }
 
             return exercises;
+        }
+
+        public void AddEvent(Event @event)
+        {
+            EventDAL eventDAL = new();
+
+            EventDTO eventDTO = new();
+
+            eventDTO.ID = @event.ID;
+            eventDTO.Name = @event.Name;
+            eventDTO.StartTime = @event.StartTime;
+            eventDTO.EndTime = @event.EndTime;
+            eventDTO.Date = @event.Date;
+            eventDTO.Disciplines = new();
+            foreach(var discipline in @event.Disciplines)
+            {
+                DisciplineDTO disciplineDTO = new();
+                disciplineDTO.ID = discipline.ID;
+                disciplineDTO.Athletes = new();
+                disciplineDTO.StartTime = discipline.StartTime;
+                disciplineDTO.EndTime = discipline.EndTime;
+                if (discipline.Athletes != null)
+                {
+                    foreach (var athlete in discipline.Athletes)
+                    {
+                        AthleteDTO athleteDTO = new();
+                        athleteDTO.ID = athlete.ID;
+                        athleteDTO.Name = athlete.Name;
+                        disciplineDTO.Athletes.Add(athleteDTO);
+                    }
+                }
+                eventDTO.Disciplines.Add(disciplineDTO);
+            }
+
+            eventDAL.AddEvent(eventDTO);
         }
     }
 }
