@@ -54,5 +54,30 @@ namespace AthleteTrackLogic
 
             return exercises;
         }
+
+        public void AddTraining(Training training)
+        {
+            TrainingDAL trainingDAL = new();
+
+            TrainingDTO trainingDTO = new();
+
+            trainingDTO.ID = training.ID;
+            trainingDTO.Name = training.Name;
+            trainingDTO.StartTime = training.StartTime;
+            trainingDTO.EndTime = training.EndTime;
+            trainingDTO.Exercises = new();
+            foreach (var exercise in training.Exercises)
+            {
+                ExerciseDTO exerciseDTO = new();
+                exerciseDTO.ID = exercise.ID;
+                exerciseDTO.Time = exercise.Time;
+                exerciseDTO.Name = exercise.Name;
+                exerciseDTO.Repetitions = exercise.Repetitions;
+                exerciseDTO.Description = exercise.Description;
+                trainingDTO.Exercises.Add(exerciseDTO);
+            }
+
+            trainingDAL.AddTraining(trainingDTO);
+        }
     }
 }

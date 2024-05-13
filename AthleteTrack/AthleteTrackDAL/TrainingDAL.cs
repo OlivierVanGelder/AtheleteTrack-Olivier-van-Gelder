@@ -36,5 +36,46 @@ namespace AthleteTrackDAL
             training.Exercises = exercise.GetExercises(ID);
             return training;
         }
+
+        public void AddTraining(TrainingDTO training)
+        {
+            SqlConnection conn = new(connectionString);
+            conn.Open();
+            SqlCommand cmd = new(
+                "INSERT INTO Trainingsschema (Naam, Begintijd, Eindtijd) " +
+                "VALUES(@name, @starttime, @endtime)", conn);
+            cmd.Parameters.AddWithValue("@name", training.Name);
+            cmd.Parameters.AddWithValue("@starttime", training.StartTime);
+            cmd.Parameters.AddWithValue("@endtime", training.EndTime);
+            cmd.ExecuteNonQuery();
+            SqlCommand trainingIDcmd = new("SELECT TOP 1 ID FROM Trainingsschema ORDER BY ID DESC;", conn);
+            int trainingsID = (int)trainingIDcmd.ExecuteScalar();
+
+            foreach (ExerciseDTO exercise in training.Exercises)
+            {
+                SqlCommand exerciseCmd = new("INSERT INTO TrainingsschemaOefening(Trainingsschema_ID, Oefening_ID, Herhalingen, Tijdsduur) " +
+                "VALUES(@trainingsID, @disciplineID, @repetitions, @time);", conn);
+
+                if (exercise.ID == null)
+                {
+                    SqlCommand addexerciseCmd = new("INSERT INTO Oefening(Naam, Beschrijving) " +
+                    "VALUES(@name, @description); ", conn);
+                    addexerciseCmd.Parameters.AddWithValue("@name", exercise.Name);
+                    addexerciseCmd.Parameters.AddWithValue("@description", exercise.Description);
+                    addexerciseCmd.ExecuteNonQuery();
+
+                    SqlCommand exerciseIDcmd = new("SELECT TOP 1 ID FROM Oefening ORDER BY ID DESC;", conn);
+                    int exerciseID = (int)exerciseIDcmd.ExecuteScalar();
+                    exercise.ID = exerciseID;
+                }
+
+                exerciseCmd.Parameters.AddWithValue("@trainingsID", trainingsID);
+                exerciseCmd.Parameters.AddWithValue("@disciplineID", exercise.ID);
+                exerciseCmd.Parameters.AddWithValue("@repetitions", exercise.Repetitions);
+                exerciseCmd.Parameters.AddWithValue("@time", exercise.Time);
+                exerciseCmd.ExecuteNonQuery();
+            }
+            conn.Close();
+        }
     }
 }

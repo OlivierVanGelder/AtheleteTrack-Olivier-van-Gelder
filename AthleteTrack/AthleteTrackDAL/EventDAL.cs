@@ -67,7 +67,7 @@ namespace AthleteTrackDAL
                 disciplineCmd.ExecuteNonQuery();
 
                 SqlCommand eventdisciplineIDcmd = new("SELECT TOP 1 ID FROM WedstrijdschemaOnderdeel ORDER BY ID DESC;", conn);
-                int eventdisciplineID = (int)eventIDcmd.ExecuteScalar();
+                int eventdisciplineID = (int)eventdisciplineIDcmd.ExecuteScalar();
 
                 if(discipline.Athletes != null)
                 {
