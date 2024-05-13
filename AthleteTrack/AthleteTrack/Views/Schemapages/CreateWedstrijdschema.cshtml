@@ -46,6 +46,11 @@
                             Tijd
                         </h5>
                     </div>
+                    <div class="col ms-3">
+                        <h5>
+                            Atleten
+                        </h5>
+                    </div>
                 </div>
 
                 @for(int i = 0; i < Model.SelectedDisciplines.Count; i++)
@@ -68,11 +73,17 @@
                                 }
                             </select>
                         </div>
-                        <div class="col">
+                        <div class="col" style="font-weight:bold">
                             <input type="time" asp-for="SelectedDisciplines[i].StartTime" />
+                            tot
+                            <input type="time" asp-for="SelectedDisciplines[i].EndTime" />
                         </div>
                         <div class="col">
-                            <input type="time" asp-for="SelectedDisciplines[i].EndTime" />
+                            @for (int a = 0; a < discipline.Athletes.Count; a++)
+                            {
+                                <input type="text" asp-for="SelectedDisciplines[i].Athletes[a].Name" value="@discipline.Athletes[a].Name" disabled />
+                            }
+                            <input type="text" asp-for="SelectedDisciplines[i].SelectedAthlete" placeholder=""/>
                         </div>
                     </div> 
                 }               

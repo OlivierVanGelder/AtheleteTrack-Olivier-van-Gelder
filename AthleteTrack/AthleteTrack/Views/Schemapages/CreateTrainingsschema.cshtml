@@ -15,7 +15,7 @@
     <div class="row">
         <div class="col ms-5 me-5">
             <div class="row">
-                <div class="col me-5 mb-3">
+                <div class="col" style="max-width:200px">
                     <h4>Tijdsduur:</h4>
                     <div class="d-flex">
                         <div class="input-group input-group-sm">
@@ -27,9 +27,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="col"></div>
-                <div class="col"></div>
-                <div class="col"></div>
             </div>
             <hr>
 
@@ -39,7 +36,7 @@
 
                 <div class="row m-3 ms-2 mt-2">
                     <div class="col">
-                        <div>Oefeningen:</div>
+                        <h5>Oefeningen:</h5>
                         <select asp-for="SelectedExercises[i].Name">
                             @foreach (var option in Model.Exercises)
                             {
@@ -55,11 +52,11 @@
                         </select>
                     </div>
                     <div class="col">
-                        <div>Tijdsduur:</div>
+                        <h5>Tijdsduur:</h5>
                         <input type="time" asp-for="SelectedExercises[i].Time" />
                     </div>
                     <div class="col">
-                        <div>Herhalingen:</div>
+                        <h5>Herhalingen:</h5>
                         <input type="number" asp-for="SelectedExercises[i].Repetitions" />
                     </div>
                 </div>

@@ -3,6 +3,7 @@ using AthleteTrackLogic;
 using AthleteTrackLogic.Classes;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using AthleteTrackDAL.DTO_s;
 
 namespace AthleteTrack.Controllers
 {
@@ -60,7 +61,7 @@ namespace AthleteTrack.Controllers
             EventLogic eventLogic = new();
 
             model.Disciplines = eventLogic.GetAllDisciplines();
-            model.SelectedDisciplines.Add(new Discipline { Name = "60m sprint", StartTime = "00:00", EndTime = "00:00"});
+            model.SelectedDisciplines.Add(new Discipline { Name = "60m sprint", StartTime = "00:00", EndTime = "00:00", Athletes = new() });
             return View(model);
         }
 
@@ -71,7 +72,7 @@ namespace AthleteTrack.Controllers
 
             model.Disciplines = eventLogic.GetAllDisciplines();
             if(model.Action == "New")
-                model.SelectedDisciplines.Add(new Discipline { Name = "", StartTime = "00:00", EndTime = "00:00" });
+                model.SelectedDisciplines.Add(new Discipline { Name = "", StartTime = "00:00", EndTime = "00:00", Athletes = new() });
             
             if (model.Action == "Save")
             {

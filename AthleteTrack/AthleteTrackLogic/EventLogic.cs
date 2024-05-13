@@ -51,6 +51,7 @@ namespace AthleteTrackLogic
                 di.EndTime = discipline.EndTime;
                 di.StartTime = discipline.StartTime;
                 di.Rules = discipline.Rules;
+                di.Athletes = new();
                 exercises.Add(di);
             }
 
