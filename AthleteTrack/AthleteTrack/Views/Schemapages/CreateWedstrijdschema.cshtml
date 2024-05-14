@@ -81,16 +81,17 @@
                         <div class="col">
                             @for (int a = 0; a < discipline.Athletes.Count; a++)
                             {
-                                <input type="text" asp-for="SelectedDisciplines[i].Athletes[a].Name" value="@discipline.Athletes[a].Name" disabled />
+                                <input type="text" asp-for="SelectedDisciplines[i].Athletes[a].Name" value="@discipline.Athletes[a].Name" />
                             }
-                            <input type="text" asp-for="SelectedDisciplines[i].SelectedAthlete" placeholder=""/>
+                            <input type="text" asp-for="SelectedDisciplines[i].SelectedAthlete" value=""/>
+                            <input type="submit" asp-for="Action" value="Save" class="btn btn-secondary mb-1" style="padding-right:8px; padding-left:8px; padding-top:0px; padding-bottom:2px" />
                         </div>
                     </div> 
                 }               
             </div>
             <div class="row">
-                <input type="submit" asp-for="Action" value="New" class="mt-2" style="max-width:100px"/>
-                <input type="submit" asp-for="Action" value="Save" class="mt-2 ms-1" style="max-width:100px" />
+                <input type="submit" asp-for="Action" value="New" class="mt-2 btn btn-secondary" style="max-width:100px" />
+                <input type="submit" asp-for="Action" value="Save all" class="mt-2 ms-1 btn btn-secondary" style="max-width:100px" />
             </div>
         </div>
     </div>

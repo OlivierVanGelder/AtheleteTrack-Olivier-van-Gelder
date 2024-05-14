@@ -73,8 +73,19 @@ namespace AthleteTrack.Controllers
             model.Disciplines = eventLogic.GetAllDisciplines();
             if(model.Action == "New")
                 model.SelectedDisciplines.Add(new Discipline { Name = "", StartTime = "00:00", EndTime = "00:00", Athletes = new() });
-            
+
             if (model.Action == "Save")
+            {
+                foreach (var discipline in model.SelectedDisciplines)
+                {
+                    if (discipline.SelectedAthlete != null && discipline.SelectedAthlete.Trim() != "")
+                    {
+                        discipline.Athletes.Add(new Atleet {Name = discipline.SelectedAthlete});
+                    }
+                }
+            }
+
+            if (model.Action == "Save all")
             {
                 Event @event = new();
 

@@ -73,6 +73,14 @@ namespace AthleteTrackDAL
                 {
                     foreach (AthleteDTO athlete in discipline.Athletes)
                     {
+                        SqlCommand insertathleteCmd = new("INSERT INTO Atleet(Naam) " +
+                        "VALUES(@name); ", conn);
+                        insertathleteCmd.Parameters.AddWithValue("@name", athlete.Name);
+                        insertathleteCmd.ExecuteNonQuery();
+
+                        SqlCommand athleteIDcmd = new("SELECT TOP 1 ID FROM Atleet ORDER BY ID DESC;", conn);
+                        athlete.ID = (int)athleteIDcmd.ExecuteScalar();
+
                         SqlCommand athleteCmd = new("INSERT INTO WedstrijdschemaOnderdeelAtleet(WedstrijdschemaOnderdeel_ID, Atleet_ID)" +
                             "VALUES (@eventdisciplineID, @athleteID);", conn);
                         athleteCmd.Parameters.AddWithValue("@eventdisciplineID", eventdisciplineID);
