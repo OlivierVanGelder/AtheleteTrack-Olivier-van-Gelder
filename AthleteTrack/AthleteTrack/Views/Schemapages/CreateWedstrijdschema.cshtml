@@ -18,18 +18,18 @@
                 <div class="col">
                     <h4>Datum:</h4>
                     <div class="input-group input-group-sm me-2">
-                        <input class="form-control" asp-for="Date" type="text" placeholder="" />
+                        <input type="date" asp-for="Date" />
                     </div>
                 </div>
                 <div class="col">
                     <h4>Tijdsduur:</h4>
                     <div class="d-flex">
                         <div class="input-group input-group-sm">
-                            <input class="form-control" asp-for="StartTime" type="text" placeholder="" />
+                            <input type="time" asp-for="StartTime" />
                         </div>
                         <h5 class="ms-2 me-2">tot</h5>
                         <div class="input-group input-group-sm">
-                            <input class="form-control" asp-for="EndTime" type="text" placeholder="" />
+                            <input type="time" asp-for="EndTime" />
                         </div>
                     </div>
                 </div>
@@ -91,7 +91,7 @@
             </div>
             <div class="row">
                 <input type="submit" asp-for="Action" value="New" class="mt-2 btn btn-secondary" style="max-width:100px" />
-                <input type="submit" asp-for="Action" value="Save all" class="mt-2 ms-1 btn btn-secondary" style="max-width:100px" />
+                <input type="submit" asp-for="Action" value="Submit" class="mt-2 ms-1 btn btn-secondary" style="max-width:100px" />
             </div>
         </div>
     </div>

@@ -85,12 +85,22 @@ namespace AthleteTrack.Controllers
                 }
             }
 
-            if (model.Action == "Save all")
+            if (model.Action == "Submit")
             {
                 Event @event = new();
 
                 @event.StartTime = model.StartTime;
                 @event.EndTime = model.EndTime;
+                if(model.Date != null)
+                {
+                    string[] date = model.Date.Split("-");
+                    try
+                    {
+                        model.Date = date[0] + "-";
+                        model.Date += date[1] + "-";
+                        model.Date += date[2];
+                    }catch(Exception) { }
+                }
                 @event.Date = model.Date;
                 @event.Name = model.Name;
 
