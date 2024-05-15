@@ -16,6 +16,7 @@ namespace AthleteTrackLogic
 
             @event.ID = eventDTO.ID;
             @event.Name = eventDTO.Name;
+            @event.Date = eventDTO.Date;
             @event.StartTime = eventDTO.StartTime;
             @event.EndTime = eventDTO.EndTime;
             @event.Disciplines = new();
