@@ -1,15 +1,16 @@
-﻿using AthleteTrackDAL.DTO_s;
+﻿using AthleteTrackLogic.Classes;
+using AthleteTrackLogic.Interfaces;
 using Microsoft.Data.SqlClient;
 
 namespace AthleteTrackDAL
 {
-    public class Schema_sDAL
+    public class Schema_sDAL : ISchemasDAL
     {
         string connectionString = "Server=mssqlstud.fhict.local;Database=dbi536130_athletet;User Id=dbi536130_athletet;Password=123;TrustServerCertificate=True;";
 
-        public List<SearchResultDTO> GetSchemas(string naam)
+        public List<SearchResult> GetSchemas(string naam)
         {
-            List<SearchResultDTO> results = new();
+            List<SearchResult> results = new();
 
             SqlCommand cmd = new SqlCommand("SELECT * FROM Wedstrijdschema \r\nWHERE Wedstrijdschema.Naam LIKE '%' + @name + '%';");
             cmd.Connection = new SqlConnection(connectionString);
@@ -19,11 +20,9 @@ namespace AthleteTrackDAL
             {
                 while (reader.Read())
                 {
-                    SearchResultDTO.SearchType searchType = searchType = SearchResultDTO.SearchType.Trainingsschema; ;
-                    searchType = SearchResultDTO.SearchType.Wedstrijdschema;
-                    SearchResultDTO item = new(searchType);
-                    item.Name = reader.GetString(1);
-                    item.ID = reader.GetInt32(0);
+                    SearchResult.SearchType searchType = searchType = SearchResult.SearchType.Trainingsschema; ;
+                    searchType = SearchResult.SearchType.Wedstrijdschema;
+                    SearchResult item = new(reader.GetString(1), reader.GetInt32(0), searchType);
                     results.Add(item);
                 }
             }
@@ -37,11 +36,9 @@ namespace AthleteTrackDAL
             {
                 while (newreader.Read())
                 {
-                    SearchResultDTO.SearchType searchType = searchType = SearchResultDTO.SearchType.Trainingsschema; ;
-                    searchType = SearchResultDTO.SearchType.Trainingsschema;
-                    SearchResultDTO item = new(searchType);
-                    item.Name = newreader.GetString(1);
-                    item.ID = newreader.GetInt32(0);
+                    SearchResult.SearchType searchType = searchType = SearchResult.SearchType.Trainingsschema; ;
+                    searchType = SearchResult.SearchType.Trainingsschema;
+                    SearchResult item = new(newreader.GetString(1), newreader.GetInt32(0), searchType);
                     results.Add(item);
                 }
             }

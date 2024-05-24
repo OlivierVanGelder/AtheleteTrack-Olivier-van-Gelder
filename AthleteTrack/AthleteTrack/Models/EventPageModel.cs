@@ -2,7 +2,7 @@
 
 namespace AthleteTrackMVC.Models
 {
-    public class WedstrijdPageModel
+    public class EventPageModel
     {
         public string Name { get; set; }
         public int ID { get; set; }
@@ -11,6 +11,6 @@ namespace AthleteTrackMVC.Models
         public string EndTime { get; set; }
         public int OnderdeelID {  get; set; }
         public List<Discipline> Disciplines {  get; set; }
-        public List<Atleet> Atleten { get; set; }
+        public List<Athlete> Atleten { get; set; }
     }
 }

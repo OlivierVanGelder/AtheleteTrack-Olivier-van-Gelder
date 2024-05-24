@@ -1,15 +1,17 @@
 ﻿using AthleteTrackDAL.DTO_s;
+using AthleteTrackLogic.Classes;
+using AthleteTrackLogic.Interfaces;
 using Microsoft.Data.SqlClient;
 
 namespace AthleteTrackDAL
 {
-    public class ExerciseDAL
+    public class ExerciseDAL : IExerciseDAL
     {
         string connectionString = "Server=mssqlstud.fhict.local;Database=dbi536130_athletet;User Id=dbi536130_athletet;Password=123;TrustServerCertificate=True;";
 
-        public List<ExerciseDTO> GetExercises(int ID)
+        public List<Exercise> GetExercises(int ID)
         {
-            List<ExerciseDTO> exercises = new();
+            List<Exercise> exercises = new();
 
             SqlCommand cmd = new();
 
@@ -24,7 +26,7 @@ namespace AthleteTrackDAL
             using SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                ExerciseDTO e = new();
+                Exercise e = new();
                 e.Name = reader.GetString(2);
                 e.Description = reader.GetString(3);
                 e.Repetitions = reader.GetInt32(4);
@@ -37,9 +39,9 @@ namespace AthleteTrackDAL
             return exercises;
         }
 
-        public List<ExerciseDTO> GetAllExercises()
+        public List<Exercise> GetAllExercises()
         {
-            List<ExerciseDTO> exercises = new();
+            List<Exercise> exercises = new();
 
             SqlCommand cmd = new();
 
@@ -51,7 +53,7 @@ namespace AthleteTrackDAL
             using SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                ExerciseDTO e = new();
+                Exercise e = new();
                 e.Name = reader.GetString(1);
                 e.Description = reader.GetString(2);
                 e.Repetitions = 1;

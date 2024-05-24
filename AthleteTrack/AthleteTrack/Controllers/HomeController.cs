@@ -1,9 +1,11 @@
 ﻿using AthleteTrackMVC.Models;
 using Microsoft.AspNetCore.Mvc;
+using AthleteTrackDAL;
 using Microsoft.Data.SqlClient;
 using System.Diagnostics;
 using System.Data;
 using AthleteTrackLogic;
+using AthleteTrackLogic.Interfaces;
 
 namespace AthleteTrack.Controllers
 {
@@ -20,8 +22,9 @@ namespace AthleteTrack.Controllers
         {
             HomeModel model = new HomeModel();
             SchemasLogic schemasLogic = new SchemasLogic();
+            Schema_sDAL schemasDAL = new();
 
-            model.Results = schemasLogic.GetSchemas(model.Searchtext);
+            model.Results = schemasLogic.GetSchemas(model.Searchtext, schemasDAL);
             return View(model);
         }
 
@@ -30,6 +33,7 @@ namespace AthleteTrack.Controllers
         {
             HomeModel model = new HomeModel();
             SchemasLogic schemasLogic = new SchemasLogic();
+            Schema_sDAL schema_SDAL = new();
 
             if (Searchtext != null)
             {
@@ -39,7 +43,7 @@ namespace AthleteTrack.Controllers
             {
                 model.Searchtext = "";
             }
-            model.Results = schemasLogic.GetSchemas(model.Searchtext);
+            model.Results = schemasLogic.GetSchemas(model.Searchtext, schema_SDAL);
             return View(model);
         }
 

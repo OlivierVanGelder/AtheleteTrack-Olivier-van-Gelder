@@ -1,4 +1,6 @@
 ﻿using AthleteTrackDAL.DTO_s;
+using AthleteTrackLogic.Classes;
+using AthleteTrackLogic.Interfaces;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
@@ -10,13 +12,13 @@ using System.Threading.Tasks;
 
 namespace AthleteTrackDAL
 {
-    public class EventDAL
+    public class EventDAL : IEventDAL
     {
         string connectionString = "Server=mssqlstud.fhict.local;Database=dbi536130_athletet;User Id=dbi536130_athletet;Password=123;TrustServerCertificate=True;";
 
-        public EventDTO GetEventDetails(int ID)
+        public Event GetEventDetails(int ID)
         {
-            EventDTO @event = new();
+            Event @event = new();
             SqlCommand cmd = new();
 
             cmd.CommandText =
@@ -41,7 +43,7 @@ namespace AthleteTrackDAL
             return @event;
         }
 
-        public void AddEvent(EventDTO @event)
+        public void AddEvent(Event @event)
         {
             SqlConnection conn = new(connectionString);
             conn.Open();
@@ -56,7 +58,7 @@ namespace AthleteTrackDAL
             SqlCommand eventIDcmd = new("SELECT TOP 1 ID FROM Wedstrijdschema ORDER BY ID DESC;", conn);
             int eventID = (int)eventIDcmd.ExecuteScalar();
 
-            foreach (DisciplineDTO discipline in @event.Disciplines)
+            foreach (Discipline discipline in @event.Disciplines)
             {
                 SqlCommand disciplineCmd = new("INSERT INTO WedstrijdschemaOnderdeel(Wedstrijdschema_ID, Onderdeel_ID, Begintijd, Tijdsduur)" +
                     "VALUES (@eventID, @disciplineID, @starttime, @endtime);", conn);
@@ -71,7 +73,7 @@ namespace AthleteTrackDAL
 
                 if(discipline.Athletes != null)
                 {
-                    foreach (AthleteDTO athlete in discipline.Athletes)
+                    foreach (Athlete athlete in discipline.Athletes)
                     {
                         SqlCommand insertathleteCmd = new("INSERT INTO Atleet(Naam) " +
                         "VALUES(@name); ", conn);

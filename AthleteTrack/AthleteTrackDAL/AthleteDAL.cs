@@ -1,4 +1,6 @@
 ﻿using AthleteTrackDAL.DTO_s;
+using AthleteTrackLogic.Classes;
+using AthleteTrackLogic.Interfaces;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
@@ -8,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace AthleteTrackDAL
 {
-    public class AthleteDAL
+    public class AthleteDAL : IAthleteDAL
     {
         string connectionString = "Server=mssqlstud.fhict.local;Database=dbi536130_athletet;User Id=dbi536130_athletet;Password=123;TrustServerCertificate=True;";
 
-        public List<AthleteDTO> GetAtleten(int ID)
+        public List<Athlete> GetAtleten(int ID)
         {
-            List<AthleteDTO> atleten = new();
+            List<Athlete> atleten = new();
             SqlCommand cmd = new();
 
             cmd.CommandText =
@@ -29,7 +31,7 @@ namespace AthleteTrackDAL
             using SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                AthleteDTO atleet = new AthleteDTO();
+                Athlete atleet = new();
                 atleet.Name = reader["Naam"].ToString()!;
                 atleet.ID = Convert.ToInt32(reader["ID"]);
                 atleten.Add(atleet);

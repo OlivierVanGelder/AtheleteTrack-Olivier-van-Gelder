@@ -1,5 +1,4 @@
-﻿using AthleteTrackDAL.DTO_s;
-using AthleteTrackDAL;
+﻿using AthleteTrackLogic.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,25 +10,10 @@ namespace AthleteTrackLogic
 {
     public class SchemasLogic
     {
-        public List<SearchResult> GetSchemas(string searchtext)
+        public List<SearchResult> GetSchemas(string searchtext, ISchemasDAL schemasDAL)
         {
-            Schema_sDAL schemasDal = new();
-            List<SearchResult> results = new();
+            List<SearchResult> results = schemasDAL.GetSchemas(searchtext);
 
-            foreach (SearchResultDTO result in schemasDal.GetSchemas(searchtext))
-            {
-
-                if(result.searchType == SearchResultDTO.SearchType.Wedstrijdschema)
-                {
-                    SearchResult newResult = new(result.Name, result.ID, SearchResult.SearchType.Wedstrijdschema);
-                    results.Add(newResult);
-                }
-                else
-                {
-                    SearchResult newResult = new(result.Name, result.ID, SearchResult.SearchType.Trainingsschema);
-                    results.Add(newResult);
-                }
-            }
             return results;
         }
     }

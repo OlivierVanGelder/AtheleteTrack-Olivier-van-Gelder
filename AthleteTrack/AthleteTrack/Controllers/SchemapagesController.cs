@@ -3,7 +3,7 @@ using AthleteTrackLogic;
 using AthleteTrackLogic.Classes;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using AthleteTrackDAL.DTO_s;
+using AthleteTrackDAL;
 
 namespace AthleteTrack.Controllers
 {
@@ -20,13 +20,14 @@ namespace AthleteTrack.Controllers
         {
             TrainingLogic trainingLogic = new TrainingLogic();
             TrainingsPageModel model = new();
-            Training training = trainingLogic.GetTraining(ID);
+            TrainingDAL trainingDAL = new TrainingDAL();
+            Training training = trainingLogic.GetTraining(ID, trainingDAL);
             model.ID = training.ID;
             model.StartTime = training.StartTime;
             model.EndTime = training.EndTime;
             model.Name = training.Name;
             model.Exercises = training.Exercises;
-            if (ExerciseID != null)
+            if (ExerciseID != 0)
             {
                 model.ExerciseID = ExerciseID;
             }
@@ -37,9 +38,10 @@ namespace AthleteTrack.Controllers
         {
             AtleetLogic atleetLogic = new();
             EventLogic eventLogic = new();
-
-            WedstrijdPageModel model = new();
-            Event @event = eventLogic.GetEvent(ID);
+            AthleteDAL athleteDAL = new AthleteDAL();
+            EventPageModel model = new();
+            EventDAL eventDal = new();
+            Event @event = eventLogic.GetEvent(ID, eventDal);
             model.ID = @event.ID;
             model.StartTime = @event.StartTime;
             model.EndTime = @event.EndTime;
@@ -49,7 +51,7 @@ namespace AthleteTrack.Controllers
             model.Atleten = new();
             if (DisciplineID != 0)
             {
-                model.Atleten = atleetLogic.GetAtleten(DisciplineID);
+                model.Atleten = atleetLogic.GetAtleten(DisciplineID, athleteDAL);
                 model.OnderdeelID = DisciplineID;
             }
             return View(model);
@@ -59,8 +61,9 @@ namespace AthleteTrack.Controllers
         {
             CreateEventPageModel model = new();
             EventLogic eventLogic = new();
+            DisciplinesDAL disciplinesDal = new();
 
-            model.Disciplines = eventLogic.GetAllDisciplines();
+            model.Disciplines = eventLogic.GetAllDisciplines(disciplinesDal);
             model.SelectedDisciplines.Add(new Discipline { Name = "60m sprint", StartTime = "00:00", EndTime = "00:00", Athletes = new() });
             return View(model);
         }
@@ -69,8 +72,9 @@ namespace AthleteTrack.Controllers
         public IActionResult CreateWedstrijdschema(CreateEventPageModel model)
         {
             EventLogic eventLogic = new();
+            DisciplinesDAL disciplinesDal = new();
 
-            model.Disciplines = eventLogic.GetAllDisciplines();
+            model.Disciplines = eventLogic.GetAllDisciplines(disciplinesDal);
             if(model.Action == "New")
                 model.SelectedDisciplines.Add(new Discipline { Name = "", StartTime = "00:00", EndTime = "00:00", Athletes = new() });
 
@@ -80,7 +84,7 @@ namespace AthleteTrack.Controllers
                 {
                     if (discipline.SelectedAthlete != null && discipline.SelectedAthlete.Trim() != "")
                     {
-                        discipline.Athletes.Add(new Atleet {Name = discipline.SelectedAthlete});
+                        discipline.Athletes.Add(new Athlete {Name = discipline.SelectedAthlete});
                     }
                 }
             }
@@ -88,6 +92,7 @@ namespace AthleteTrack.Controllers
             if (model.Action == "Submit")
             {
                 Event @event = new();
+                EventDAL eventDAL = new();
 
                 @event.StartTime = model.StartTime;
                 @event.EndTime = model.EndTime;
@@ -116,7 +121,7 @@ namespace AthleteTrack.Controllers
                 }
 
                 @event.Disciplines = model.SelectedDisciplines;
-                eventLogic.AddEvent(@event);
+                eventLogic.AddEvent(@event, eventDAL);
             }
             return View(model);
         }
@@ -125,8 +130,8 @@ namespace AthleteTrack.Controllers
         {
             CreateTrainingPageModel model = new();
             TrainingLogic trainingLogic = new();
-
-            model.Exercises = trainingLogic.GetAllExercises();
+            ExerciseDAL exerciseDAL = new ExerciseDAL();
+            model.Exercises = trainingLogic.GetAllExercises(exerciseDAL);
             model.SelectedExercises = new();
             model.SelectedExercises.Add(new Exercise {Name = "Pushups"});
             return View(model);
@@ -136,8 +141,9 @@ namespace AthleteTrack.Controllers
         public IActionResult CreateTrainingsschema(CreateTrainingPageModel model)
         {
             TrainingLogic trainingLogic = new();
-
-            model.Exercises = trainingLogic.GetAllExercises();
+            ExerciseDAL exerciseDAL = new ExerciseDAL();
+            TrainingDAL trainingDAL = new TrainingDAL();
+            model.Exercises = trainingLogic.GetAllExercises(exerciseDAL);
             if (model.Action == "New")
                 model.SelectedExercises.Add(new Exercise { Name = "Pushup"});
 
@@ -161,7 +167,7 @@ namespace AthleteTrack.Controllers
                 }
 
                 training.Exercises = model.SelectedExercises;
-                trainingLogic.AddTraining(training);
+                trainingLogic.AddTraining(training, trainingDAL);
             }
             return View(model);
         }

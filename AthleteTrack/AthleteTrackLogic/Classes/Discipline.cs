@@ -8,7 +8,7 @@
         public string? EndTime { get; set; }
         public string? Rules { get; set; }
         public int? DisciplineID { get; set; }
-        public List<Atleet> Athletes { get; set; } = new();
+        public List<Athlete> Athletes { get; set; } = new();
         public string SelectedAthlete { get; set; } = string.Empty;
     }
 }

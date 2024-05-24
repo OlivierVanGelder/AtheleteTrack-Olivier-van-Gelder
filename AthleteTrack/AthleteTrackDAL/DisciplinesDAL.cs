@@ -1,15 +1,17 @@
 ﻿using AthleteTrackDAL.DTO_s;
+using AthleteTrackLogic.Classes;
+using AthleteTrackLogic.Interfaces;
 using Microsoft.Data.SqlClient;
 
 namespace AthleteTrackDAL
 {
-    public class DisciplinesDAL
+    public class DisciplinesDAL : IDisciplinesDAL
     {
         string connectionString = "Server=mssqlstud.fhict.local;Database=dbi536130_athletet;User Id=dbi536130_athletet;Password=123;TrustServerCertificate=True;";
 
-        public List<DisciplineDTO> GetDisciplines(int ID)
+        public List<Discipline> GetDisciplines(int ID)
         {
-            List<DisciplineDTO> disciplines = new();
+            List<Discipline> disciplines = new();
 
             SqlCommand cmd = new();
 
@@ -25,7 +27,7 @@ namespace AthleteTrackDAL
             using SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                DisciplineDTO o = new();
+                Discipline o = new();
                 o.StartTime = ((TimeSpan)reader.GetValue(1)).ToString(@"hh\:mm");
                 o.Rules = reader.GetString(4);
                 o.EndTime = ((TimeSpan)reader.GetValue(2)).ToString(@"hh\:mm");
@@ -39,9 +41,9 @@ namespace AthleteTrackDAL
             return disciplines;
         }
 
-        public List<DisciplineDTO> GetAllDisciplines()
+        public List<Discipline> GetAllDisciplines()
         {
-            List<DisciplineDTO> disciplines = new();
+            List<Discipline> disciplines = new();
 
             SqlCommand cmd = new();
 
@@ -53,7 +55,7 @@ namespace AthleteTrackDAL
             using SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                DisciplineDTO o = new();
+                Discipline o = new();
                 o.StartTime = "";
                 o.Rules = reader.GetString(2);
                 o.EndTime = "";

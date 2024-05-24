@@ -1,6 +1,5 @@
-﻿using AthleteTrackDAL;
-using AthleteTrackLogic.Classes;
-using AthleteTrackDAL.DTO_s;
+﻿using AthleteTrackLogic.Classes;
+using AthleteTrackLogic.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,21 +10,11 @@ namespace AthleteTrackLogic
 {
     public class AtleetLogic
     {
-        public List<Atleet> GetAtleten(int id)
+        public List<Athlete> GetAtleten(int id, IAthleteDAL athleteDAL)
         {
-            AthleteDAL atleetDAL = new AthleteDAL();
-            List<Atleet> atleten = new List<Atleet>();
+            List<Athlete> athletes = athleteDAL.GetAtleten(id);
 
-            foreach (AthleteDTO atleet in atleetDAL.GetAtleten(id))
-            {
-                Atleet newAtleet = new();
-
-                newAtleet.ID = atleet.ID;
-                newAtleet.Name = atleet.Name;
-                atleten.Add(newAtleet);
-            }
-
-            return atleten;
+            return athletes;
         }
     }
 }

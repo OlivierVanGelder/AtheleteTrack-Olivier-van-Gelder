@@ -1,4 +1,6 @@
 ﻿using AthleteTrackDAL.DTO_s;
+using AthleteTrackLogic.Classes;
+using AthleteTrackLogic.Interfaces;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
@@ -9,13 +11,13 @@ using System.Threading.Tasks;
 
 namespace AthleteTrackDAL
 {
-    public class TrainingDAL
+    public class TrainingDAL : ITrainingDAL
     {
         string connectionString = "Server=mssqlstud.fhict.local;Database=dbi536130_athletet;User Id=dbi536130_athletet;Password=123;TrustServerCertificate=True;";
 
-        public TrainingDTO GetTrainingsDetails(int ID)
+        public Training GetTrainingsDetails(int ID)
         {
-            TrainingDTO training = new();
+            Training training = new();
 
             SqlCommand cmd = new SqlCommand("SELECT * FROM Trainingsschema WHERE ID = @id;");
             cmd.Connection = new SqlConnection(connectionString);
@@ -37,7 +39,7 @@ namespace AthleteTrackDAL
             return training;
         }
 
-        public void AddTraining(TrainingDTO training)
+        public void AddTraining(Training training)
         {
             SqlConnection conn = new(connectionString);
             conn.Open();
@@ -51,7 +53,7 @@ namespace AthleteTrackDAL
             SqlCommand trainingIDcmd = new("SELECT TOP 1 ID FROM Trainingsschema ORDER BY ID DESC;", conn);
             int trainingsID = (int)trainingIDcmd.ExecuteScalar();
 
-            foreach (ExerciseDTO exercise in training.Exercises)
+            foreach (Exercise exercise in training.Exercises)
             {
                 SqlCommand exerciseCmd = new("INSERT INTO TrainingsschemaOefening(Trainingsschema_ID, Oefening_ID, Herhalingen, Tijdsduur) " +
                 "VALUES(@trainingsID, @disciplineID, @repetitions, @time);", conn);
