@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:AthleteTrack/AthleteTrack/Logic/SearchResultModel.cs
-﻿namespace AthleteTrack.Logic
-========
 ﻿namespace AthleteTrackLogic.Classes
->>>>>>>> 3832ae2b48daaa1f58f8330660526af26f0d7c44:AthleteTrack/AthleteTrackLogic/Classes/SearchResult.cs
 {
     public class SearchResult
     {
