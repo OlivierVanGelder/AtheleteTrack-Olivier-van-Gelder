@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace AthleteTrackLogic.Interfaces
 {
-    public interface IAthleteDAL
+    public interface IEventDAL
     {
-        public List<Athlete> GetAtleten(int ID);
+        public Event GetEventDetails(int ID);
+
+        public void AddEvent(Event @event);
     }
 }

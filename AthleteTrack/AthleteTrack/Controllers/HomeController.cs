@@ -1,9 +1,11 @@
-﻿using AthleteTrack.Models;
+﻿using AthleteTrackMVC.Models;
 using Microsoft.AspNetCore.Mvc;
+using AthleteTrackDAL;
 using Microsoft.Data.SqlClient;
 using System.Diagnostics;
 using System.Data;
-using AthleteTrack.Data;
+using AthleteTrackLogic;
+using AthleteTrackLogic.Interfaces;
 
 namespace AthleteTrack.Controllers
 {
@@ -13,9 +15,7 @@ namespace AthleteTrack.Controllers
 
         private readonly ILogger<HomeController> _logger;
 
-        private readonly Dataconnection _connection = new();
-
-        public HomeController(ILogger<HomeController> logger, IConfiguration configuration)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
             _configuration = configuration;
@@ -24,7 +24,10 @@ namespace AthleteTrack.Controllers
         public IActionResult Index()
         {
             HomeModel model = new HomeModel();
-            model.Results = _connection.GetWedstrijdschemas(model.Searchtext);
+            SchemasLogic schemasLogic = new SchemasLogic();
+            Schema_sDAL schemasDAL = new();
+
+            model.Results = schemasLogic.GetSchemas(model.Searchtext, schemasDAL);
             return View(model);
         }
 
@@ -32,15 +35,18 @@ namespace AthleteTrack.Controllers
         public IActionResult Index(string Searchtext)
         {
             HomeModel model = new HomeModel();
+            SchemasLogic schemasLogic = new SchemasLogic();
+            Schema_sDAL schema_SDAL = new();
+
             if (Searchtext != null)
             {
                 model.Searchtext = Searchtext;
             }
             else
             {
-                model.Searchtext = " ";
+                model.Searchtext = "";
             }
-            model.Results = _connection.GetWedstrijdschemas(model.Searchtext);
+            model.Results = schemasLogic.GetSchemas(model.Searchtext, schema_SDAL);
             return View(model);
         }
 

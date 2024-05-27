@@ -1,29 +1,42 @@
-﻿using System;
+﻿using AthleteTrackDAL.DTO_s;
+using AthleteTrackLogic.Classes;
+using AthleteTrackLogic.Interfaces;
+using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AthleteTrackLogic.Classes;
-using AthleteTrackLogic.Interfaces;
-using Microsoft.Data.SqlClient;
-using AthleteTrackLogic.Classes;
 
 namespace AthleteTrackDAL
 {
     public class AthleteDAL : IAthleteDAL
     {
-        public List<Athlete> GetAtleet(int ID)
+        string connectionString = "Server=mssqlstud.fhict.local;Database=dbi536130_athletet;User Id=dbi536130_athletet;Password=123;TrustServerCertificate=True;";
+
+        public List<Athlete> GetAtleten(int ID)
         {
             List<Athlete> atleten = new();
+            SqlCommand cmd = new();
 
-            SqlCommand cmd = new SqlCommand($"SELECT Atleet.Naam \r\nFROM WedstrijdschemaOnderdeel\r\nINNER JOIN WedstrijdschemaOnderdeelAtleet ON WedstrijdschemaOnderdeelAtleet.WedstrijdschemaOnderdeel_ID = WedstrijdschemaOnderdeel.ID\r\nINNER JOIN Atleet ON WedstrijdschemaOnderdeelAtleet.Atleet_ID = Atleet.ID\r\nWHERE WedstrijdschemaOnderdeel.ID = {ID}", s);
+            cmd.CommandText =
+                "SELECT Atleet.Naam, Atleet.ID " +
+                "FROM WedstrijdschemaOnderdeel " +
+                "INNER JOIN WedstrijdschemaOnderdeelAtleet ON WedstrijdschemaOnderdeelAtleet.WedstrijdschemaOnderdeel_ID = WedstrijdschemaOnderdeel.ID " +
+                "INNER JOIN Atleet ON WedstrijdschemaOnderdeelAtleet.Atleet_ID = Atleet.ID " +
+                "WHERE WedstrijdschemaOnderdeel.ID = @id";
+            cmd.Parameters.AddWithValue("@id", ID);
+            cmd.Connection = new SqlConnection(connectionString);
+            cmd.Connection.Open();
             using SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                Athlete a = new(reader.GetString(0));
-                atleten.Add(a);
+                Athlete atleet = new();
+                atleet.Name = reader["Naam"].ToString()!;
+                atleet.ID = Convert.ToInt32(reader["ID"]);
+                atleten.Add(atleet);
             }
-
+            cmd.Connection.Close();
             return atleten;
         }
     }

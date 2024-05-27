@@ -1,12 +1,16 @@
+<<<<<<<< HEAD:AthleteTrack/AthleteTrack/Logic/SearchResultModel.cs
 ﻿namespace AthleteTrack.Logic
+========
+﻿namespace AthleteTrackLogic.Classes
+>>>>>>>> 3832ae2b48daaa1f58f8330660526af26f0d7c44:AthleteTrack/AthleteTrackLogic/Classes/SearchResult.cs
 {
-    public class SearchResultModel
+    public class SearchResult
     {
         public string Name { get; set; } = "";
-        public int ID { get; set; }
+        public int ID { get; set; } = 0;
         public SearchType searchType { get; } = SearchType.Wedstrijdschema;
 
-        public SearchResultModel(string name, int id, SearchType searchtype)
+        public SearchResult(string name, int id, SearchType searchtype)
         {
             Name = name;
             ID = id;

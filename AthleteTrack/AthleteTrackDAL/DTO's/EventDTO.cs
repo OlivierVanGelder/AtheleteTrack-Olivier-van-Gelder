@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AthleteTrackLogic.Classes
+namespace AthleteTrackDAL.DTO_s
 {
-    public class Training
+    public class EventDTO
     {
-        public int ID { get; set; }
+        public int ID {  get; set; }
         public string Name { get; set; }
         public string StartTime { get; set; }
         public string EndTime { get; set; }
-
-        public List<Exercise> Exercises { get; set; }
+        public string Date {  get; set; }
+        public List<DisciplineDTO> Disciplines { get; set; }
     }
 }

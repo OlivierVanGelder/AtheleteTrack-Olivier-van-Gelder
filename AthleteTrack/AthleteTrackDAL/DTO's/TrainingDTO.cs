@@ -1,18 +1,20 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AthleteTrackLogic.Classes
+namespace AthleteTrackDAL.DTO_s
 {
-    public class Training
+    public class TrainingDTO
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public string StartTime { get; set; }
+        public string StartTime {  get; set; }
         public string EndTime { get; set; }
 
-        public List<Exercise> Exercises { get; set; }
+        public List<ExerciseDTO> Exercises { get; set; }
     }
 }

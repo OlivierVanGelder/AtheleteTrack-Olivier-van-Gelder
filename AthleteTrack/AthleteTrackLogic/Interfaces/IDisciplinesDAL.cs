@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace AthleteTrackLogic.Interfaces
 {
-    public interface IAthleteDAL
+    public interface IDisciplinesDAL
     {
-        public List<Athlete> GetAtleten(int ID);
+        public List<Discipline> GetDisciplines(int ID);
+
+        public List<Discipline> GetAllDisciplines();
     }
 }

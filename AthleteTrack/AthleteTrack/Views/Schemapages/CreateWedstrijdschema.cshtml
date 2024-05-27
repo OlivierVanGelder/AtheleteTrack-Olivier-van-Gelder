@@ -2,94 +2,97 @@
     ViewData["Title"] = "Nieuw wedstrijdschema";
 }
 
-@model CreateWedstrijdPageModel
+@model CreateEventPageModel
 
-<div class="container">
-    <form>
-        <div class="row text-center mb-5">
-            <div class="col mt-4">
-                    <div class="input-group input-group-lg">
-                        <input class="form-control text-center me-5 ms-5" type="text" placeholder="Nieuw wedstrijdschema" />
-                    </div>
+<form class="container" method="post">
+    <div class="row text-center mb-5">
+        <div class="col mt-4">
+            <div class="input-group input-group-lg">
+                <input class="form-control text-center me-5 ms-5" type="text" asp-for="Name" placeholder="Nieuw wedstrijdschema" />
             </div>
         </div>
-        <div class="row">
-            <div class="col ms-5 me-5">
-                <div class="row">
-                    <div class="col">
-                        <h4>Datum:</h4>
-                        <div class="input-group input-group-sm me-2">
-                            <input class="form-control" type="text" placeholder="" />
-                        </div>
+    </div>
+    <div class="row">
+        <div class="col ms-5 me-5">
+            <div class="row">
+                <div class="col">
+                    <h4>Datum:</h4>
+                    <div class="input-group input-group-sm me-2">
+                        <input type="date" asp-for="Date" />
                     </div>
-                    <div class="col">
-                        <h4>Tijdsduur:</h4>
-                        <div class="d-flex">
-                            <div class="input-group input-group-sm">
-                                <input class="form-control" type="text" placeholder="" />
-                            </div>
-                            <h5 class="ms-2 me-2">tot</h5>
-                            <div class="input-group input-group-sm">
-                                <input class="form-control" type="text" placeholder="" />
-                            </div>
+                </div>
+                <div class="col">
+                    <h4>Tijdsduur:</h4>
+                    <div class="d-flex">
+                        <div class="input-group input-group-sm">
+                            <input type="time" asp-for="StartTime" />
+                        </div>
+                        <h5 class="ms-2 me-2">tot</h5>
+                        <div class="input-group input-group-sm">
+                            <input type="time" asp-for="EndTime" />
                         </div>
                     </div>
                 </div>
-                <div class="row border border-dark mt-2">
-                    <div class="row ms-2 mt-2">
-                        <div class="col ms-2">
-                            <h5>
-                                Onderdelen
-                            </h5>
-                        </div>
-                        <div class="col ms-2">
-                            <h5>
-                                Tijd
-                            </h5>
-                        </div>
+            </div>
+            <div class="row border border-dark mt-2">
+                <div class="row ms-2 mt-2">
+                    <div class="col ms-3">
+                        <h5>
+                            Onderdelen
+                        </h5>
                     </div>
+                    <div class="col ms-3">
+                        <h5>
+                            Tijd
+                        </h5>
+                    </div>
+                    <div class="col ms-3">
+                        <h5>
+                            Atleten
+                        </h5>
+                    </div>
+                </div>
+
+                @for(int i = 0; i < Model.SelectedDisciplines.Count; i++)
+                {
+                    var discipline = Model.SelectedDisciplines[i];
+
                     <div class="row m-3 ms-2 mt-2">
                         <div class="col">
-                            <ul class="list-group">
-                                @{
-                                    for (int i = 1; i <= 3; i++)
+                            <select asp-for="SelectedDisciplines[i].Name">
+                                @foreach(var option in Model.Disciplines)
+                                {
+                                    @if (discipline.Name == option.Name)
                                     {
-                                        <li class="list-group-item me-2 ms-2">Oefening @i</li>
+                                        <option value="@option.Name" selected>@option.Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@option.Name">@option.Name</option>
                                     }
                                 }
-                            </ul>
+                            </select>
+                        </div>
+                        <div class="col" style="font-weight:bold">
+                            <input type="time" asp-for="SelectedDisciplines[i].StartTime" />
+                            tot
+                            <input type="time" asp-for="SelectedDisciplines[i].EndTime" />
                         </div>
                         <div class="col">
-                            <ul class="list-group">
-                                @{
-                                    for (int i = 1; i <= 3; i++)
-                                    {
-                                        <li class="list-group-item me-2 ms-2">1@(i):00</li>
-                                    }
-                                }
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col ms-5 me-5">
-                <div class="row">
-                    <h4>Onderdelen</h4>
-                </div>
-                <div class="row border border-dark">
-                    <div class="row ms-1 mt-3 mb-3">
-                        <ul class="list-group">
-                            @{
-
-                                foreach (AthleteTrack.Logic.Discipline discipline in Model.Disciplines)
-                                {
-                                    <li style="max-width:300px" class="list-group-item py-1 me-1 ms-1">@discipline.Name</li>
-                                }
+                            @for (int a = 0; a < discipline.Athletes.Count; a++)
+                            {
+                                <input type="text" asp-for="SelectedDisciplines[i].Athletes[a].Name" value="@discipline.Athletes[a].Name" />
                             }
-                        </ul>
-                    </div>
-                </div>
+                            <input type="text" asp-for="SelectedDisciplines[i].SelectedAthlete" value=""/>
+                            <input type="submit" asp-for="Action" value="Save" class="btn btn-secondary mb-1" style="padding-right:8px; padding-left:8px; padding-top:0px; padding-bottom:2px" />
+                        </div>
+                    </div> 
+                }               
+            </div>
+            <div class="row">
+                <input type="submit" asp-for="Action" value="New" class="mt-2 btn btn-secondary" style="max-width:100px" />
+                <input type="submit" asp-for="Action" value="Submit" class="mt-2 ms-1 btn btn-secondary" style="max-width:100px" />
             </div>
         </div>
-    </form>
-</div>
+    </div>
+</form>

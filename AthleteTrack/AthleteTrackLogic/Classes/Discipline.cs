@@ -2,21 +2,13 @@
 {
     public class Discipline
     {
-        public int ID { get; set; }
+        public int? ID { get; set; }
         public string Name { get; set; }
-        public string Begintijd { get; set; }
-        public string Tijdsduur { get; set; }
-        public string Regelementen { get; set; }
-        public int OnderdeelID { get; set; }
-
-        public Discipline(int id, string name, string begintijd, string tijdsduur, string regelementen, int onderdeelID) 
-        {
-            ID = id;
-            Name = name;
-            Begintijd = begintijd;
-            Tijdsduur = tijdsduur;
-            Regelementen = regelementen;
-            OnderdeelID = onderdeelID;
-        }
+        public string? StartTime { get; set; }
+        public string? EndTime { get; set; }
+        public string? Rules { get; set; }
+        public int? DisciplineID { get; set; }
+        public List<Athlete> Athletes { get; set; } = new();
+        public string SelectedAthlete { get; set; } = string.Empty;
     }
 }

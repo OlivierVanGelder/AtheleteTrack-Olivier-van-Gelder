@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace AthleteTrackLogic.Classes
 {
-    public class Training
+    public class Event
     {
         public int ID { get; set; }
         public string Name { get; set; }
         public string StartTime { get; set; }
         public string EndTime { get; set; }
-
-        public List<Exercise> Exercises { get; set; }
+        public string Date { get; set; }
+        public List<Discipline> Disciplines { get; set; }
     }
 }

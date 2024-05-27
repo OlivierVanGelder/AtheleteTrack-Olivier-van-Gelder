@@ -7,10 +7,19 @@
 <div class="text-center">
     <div class="row">
         <div class="col"></div>
-        <img class="col mb-3" height="200px" src="~/img/FullLogoAthleteTrack.png"/>
-        <div class="col justify-content-end"><button class="m-2"><a class="text-dark" style="text-decoration : none" asp-area="" asp-controller="Schemapages" asp-action="CreateWedstrijdschema">Wedstrijd +</a></button><button class="m-2"><a class="text-dark" style="text-decoration : none" asp-area="" asp-controller="Schemapages" asp-action="CreateTrainingsschema">Training +</a></button></div>
+        <div class="col">
+            <img class="mb-3" height="200px" src="~/img/FullLogoAthleteTrack.png"/>
+        </div>
+        <div class="col">
+            <div class="row justify-content-end">
+                <button class="btn btn-light col flex-grow-0 text-nowrap m-1"><a asp-area="" asp-controller="Schemapages" asp-action="CreateTrainingsschema" style="text-decoration : none; color :#ffb263">Maak Training</a></button>
+            </div>
+            <div class="row justify-content-end">
+                <button class="btn btn-light col flex-grow-0 text-nowrap m-1"><a asp-area="" asp-controller="Schemapages" asp-action="CreateWedstrijdschema" style="text-decoration : none; color :#ffb263">Maak Wedstrijd</a></button>
+            </div>
+        </div>
     </div>
-    <div class="container text-center">
+    <div class="row text-center">
         <div class="row">
             <form class="col border-2" action="/" method="post">
                 <input type="text" asp-for="Searchtext" placeholder="Zoek een schema..." />

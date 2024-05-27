@@ -1,11 +1,9 @@
-﻿using AthleteTrack.Logic;
-
-namespace AthleteTrack.Models
+﻿namespace AthleteTrackMVC.Models
 {
     public class HomeModel
     {
         public string Searchtext { get; set; } = "";
 
-        public List<SearchResultModel> Results { get; set; } = new();
+        public List<AthleteTrackLogic.Classes.SearchResult> Results { get; set; } = new();
     }
 }

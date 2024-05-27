@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace AthleteTrackLogic.Interfaces
 {
-    public interface IAthleteDAL
+    public interface ISchemasDAL
     {
-        public List<Athlete> GetAtleten(int ID);
+        public List<SearchResult> GetSchemas(string naam);
     }
 }

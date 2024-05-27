@@ -5,9 +5,9 @@ VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AthleteTrackMVC", "AthleteTrack\AthleteTrackMVC.csproj", "{F83A472F-DAC6-4AD0-8DC9-4CA63D24CD6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AthleteTrackDAL", "AthleteTrackDAL\AthleteTrackDAL.csproj", "{93C96BEA-9190-49CE-B65D-554372652A51}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AthleteTrackDAL", "AthleteTrackDAL\AthleteTrackDAL.csproj", "{93C96BEA-9190-49CE-B65D-554372652A51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AthleteTrackLogic", "AthleteTrackLogic\AthleteTrackLogic.csproj", "{27E000D5-0F20-4D9B-B237-445FF9C345A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AthleteTrackLogic", "AthleteTrackLogic\AthleteTrackLogic.csproj", "{27E000D5-0F20-4D9B-B237-445FF9C345A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

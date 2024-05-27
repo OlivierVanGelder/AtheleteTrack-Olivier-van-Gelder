@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AthleteTrackDAL.DTO_s;
 using AthleteTrackLogic.Classes;
 using AthleteTrackLogic.Interfaces;
 using Microsoft.Data.SqlClient;
@@ -11,31 +7,61 @@ namespace AthleteTrackDAL
 {
     public class ExerciseDAL : IExerciseDAL
     {
-        public List<Exercise> GetAllExercises()
-        {
-            List<Exercise> exercise = new();
-
-            SqlCommand cmd = new SqlCommand($"SELECT Oefening.Naam, Oefening.ID, Oefening.Beschrijving \r\nFROM Oefening", s);
-            using SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                Exercise o = new(reader.GetString(0), reader.GetString(2), 0, "00:00", reader.GetInt32(1));
-                exercise.Add(o);
-            }
-            return exercise;
-        }
+        string connectionString = "Server=mssqlstud.fhict.local;Database=dbi536130_athletet;User Id=dbi536130_athletet;Password=123;TrustServerCertificate=True;";
 
         public List<Exercise> GetExercises(int ID)
         {
             List<Exercise> exercises = new();
 
-            SqlCommand cmd = new SqlCommand($"SELECT Trainingsschema.ID, TrainingsschemaOefening.Tijdsduur, Oefening.Naam, Oefening.Beschrijving, TrainingsschemaOefening.Herhalingen, TrainingsschemaOefening.Oefening_ID\r\nFROM Trainingsschema\r\nINNER JOIN TrainingsschemaOefening ON TrainingsschemaOefening.Trainingsschema_ID = Trainingsschema.ID\r\nINNER JOIN Oefening ON TrainingsschemaOefening.Oefening_ID = Oefening.ID\r\nWHERE Trainingsschema_ID = {ID}", s);
+            SqlCommand cmd = new();
+
+            cmd.CommandText = 
+                "SELECT Trainingsschema.ID, TrainingsschemaOefening.Tijdsduur, Oefening.Naam, Oefening.Beschrijving, TrainingsschemaOefening.Herhalingen, TrainingsschemaOefening.Oefening_ID " +
+                $"FROM Trainingsschema " +
+                $"INNER JOIN TrainingsschemaOefening ON TrainingsschemaOefening.Trainingsschema_ID = Trainingsschema.ID\r\nINNER JOIN Oefening ON TrainingsschemaOefening.Oefening_ID = Oefening.ID " +
+                $"WHERE Trainingsschema_ID = @id";
+            cmd.Parameters.AddWithValue("@id", ID);
+            cmd.Connection = new SqlConnection(connectionString);
+            cmd.Connection.Open();
             using SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                Exercise e = new(reader.GetString(2), reader.GetString(3), reader.GetInt32(4), ((TimeSpan)reader.GetValue(1)).ToString(@"hh\:mm"), reader.GetInt32(5));
+                Exercise e = new();
+                e.Name = reader.GetString(2);
+                e.Description = reader.GetString(3);
+                e.Repetitions = reader.GetInt32(4);
+                e.Time = ((TimeSpan)reader.GetValue(1)).ToString(@"hh\:mm");
+                e.ID = reader.GetInt32(5);
+
                 exercises.Add(e);
             }
+            cmd.Connection.Close();
+            return exercises;
+        }
+
+        public List<Exercise> GetAllExercises()
+        {
+            List<Exercise> exercises = new();
+
+            SqlCommand cmd = new();
+
+            cmd.CommandText =
+                "SELECT [ID], [Naam], [Beschrijving]" +
+                "FROM [dbi536130_athletet].[dbo].[Oefening]";            
+            cmd.Connection = new SqlConnection(connectionString);
+            cmd.Connection.Open();
+            using SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                Exercise e = new();
+                e.Name = reader.GetString(1);
+                e.Description = reader.GetString(2);
+                e.Repetitions = 1;
+                e.Time = "";
+                e.ID = reader.GetInt32(0);
+                exercises.Add(e);
+            }
+            cmd.Connection.Close();
             return exercises;
         }
     }
