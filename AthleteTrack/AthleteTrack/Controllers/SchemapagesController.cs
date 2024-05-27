@@ -4,6 +4,7 @@ using AthleteTrackLogic.Classes;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using AthleteTrackDAL;
+using Microsoft.Extensions.Logging;
 
 namespace AthleteTrack.Controllers
 {
@@ -16,7 +17,6 @@ namespace AthleteTrack.Controllers
         public SchemapagesController(ILogger<SchemapagesController> logger)
         {
             _logger = logger;
-            _configuration = configuration;
         }
 
         public IActionResult Trainingsschema(int ID, int ExerciseID)
@@ -124,7 +124,11 @@ namespace AthleteTrack.Controllers
                 }
 
                 @event.Disciplines = model.SelectedDisciplines;
-                eventLogic.AddEvent(@event, eventDAL);
+                if (!eventLogic.AddEvent(@event, eventDAL))
+                {
+                    model.ErrorMessage = "Voer alle lege velden in A.U.B.";
+                    return View(model);
+                }
             }
             return View(model);
         }
@@ -135,8 +139,10 @@ namespace AthleteTrack.Controllers
             TrainingLogic trainingLogic = new();
             ExerciseDAL exerciseDAL = new ExerciseDAL();
             model.Exercises = trainingLogic.GetAllExercises(exerciseDAL);
-            model.SelectedExercises = new();
-            model.SelectedExercises.Add(new Exercise {Name = "Pushups"});
+            model.SelectedExercises = new()
+            {
+                new Exercise { Name = "Pushups" }
+            };
             return View(model);
         }
 
@@ -170,7 +176,11 @@ namespace AthleteTrack.Controllers
                 }
 
                 training.Exercises = model.SelectedExercises;
-                trainingLogic.AddTraining(training, trainingDAL);
+                if (!trainingLogic.AddTraining(training, trainingDAL))
+                {
+                    model.ErrorMessage = "Voer alle lege velden in A.U.B.";
+                    return View(model);
+                }
             }
             return View(model);
         }

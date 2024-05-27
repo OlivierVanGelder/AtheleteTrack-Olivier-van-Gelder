@@ -19,9 +19,24 @@ namespace AthleteTrackLogic
             return exercises;
         }
 
-        public void AddEvent(Event @event, IEventDAL eventDAL)
+        public bool AddEvent(Event @event, IEventDAL eventDAL)
         {
+            if (string.IsNullOrWhiteSpace(@event.Date))
+                return false;
+            if (string.IsNullOrWhiteSpace(@event.EndTime)) 
+                return false;
+            if (string.IsNullOrWhiteSpace(@event.StartTime))
+                return false;
+            if (string.IsNullOrWhiteSpace(@event.Name))
+                return false;
+
+            @event.Date = @event.Date.Trim();
+            @event.EndTime = @event.EndTime.Trim();
+            @event.StartTime = @event.StartTime.Trim();
+            @event.Name = @event.Name.Trim();
+
             eventDAL.AddEvent(@event);
+            return true;
         }
     }
 }

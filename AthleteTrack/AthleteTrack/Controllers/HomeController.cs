@@ -18,7 +18,6 @@ namespace AthleteTrack.Controllers
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _configuration = configuration;
         }
 
         public IActionResult Index()

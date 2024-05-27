@@ -19,9 +19,22 @@ namespace AthleteTrackLogic
             return exercises;
         }
 
-        public void AddTraining(Training training, ITrainingDAL trainingDAL)
+        public bool AddTraining(Training training, ITrainingDAL trainingDAL)
         {
+
+            if (string.IsNullOrWhiteSpace(training.EndTime))
+                return false;
+            if (string.IsNullOrWhiteSpace(training.StartTime))
+                return false;
+            if (string.IsNullOrWhiteSpace(training.Name))
+                return false;
+
+            training.EndTime = training.EndTime.Trim();
+            training.StartTime = training.StartTime.Trim();
+            training.Name = training.Name.Trim();
+
             trainingDAL.AddTraining(training);
+            return true;
         }
     }
 }
