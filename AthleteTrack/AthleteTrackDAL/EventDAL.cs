@@ -1,14 +1,8 @@
-﻿using AthleteTrackDAL.DTO_s;
-using AthleteTrackLogic.Classes;
+﻿using AthleteTrackLogic.Classes;
 using AthleteTrackLogic.Interfaces;
 using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data.Common;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace AthleteTrackDAL
 {
@@ -46,52 +40,68 @@ namespace AthleteTrackDAL
         public void AddEvent(Event @event)
         {
             SqlConnection conn = new(connectionString);
-            conn.Open();
-            SqlCommand cmd = new(
-                "INSERT INTO Wedstrijdschema (Naam, Begintijd, Eindtijd, Datum)" +
-                "VALUES (@name, @starttime, @endtime, @date);", conn);
-            cmd.Parameters.AddWithValue("@date", @event.Date);
-            cmd.Parameters.AddWithValue("@name", @event.Name);
-            cmd.Parameters.AddWithValue("@starttime", @event.StartTime);
-            cmd.Parameters.AddWithValue("@endtime", @event.EndTime);
-            cmd.ExecuteNonQuery();
-            SqlCommand eventIDcmd = new("SELECT TOP 1 ID FROM Wedstrijdschema ORDER BY ID DESC;", conn);
-            int eventID = (int)eventIDcmd.ExecuteScalar();
+            SqlTransaction transaction = conn.BeginTransaction();
 
-            foreach (Discipline discipline in @event.Disciplines)
+            try
             {
-                SqlCommand disciplineCmd = new("INSERT INTO WedstrijdschemaOnderdeel(Wedstrijdschema_ID, Onderdeel_ID, Begintijd, Tijdsduur)" +
-                    "VALUES (@eventID, @disciplineID, @starttime, @endtime);", conn);
-                disciplineCmd.Parameters.AddWithValue("@eventID",eventID);
-                disciplineCmd.Parameters.AddWithValue("@disciplineID", discipline.ID);
-                disciplineCmd.Parameters.AddWithValue("@starttime", discipline.StartTime);
-                disciplineCmd.Parameters.AddWithValue("@endtime", discipline.EndTime);
-                disciplineCmd.ExecuteNonQuery();
+                conn.Open();
+                transaction = conn.BeginTransaction();
+                SqlCommand cmd = new(
+                    "INSERT INTO Wedstrijdschema (Naam, Begintijd, Eindtijd, Datum)" +
+                    "VALUES (@name, @starttime, @endtime, @date);", conn);
+                cmd.Parameters.AddWithValue("@date", @event.Date);
+                cmd.Parameters.AddWithValue("@name", @event.Name);
+                cmd.Parameters.AddWithValue("@starttime", @event.StartTime);
+                cmd.Parameters.AddWithValue("@endtime", @event.EndTime);
+                cmd.Transaction = transaction;
+                cmd.ExecuteNonQuery();
+                SqlCommand eventIDcmd = new("SELECT TOP 1 ID FROM Wedstrijdschema ORDER BY ID DESC;", conn);
+                int eventID = (int)eventIDcmd.ExecuteScalar();
 
-                SqlCommand eventdisciplineIDcmd = new("SELECT TOP 1 ID FROM WedstrijdschemaOnderdeel ORDER BY ID DESC;", conn);
-                int eventdisciplineID = (int)eventdisciplineIDcmd.ExecuteScalar();
-
-                if(discipline.Athletes != null)
+                foreach (Discipline discipline in @event.Disciplines)
                 {
-                    foreach (Athlete athlete in discipline.Athletes)
+                    SqlCommand disciplineCmd = new("INSERT INTO WedstrijdschemaOnderdeel(Wedstrijdschema_ID, Onderdeel_ID, Begintijd, Tijdsduur)" +
+                        "VALUES (@eventID, @disciplineID, @starttime, @endtime);", conn);
+                    disciplineCmd.Parameters.AddWithValue("@eventID", eventID);
+                    disciplineCmd.Parameters.AddWithValue("@disciplineID", discipline.ID);
+                    disciplineCmd.Parameters.AddWithValue("@starttime", discipline.StartTime);
+                    disciplineCmd.Parameters.AddWithValue("@endtime", discipline.EndTime);
+                    disciplineCmd.Transaction = transaction;
+                    disciplineCmd.ExecuteNonQuery();
+
+                    SqlCommand eventdisciplineIDcmd = new("SELECT TOP 1 ID FROM WedstrijdschemaOnderdeel ORDER BY ID DESC;", conn);
+                    int eventdisciplineID = (int)eventdisciplineIDcmd.ExecuteScalar();
+
+                    if (discipline.Athletes != null)
                     {
-                        SqlCommand insertathleteCmd = new("INSERT INTO Atleet(Naam) " +
-                        "VALUES(@name); ", conn);
-                        insertathleteCmd.Parameters.AddWithValue("@name", athlete.Name);
-                        insertathleteCmd.ExecuteNonQuery();
+                        foreach (Athlete athlete in discipline.Athletes)
+                        {
+                            SqlCommand insertathleteCmd = new("INSERT INTO Atleet(Naam) " +
+                            "VALUES(@name); ", conn);
+                            insertathleteCmd.Parameters.AddWithValue("@name", athlete.Name);
+                            insertathleteCmd.Transaction = transaction;
+                            insertathleteCmd.ExecuteNonQuery();
 
-                        SqlCommand athleteIDcmd = new("SELECT TOP 1 ID FROM Atleet ORDER BY ID DESC;", conn);
-                        athlete.ID = (int)athleteIDcmd.ExecuteScalar();
+                            SqlCommand athleteIDcmd = new("SELECT TOP 1 ID FROM Atleet ORDER BY ID DESC;", conn);
+                            athlete.ID = (int)athleteIDcmd.ExecuteScalar();
 
-                        SqlCommand athleteCmd = new("INSERT INTO WedstrijdschemaOnderdeelAtleet(WedstrijdschemaOnderdeel_ID, Atleet_ID)" +
-                            "VALUES (@eventdisciplineID, @athleteID);", conn);
-                        athleteCmd.Parameters.AddWithValue("@eventdisciplineID", eventdisciplineID);
-                        athleteCmd.Parameters.AddWithValue("@athleteID", athlete.ID);
-                        athleteCmd.ExecuteNonQuery();
+                            SqlCommand athleteCmd = new("INSERT INTO WedstrijdschemaOnderdeelAtleet(WedstrijdschemaOnderdeel_ID, Atleet_ID)" +
+                                "VALUES (@eventdisciplineID, @athleteID);", conn);
+                            athleteCmd.Parameters.AddWithValue("@eventdisciplineID", eventdisciplineID);
+                            athleteCmd.Parameters.AddWithValue("@athleteID", athlete.ID);
+                            athleteCmd.Transaction = transaction;
+                            athleteCmd.ExecuteNonQuery();
+                        }
                     }
                 }
+                conn.Close();
+                transaction.Commit(); 
             }
-            conn.Close();
+            catch
+            {
+                transaction.Rollback();
+                Debug.WriteLine("Transaction rolled back");
+            }
         }
     }
 }

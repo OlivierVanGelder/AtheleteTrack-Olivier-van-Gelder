@@ -90,7 +90,7 @@ namespace AthleteTrack.Controllers
                         discipline.Athletes.Add(new Athlete {Name = discipline.SelectedAthlete});
                     }
                 }
-            }
+            } 
 
             if (model.Action == "Submit")
             {
