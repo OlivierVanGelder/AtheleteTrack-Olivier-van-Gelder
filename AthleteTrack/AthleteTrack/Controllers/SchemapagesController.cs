@@ -4,7 +4,6 @@ using AthleteTrackLogic.Classes;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using AthleteTrackDAL;
-using Microsoft.Extensions.Logging;
 
 namespace AthleteTrack.Controllers
 {
@@ -178,7 +177,7 @@ namespace AthleteTrack.Controllers
                 training.Exercises = model.SelectedExercises;
                 if (!trainingLogic.AddTraining(training, trainingDAL))
                 {
-                    model.ErrorMessage = "Voer alle lege velden in A.U.B.";
+                    model.ErrorMessage = "Voer alle lege velden in A.U.B. (geen negatieve getallen)";
                     return View(model);
                 }
             }

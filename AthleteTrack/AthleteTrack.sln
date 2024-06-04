@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AthleteTrackDAL", "AthleteT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AthleteTrackLogic", "AthleteTrackLogic\AthleteTrackLogic.csproj", "{27E000D5-0F20-4D9B-B237-445FF9C345A3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAthleteTrack", "TestAthleteTrack\TestAthleteTrack.csproj", "{1C789102-05D9-4BC8-BB37-15D9B8985136}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{27E000D5-0F20-4D9B-B237-445FF9C345A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27E000D5-0F20-4D9B-B237-445FF9C345A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27E000D5-0F20-4D9B-B237-445FF9C345A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C789102-05D9-4BC8-BB37-15D9B8985136}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C789102-05D9-4BC8-BB37-15D9B8985136}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C789102-05D9-4BC8-BB37-15D9B8985136}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C789102-05D9-4BC8-BB37-15D9B8985136}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

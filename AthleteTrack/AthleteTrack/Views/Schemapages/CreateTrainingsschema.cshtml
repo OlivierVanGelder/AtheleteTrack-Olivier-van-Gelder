@@ -29,17 +29,17 @@
                     <h4>Tijdsduur:</h4>
                     <div class="d-flex">
                         <div class="input-group input-group-sm">
-                            <input type="time" asp-for="StartTime" />
+                            <input class="form-control" type="time" asp-for="StartTime" />
                         </div>
                         <h5 class="ms-2 me-2">tot</h5>
                         <div class="input-group input-group-sm">
-                            <input type="time" asp-for="EndTime" />
+                            <input class="form-control" type="time" asp-for="EndTime" />
                         </div>
                     </div>
                 </div>
             </div>
             <hr>
-            <div class="row">
+            <div class="row ms-1">
                 <div class="col">
                     <h5>Oefeningen:</h5>
                 </div>
@@ -54,9 +54,9 @@
             {
                 var exercise = Model.SelectedExercises[i];
 
-                <div class="row m-3 ms-2 mt-2">
+                <div class="row m-3 ms-0 mt-2">
                     <div class="col">
-                        <select asp-for="SelectedExercises[i].Name">
+                        <select class="form-control" asp-for="SelectedExercises[i].Name">
                             @foreach (var option in Model.Exercises)
                             {
                                 @if (exercise.Name == option.Name)
@@ -71,10 +71,10 @@
                         </select>
                     </div>
                     <div class="col">
-                        <input type="time" asp-for="SelectedExercises[i].Time" />
+                        <input class="form-control" type="time" asp-for="SelectedExercises[i].Time" />
                     </div>
                     <div class="col">
-                        <input type="number" asp-for="SelectedExercises[i].Repetitions" />
+                        <input class="form-control" type="number" asp-for="SelectedExercises[i].Repetitions" />
                     </div>
                 </div>
             }

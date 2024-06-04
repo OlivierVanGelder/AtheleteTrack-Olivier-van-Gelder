@@ -28,6 +28,13 @@ namespace AthleteTrackLogic
                 return false;
             if (string.IsNullOrWhiteSpace(training.Name))
                 return false;
+            foreach (Exercise exercise in training.Exercises)
+            {
+                if (exercise.Repetitions <= 0)
+                {
+                    return false;
+                }
+            }
 
             training.EndTime = training.EndTime.Trim();
             training.StartTime = training.StartTime.Trim();

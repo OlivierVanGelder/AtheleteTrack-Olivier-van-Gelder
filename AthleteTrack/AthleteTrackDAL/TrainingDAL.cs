@@ -43,38 +43,35 @@ namespace AthleteTrackDAL
         public void AddTraining(Training training)
         {
             SqlConnection conn = new(connectionString);
+            conn.Open();
             SqlTransaction transaction = conn.BeginTransaction();
 
             try
             {
-                conn.Open();
-                transaction = conn.BeginTransaction();
                 SqlCommand cmd = new(
                     "INSERT INTO Trainingsschema (Naam, Begintijd, Eindtijd) " +
-                    "VALUES(@name, @starttime, @endtime)", conn);
+                    "VALUES(@name, @starttime, @endtime)", conn, transaction);
                 cmd.Parameters.AddWithValue("@name", training.Name);
                 cmd.Parameters.AddWithValue("@starttime", training.StartTime);
                 cmd.Parameters.AddWithValue("@endtime", training.EndTime);
-                cmd.Transaction = transaction;
                 cmd.ExecuteNonQuery();
-                SqlCommand trainingIDcmd = new("SELECT TOP 1 ID FROM Trainingsschema ORDER BY ID DESC;", conn);
+                SqlCommand trainingIDcmd = new("SELECT TOP 1 ID FROM Trainingsschema ORDER BY ID DESC;", conn, transaction);
                 int trainingsID = (int)trainingIDcmd.ExecuteScalar();
 
                 foreach (Exercise exercise in training.Exercises)
                 {
                     SqlCommand exerciseCmd = new("INSERT INTO TrainingsschemaOefening(Trainingsschema_ID, Oefening_ID, Herhalingen, Tijdsduur) " +
-                    "VALUES(@trainingsID, @disciplineID, @repetitions, @time);", conn);
+                    "VALUES(@trainingsID, @disciplineID, @repetitions, @time);", conn, transaction);
 
                     if (exercise.ID == null)
                     {
                         SqlCommand addexerciseCmd = new("INSERT INTO Oefening(Naam, Beschrijving) " +
-                        "VALUES(@name, @description); ", conn);
+                        "VALUES(@name, @description); ", conn, transaction);
                         addexerciseCmd.Parameters.AddWithValue("@name", exercise.Name);
                         addexerciseCmd.Parameters.AddWithValue("@description", exercise.Description);
-                        addexerciseCmd.Transaction = transaction;
                         addexerciseCmd.ExecuteNonQuery();
 
-                        SqlCommand exerciseIDcmd = new("SELECT TOP 1 ID FROM Oefening ORDER BY ID DESC;", conn);
+                        SqlCommand exerciseIDcmd = new("SELECT TOP 1 ID FROM Oefening ORDER BY ID DESC;", conn, transaction);
                         int exerciseID = (int)exerciseIDcmd.ExecuteScalar();
                         exercise.ID = exerciseID;
                     }
@@ -83,16 +80,15 @@ namespace AthleteTrackDAL
                     exerciseCmd.Parameters.AddWithValue("@disciplineID", exercise.ID);
                     exerciseCmd.Parameters.AddWithValue("@repetitions", exercise.Repetitions);
                     exerciseCmd.Parameters.AddWithValue("@time", exercise.Time);
-                    exerciseCmd.Transaction = transaction;
                     exerciseCmd.ExecuteNonQuery();
                 }
-                conn.Close();
                 transaction.Commit();
+                conn.Close();
             }
-            catch
+            catch (SqlException ex)
             {
                 transaction.Rollback();
-                Debug.WriteLine("Transaction rolled back");
+                Debug.WriteLine($"Transaction rolled back: {ex}");
             }
         }
     }

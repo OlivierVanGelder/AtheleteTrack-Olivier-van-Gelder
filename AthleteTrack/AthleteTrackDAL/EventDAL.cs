@@ -40,12 +40,11 @@ namespace AthleteTrackDAL
         public void AddEvent(Event @event)
         {
             SqlConnection conn = new(connectionString);
+            conn.Open();
             SqlTransaction transaction = conn.BeginTransaction();
 
             try
             {
-                conn.Open();
-                transaction = conn.BeginTransaction();
                 SqlCommand cmd = new(
                     "INSERT INTO Wedstrijdschema (Naam, Begintijd, Eindtijd, Datum)" +
                     "VALUES (@name, @starttime, @endtime, @date);", conn);

@@ -28,35 +28,35 @@
                 <div class="col">
                     <h4>Datum:</h4>
                     <div class="input-group input-group-sm me-2">
-                        <input type="date" asp-for="Date" />
+                        <input class="form-control" type="date" asp-for="Date" />
                     </div>
                 </div>
                 <div class="col">
                     <h4>Tijdsduur:</h4>
                     <div class="d-flex">
                         <div class="input-group input-group-sm">
-                            <input type="time" asp-for="StartTime" />
+                            <input class="form-control" type="time" asp-for="StartTime" />
                         </div>
                         <h5 class="ms-2 me-2">tot</h5>
                         <div class="input-group input-group-sm">
-                            <input type="time" asp-for="EndTime" />
+                            <input class="form-control" type="time" asp-for="EndTime" />
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row border border-dark mt-2">
-                <div class="row ms-2 mt-2">
-                    <div class="col ms-3">
+                <div class="row mt-2">
+                    <div class="col">
                         <h5>
                             Onderdelen
                         </h5>
                     </div>
-                    <div class="col ms-3">
+                    <div class="col">
                         <h5>
                             Tijd
                         </h5>
                     </div>
-                    <div class="col ms-3">
+                    <div class="col">
                         <h5>
                             Atleten
                         </h5>
@@ -67,9 +67,9 @@
                 {
                     var discipline = Model.SelectedDisciplines[i];
 
-                    <div class="row m-3 ms-2 mt-2">
+                    <div class="row mb-3">
                         <div class="col">
-                            <select asp-for="SelectedDisciplines[i].Name">
+                            <select class="form-control" asp-for="SelectedDisciplines[i].Name">
                                 @foreach(var option in Model.Disciplines)
                                 {
                                     @if (discipline.Name == option.Name)
@@ -84,17 +84,21 @@
                             </select>
                         </div>
                         <div class="col" style="font-weight:bold">
-                            <input type="time" asp-for="SelectedDisciplines[i].StartTime" />
-                            tot
-                            <input type="time" asp-for="SelectedDisciplines[i].EndTime" />
+                            <div class="d-flex gap-2">
+                                <input class="form-control" type="time" asp-for="SelectedDisciplines[i].StartTime" />
+                                tot
+                                <input class="form-control" type="time" asp-for="SelectedDisciplines[i].EndTime" />
+                            </div>
                         </div>
                         <div class="col">
                             @for (int a = 0; a < discipline.Athletes.Count; a++)
                             {
-                                <input type="text" asp-for="SelectedDisciplines[i].Athletes[a].Name" value="@discipline.Athletes[a].Name" />
+                                <input class="form-control mb-3" type="text" asp-for="SelectedDisciplines[i].Athletes[a].Name" value="@discipline.Athletes[a].Name" />
                             }
-                            <input type="text" asp-for="SelectedDisciplines[i].SelectedAthlete" value=""/>
-                            <input type="submit" asp-for="Action" value="Save" class="btn btn-secondary mb-1" style="padding-right:8px; padding-left:8px; padding-top:0px; padding-bottom:2px" />
+                            <div class="d-flex gap-3">
+                                <input class="form-control" type="text" asp-for="SelectedDisciplines[i].SelectedAthlete" value="" />
+                                <input type="submit" asp-for="Action" value="Save" class="btn btn-secondary form-control"/>
+                            </div>
                         </div>
                     </div> 
                 }               
