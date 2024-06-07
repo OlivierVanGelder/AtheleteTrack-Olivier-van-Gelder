@@ -13,6 +13,6 @@ namespace AthleteTrackLogic.Classes
         public string StartTime { get; set; }
         public string EndTime { get; set; }
 
-        public List<Exercise> Exercises { get; set; }
+        public List<Exercise> Exercises { get; set; } = new();
     }
 }

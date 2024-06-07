@@ -17,6 +17,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AthleteTrackDAL\AthleteTrackDAL.csproj" />
+    <ProjectReference Include="..\AthleteTrackLogic\AthleteTrackLogic.csproj" />
+    <ProjectReference Include="..\AthleteTrack\AthleteTrackMVC.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
   </ItemGroup>
 
