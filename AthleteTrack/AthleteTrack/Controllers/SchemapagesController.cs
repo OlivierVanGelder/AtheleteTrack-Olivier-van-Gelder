@@ -184,6 +184,39 @@ namespace AthleteTrack.Controllers
             return View(model);
         }
 
+        public IActionResult NewExercise()
+        {
+            NewExerciseModel model = new();
+            model.NewExercise = new();
+            model.NewExercise.Time = "";
+            model.NewExercise.Repetitions = 0;
+            model.NewExercise.ID = 0;
+            model.ErrorMessage = "";
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult NewExercise(NewExerciseModel model)
+        {
+            if (string.IsNullOrEmpty(model.NewExercise.Name) || string.IsNullOrEmpty(model.NewExercise.Description))
+            {
+                model.ErrorMessage = "Voer alle lege velden in A.U.B.";
+            }
+            else
+            {
+                ExerciseDAL exerciseDAL = new ExerciseDAL();
+                Exercise exercise = new();
+                exercise.Name = model.NewExercise.Name;
+                exercise.Description = model.NewExercise.Description;
+                exercise.Time = model.NewExercise.Time;
+                exercise.Repetitions = model.NewExercise.Repetitions;
+                exerciseDAL.AddExercise(exercise);
+            }
+
+            return View(model);
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

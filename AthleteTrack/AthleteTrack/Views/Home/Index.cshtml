@@ -17,6 +17,9 @@
             <div class="row justify-content-end">
                 <button class="btn btn-light col flex-grow-0 text-nowrap m-1"><a asp-area="" asp-controller="Schemapages" asp-action="CreateWedstrijdschema" style="text-decoration : none; color :#ffb263">Maak Wedstrijd</a></button>
             </div>
+            <div class="row justify-content-end">
+                <button class="btn btn-light col flex-grow-0 text-nowrap m-1"><a asp-area="" asp-controller="Schemapages" asp-action="NewExercise" style="text-decoration : none; color :#ffb263">Maak Oefening</a></button>
+            </div>
         </div>
     </div>
     <div class="row text-center">
@@ -29,7 +32,19 @@
         <div class="list-group row m-4 ms-3">
             @foreach (var result in Model.Results)
             {
-                <a href="/Schemapages/@result.searchType?ID=@result.ID" class="list-group-item me-5">@result.Name</a>
+                <div class="list-group-item">
+                    <span class="material-symbols-rounded">
+                        @if(result.searchType == AthleteTrackLogic.Classes.SearchResult.SearchType.Wedstrijdschema)
+                        {
+                            <text>scoreboard</text>
+                        }
+                        else
+                        {
+                            <text>exercise</text>
+                        }
+                    </span>
+                    <a class="nav-link d-inline" href="/Schemapages/@result.searchType?ID=@result.ID">@result.Name</a>
+                </div>
             }
         </div>
     </div>

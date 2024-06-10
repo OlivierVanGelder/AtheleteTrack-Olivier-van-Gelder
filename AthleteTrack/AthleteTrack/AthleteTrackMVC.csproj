@@ -26,4 +26,12 @@
     <ProjectReference Include="..\AthleteTrackLogic\AthleteTrackLogic.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Schemapages\NewExercise.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Schemapages\NewExercise.cshtml" />
+  </ItemGroup>
+
 </Project>

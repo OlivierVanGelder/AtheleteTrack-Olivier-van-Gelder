@@ -2,6 +2,7 @@
 using AthleteTrackLogic.Classes;
 using AthleteTrackLogic.Interfaces;
 using Microsoft.Data.SqlClient;
+using System.Diagnostics;
 
 namespace AthleteTrackDAL
 {
@@ -63,6 +64,30 @@ namespace AthleteTrackDAL
             }
             cmd.Connection.Close();
             return exercises;
+        }
+
+        public void AddExercise(Exercise exercise)
+        {
+            SqlConnection conn = new(connectionString);
+            conn.Open();
+            SqlTransaction transaction = conn.BeginTransaction();
+
+            try
+            {
+                SqlCommand exercideCMD = new("INSERT INTO Oefening(Naam, Beschrijving) VALUES (@Name, @Description);", conn);
+                exercideCMD.Parameters.AddWithValue("@Name", exercise.Name);
+                exercideCMD.Parameters.AddWithValue("@Desciption", exercise.Description);
+                exercideCMD.Transaction = transaction;
+                exercideCMD.ExecuteNonQuery();
+
+                conn.Close();
+                transaction.Commit();
+            }
+            catch
+            {
+                transaction.Rollback();
+                Debug.WriteLine("Transaction rolled back");
+            }
         }
     }
 }
