@@ -5,7 +5,7 @@ namespace TestAthleteTrack
 {
     internal class MockEventDAL : IEventDAL
     {
-        public void AddEvent(Event @event) { }
+        public bool AddEvent(Event @event) { return true; }
 
         public Event MockEvent { get; set; } = new();
 

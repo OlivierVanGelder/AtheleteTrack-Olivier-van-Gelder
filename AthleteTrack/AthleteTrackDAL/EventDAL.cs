@@ -37,7 +37,7 @@ namespace AthleteTrackDAL
             return @event;
         }
 
-        public void AddEvent(Event @event)
+        public bool AddEvent(Event @event)
         {
             SqlConnection conn = new(connectionString);
             conn.Open();
@@ -93,13 +93,19 @@ namespace AthleteTrackDAL
                         }
                     }
                 }
-                conn.Close();
-                transaction.Commit(); 
+
+                transaction.Commit();
+                return true;
             }
             catch
             {
                 transaction.Rollback();
                 Debug.WriteLine("Transaction rolled back");
+                return false;
+            }
+            finally
+            {
+                conn.Close();
             }
         }
     }

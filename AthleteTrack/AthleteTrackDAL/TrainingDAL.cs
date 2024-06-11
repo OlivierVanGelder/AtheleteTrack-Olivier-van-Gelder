@@ -40,7 +40,7 @@ namespace AthleteTrackDAL
             return training;
         }
 
-        public void AddTraining(Training training)
+        public bool AddTraining(Training training)
         {
             SqlConnection conn = new(connectionString);
             conn.Open();
@@ -82,13 +82,19 @@ namespace AthleteTrackDAL
                     exerciseCmd.Parameters.AddWithValue("@time", exercise.Time);
                     exerciseCmd.ExecuteNonQuery();
                 }
+
                 transaction.Commit();
-                conn.Close();
+                return true;
             }
             catch (SqlException ex)
             {
                 transaction.Rollback();
                 Debug.WriteLine($"Transaction rolled back: {ex}");
+                return false;
+            }
+            finally
+            {
+                conn.Close();
             }
         }
     }

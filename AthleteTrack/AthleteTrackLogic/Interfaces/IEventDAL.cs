@@ -11,6 +11,6 @@ namespace AthleteTrackLogic.Interfaces
     {
         public Event GetEventDetails(int ID);
 
-        public void AddEvent(Event @event);
+        public bool AddEvent(Event @event);
     }
 }

@@ -122,10 +122,17 @@ namespace AthleteTrack.Controllers
                     }
                 }
 
+                model.ErrorMessage = null;
+                model.SuccesMessage = null;
                 @event.Disciplines = model.SelectedDisciplines;
                 if (!eventLogic.AddEvent(@event, eventDAL))
                 {
                     model.ErrorMessage = "Voer alle lege velden in A.U.B.";
+                    return View(model);
+                }
+                else
+                {
+                    model.SuccesMessage = "Wedstrijdschema is toegevoegd!";
                     return View(model);
                 }
             }

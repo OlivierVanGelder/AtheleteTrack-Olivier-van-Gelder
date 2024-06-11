@@ -66,7 +66,7 @@ namespace AthleteTrackDAL
             return exercises;
         }
 
-        public void AddExercise(Exercise exercise)
+        public bool AddExercise(Exercise exercise)
         {
             SqlConnection conn = new(connectionString);
             conn.Open();
@@ -74,19 +74,26 @@ namespace AthleteTrackDAL
 
             try
             {
-                SqlCommand exercideCMD = new("INSERT INTO Oefening(Naam, Beschrijving) VALUES (@Name, @Description);", conn);
+                SqlCommand exercideCMD = new(
+                    "INSERT INTO Oefening (Naam, Beschrijving) " +
+                    "VALUES (@Name, @Description);", conn);
                 exercideCMD.Parameters.AddWithValue("@Name", exercise.Name);
-                exercideCMD.Parameters.AddWithValue("@Desciption", exercise.Description);
+                exercideCMD.Parameters.AddWithValue("@Description", exercise.Description);
                 exercideCMD.Transaction = transaction;
                 exercideCMD.ExecuteNonQuery();
 
-                conn.Close();
                 transaction.Commit();
+                return true;
             }
             catch
             {
                 transaction.Rollback();
                 Debug.WriteLine("Transaction rolled back");
+                return false;
+            }
+            finally
+            {
+                conn.Close();
             }
         }
     }

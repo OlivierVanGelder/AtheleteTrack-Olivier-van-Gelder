@@ -1,9 +1,4 @@
 ﻿using AthleteTrackLogic.Classes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AthleteTrackLogic.Interfaces
 {
@@ -11,6 +6,6 @@ namespace AthleteTrackLogic.Interfaces
     {
         public Training GetTrainingsDetails(int ID);
 
-        public void AddTraining(Training training);
+        public bool AddTraining(Training training);
     }
 }

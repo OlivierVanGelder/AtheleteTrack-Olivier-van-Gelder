@@ -35,7 +35,8 @@ namespace AthleteTrackLogic
             @event.StartTime = @event.StartTime.Trim();
             @event.Name = @event.Name.Trim();
 
-            eventDAL.AddEvent(@event);
+            if (!eventDAL.AddEvent(@event))
+                return false;
             return true;
         }
     }

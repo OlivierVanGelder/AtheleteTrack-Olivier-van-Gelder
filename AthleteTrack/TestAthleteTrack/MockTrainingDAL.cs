@@ -5,7 +5,7 @@ namespace TestAthleteTrack
 {
     internal class MockTrainingDAL : ITrainingDAL
     {
-        public void AddTraining(Training training) { }
+        public bool AddTraining(Training training) { return true; }
 
         public Training MockTraining { get; set; } = new();
 

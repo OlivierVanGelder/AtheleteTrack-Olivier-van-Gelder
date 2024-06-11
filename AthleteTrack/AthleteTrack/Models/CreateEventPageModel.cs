@@ -12,5 +12,6 @@ namespace AthleteTrackMVC.Models
         public List<Discipline> SelectedDisciplines { get; set; } = new();
         public string Action { get; set; } = "New";
         public string? ErrorMessage { get; set; } = null;
+        public string? SuccesMessage { get; set; } = null;
     }
 }

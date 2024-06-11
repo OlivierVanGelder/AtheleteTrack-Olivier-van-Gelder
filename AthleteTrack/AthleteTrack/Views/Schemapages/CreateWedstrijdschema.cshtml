@@ -15,6 +15,16 @@
             </div>
         </div>
     }
+    @if (Model.SuccesMessage != null)
+    {
+        <div class="row text-center">
+            <div class="col mx-5">
+                <div class="alert alert-succes">
+                    @Model.SuccesMessage
+                </div>
+            </div>
+        </div>
+    }
     <div class="row text-center mb-5">
         <div class="col mt-4">
             <div class="input-group input-group-lg">
