@@ -162,7 +162,7 @@ namespace AthleteTrack.Controllers
             if (model.Action == "New")
                 model.SelectedExercises.Add(new Exercise { Name = "Pushup"});
 
-            if (model.Action == "Save")
+            if (model.Action == "Submit")
             {
                 Training training = new();
 
@@ -185,6 +185,11 @@ namespace AthleteTrack.Controllers
                 if (!trainingLogic.AddTraining(training, trainingDAL))
                 {
                     model.ErrorMessage = "Voer alle lege velden in A.U.B. (geen negatieve getallen)";
+                    return View(model);
+                }
+                else
+                {
+                    model.SuccesMessage = "Trainingsschema is toegevoegd!";
                     return View(model);
                 }
             }

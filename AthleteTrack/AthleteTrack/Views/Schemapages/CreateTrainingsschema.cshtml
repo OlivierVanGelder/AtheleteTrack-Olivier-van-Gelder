@@ -15,6 +15,16 @@
             </div>
         </div>
     }
+    @if (Model.SuccesMessage != null)
+    {
+        <div class="row text-center">
+            <div class="col mx-5">
+                <div class="alert alert-success">
+                    @Model.SuccesMessage
+                </div>
+            </div>
+        </div>
+    }
     <div class="row text-center mb-5">
         <div class="col mt-4">
             <div class="input-group input-group-lg">
@@ -81,7 +91,7 @@
         </div>
         <div class="row">
             <input type="submit" asp-for="Action" value="New" class="mt-2 btn btn-secondary" style="max-width:100px" />
-            <input type="submit" asp-for="Action" value="Save" class="mt-2 ms-1 btn btn-secondary" style="max-width:100px" />
+            <input type="submit" asp-for="Action" value="Submit" class="mt-2 ms-1 btn btn-secondary" style="max-width:100px" />
         </div>
     </div>
 </form>

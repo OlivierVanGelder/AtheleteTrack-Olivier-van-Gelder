@@ -1,14 +1,8 @@
-﻿using AthleteTrackDAL.DTO_s;
-using AthleteTrackLogic.Classes;
+﻿using AthleteTrackLogic.Classes;
 using AthleteTrackLogic.Interfaces;
 using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
 using System.Data.Common;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AthleteTrackDAL
 {
@@ -56,6 +50,7 @@ namespace AthleteTrackDAL
                 cmd.Parameters.AddWithValue("@endtime", training.EndTime);
                 cmd.ExecuteNonQuery();
                 SqlCommand trainingIDcmd = new("SELECT TOP 1 ID FROM Trainingsschema ORDER BY ID DESC;", conn, transaction);
+                trainingIDcmd.Transaction = transaction;
                 int trainingsID = (int)trainingIDcmd.ExecuteScalar();
 
                 foreach (Exercise exercise in training.Exercises)
@@ -72,6 +67,7 @@ namespace AthleteTrackDAL
                         addexerciseCmd.ExecuteNonQuery();
 
                         SqlCommand exerciseIDcmd = new("SELECT TOP 1 ID FROM Oefening ORDER BY ID DESC;", conn, transaction);
+                        exerciseIDcmd.Transaction = transaction;
                         int exerciseID = (int)exerciseIDcmd.ExecuteScalar();
                         exercise.ID = exerciseID;
                     }
@@ -84,17 +80,15 @@ namespace AthleteTrackDAL
                 }
 
                 transaction.Commit();
+                conn.Close();
                 return true;
             }
             catch (SqlException ex)
             {
                 transaction.Rollback();
                 Debug.WriteLine($"Transaction rolled back: {ex}");
-                return false;
-            }
-            finally
-            {
                 conn.Close();
+                return false;
             }
         }
     }

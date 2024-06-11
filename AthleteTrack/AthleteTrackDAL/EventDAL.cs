@@ -55,6 +55,7 @@ namespace AthleteTrackDAL
                 cmd.Transaction = transaction;
                 cmd.ExecuteNonQuery();
                 SqlCommand eventIDcmd = new("SELECT TOP 1 ID FROM Wedstrijdschema ORDER BY ID DESC;", conn);
+                eventIDcmd.Transaction = transaction;
                 int eventID = (int)eventIDcmd.ExecuteScalar();
 
                 foreach (Discipline discipline in @event.Disciplines)
@@ -69,6 +70,7 @@ namespace AthleteTrackDAL
                     disciplineCmd.ExecuteNonQuery();
 
                     SqlCommand eventdisciplineIDcmd = new("SELECT TOP 1 ID FROM WedstrijdschemaOnderdeel ORDER BY ID DESC;", conn);
+                    eventdisciplineIDcmd.Transaction = transaction;
                     int eventdisciplineID = (int)eventdisciplineIDcmd.ExecuteScalar();
 
                     if (discipline.Athletes != null)
@@ -82,6 +84,7 @@ namespace AthleteTrackDAL
                             insertathleteCmd.ExecuteNonQuery();
 
                             SqlCommand athleteIDcmd = new("SELECT TOP 1 ID FROM Atleet ORDER BY ID DESC;", conn);
+                            athleteIDcmd.Transaction = transaction;
                             athlete.ID = (int)athleteIDcmd.ExecuteScalar();
 
                             SqlCommand athleteCmd = new("INSERT INTO WedstrijdschemaOnderdeelAtleet(WedstrijdschemaOnderdeel_ID, Atleet_ID)" +
@@ -95,17 +98,15 @@ namespace AthleteTrackDAL
                 }
 
                 transaction.Commit();
+                conn.Close();
                 return true;
             }
             catch
             {
                 transaction.Rollback();
                 Debug.WriteLine("Transaction rolled back");
-                return false;
-            }
-            finally
-            {
                 conn.Close();
+                return false;
             }
         }
     }

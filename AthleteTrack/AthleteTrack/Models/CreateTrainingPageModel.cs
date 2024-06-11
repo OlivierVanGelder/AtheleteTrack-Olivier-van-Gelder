@@ -11,5 +11,6 @@ namespace AthleteTrackMVC.Models
         public List<Exercise> Exercises { get; set; }
         public List<Exercise> SelectedExercises { get; set; }
         public string? ErrorMessage { get; set; } = null;
+        public string? SuccesMessage { get; set; } = null;
     }
 }

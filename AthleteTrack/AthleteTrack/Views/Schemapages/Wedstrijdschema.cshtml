@@ -57,7 +57,17 @@
         </div>
         <div class="col ms-5 me-5">
             <div class="row">
-                <h4>Info:</h4>
+                <h4>Info:
+                    @{
+                        foreach (AthleteTrackLogic.Classes.Discipline discipline in Model.Disciplines)
+                        {
+                            if (discipline.DisciplineID == Model.OnderdeelID)
+                            {
+                                @discipline.Name;
+                            }
+                        }
+                    }
+                </h4>
             </div>
             <div class="row border border-dark">
                 <div class="row ms-0 mt-3">
