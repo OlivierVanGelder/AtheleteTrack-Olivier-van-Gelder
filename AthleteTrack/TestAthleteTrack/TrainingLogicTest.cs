@@ -1,5 +1,7 @@
 ﻿using AthleteTrackLogic.Classes;
 using AthleteTrackLogic;
+using Microsoft.Extensions.Logging;
+using System.Diagnostics;
 
 namespace TestAthleteTrack
 {
@@ -20,11 +22,18 @@ namespace TestAthleteTrack
             training.Exercises.Add(new Exercise() { Repetitions = 21 });
             training.Exercises.Add(new Exercise() { Repetitions = 15 });
 
-            // Act
-            bool result = trainingLogic.AddTraining(training, mocktrainingDAL);
+            try
+            {
+                // Act
+                bool result = trainingLogic.AddTraining(training, mocktrainingDAL);
 
-            // Assert
-            Assert.IsTrue(result);
+                // Assert
+                Assert.IsTrue(result);
+            }
+            catch (ArgumentException)
+            {
+                Assert.Fail();
+            }
         }
 
         [TestMethod]
@@ -37,11 +46,18 @@ namespace TestAthleteTrack
             training.StartTime = "10:00";
             training.EndTime = "12:00";
 
-            // Act
-            bool result = trainingLogic.AddTraining(training, mocktrainingDAL);
+            try
+            {
+                // Act
+                bool result = trainingLogic.AddTraining(training, mocktrainingDAL);
 
-            // Assert
-            Assert.IsFalse(result);
+                // Assert
+                Assert.Fail();
+            }
+            catch (ArgumentException ex)
+            {
+                Assert.AreEqual("Name cannot be empty", ex.Message);
+            }
         }
 
         [TestMethod]
@@ -54,11 +70,18 @@ namespace TestAthleteTrack
             training.EndTime = "12:00";
             training.Name = "Test training";
 
-            // Act
-            bool result = trainingLogic.AddTraining(training, mocktrainingDAL);
+            try
+            {
+                // Act
+                bool result = trainingLogic.AddTraining(training, mocktrainingDAL);
 
-            // Assert
-            Assert.IsFalse(result);
+                // Assert
+                Assert.Fail();
+            }
+            catch (ArgumentException ex)
+            {
+                Assert.AreEqual("StartTime cannot be empty", ex.Message);
+            }
         }
 
         [TestMethod]
@@ -71,11 +94,18 @@ namespace TestAthleteTrack
             training.StartTime = "10:00";
             training.Name = "Test training";
 
-            // Act
-            bool result = trainingLogic.AddTraining(training, mocktrainingDAL);
+            try
+            {
+                // Act
+                bool result = trainingLogic.AddTraining(training, mocktrainingDAL);
 
-            // Assert
-            Assert.IsFalse(result);
+                // Assert
+                Assert.Fail();
+            }
+            catch (ArgumentException ex)
+            {
+                Assert.AreEqual("EndTime cannot be empty", ex.Message);
+            }
         }
 
         [TestMethod]
@@ -95,11 +125,18 @@ namespace TestAthleteTrack
             training.Exercises.Add(new Exercise() { Repetitions = 189 });
             training.Exercises.Add(new Exercise() { Repetitions = 5 });
 
-            // Act
-            bool result = trainingLogic.AddTraining(training, mocktrainingDAL);
+            try
+            {
+                // Act
+                bool result = trainingLogic.AddTraining(training, mocktrainingDAL);
 
-            // Assert
-            Assert.IsFalse(result);
+                // Assert
+                Assert.Fail();
+            }
+            catch (ArgumentException ex)
+            {
+                Assert.AreEqual("Repetitions cannot be 0 or less", ex.Message);
+            }
         }
 
         [TestMethod]
@@ -112,11 +149,18 @@ namespace TestAthleteTrack
             exercise.Description = "Test description";
             exercise.Name = "Test exercise";
 
-            // Act
-            bool result = trainingLogic.AddExercise(exercise, mockExerciseDAL);
+            try
+            {
+                // Act
+                bool result = trainingLogic.AddExercise(exercise, mockExerciseDAL);
 
-            // Assert
-            Assert.IsTrue(result);
+                // Assert
+                Assert.IsTrue(result);
+            }
+            catch (ArgumentException)
+            {
+                Assert.Fail();
+            }
         }
 
         [TestMethod]
@@ -128,11 +172,18 @@ namespace TestAthleteTrack
             Exercise exercise = new Exercise();
             exercise.Description = "Test description";
 
-            // Act
-            bool result = trainingLogic.AddExercise(exercise, mockExerciseDAL);
+            try
+            {
+                // Act
+                bool result = trainingLogic.AddExercise(exercise, mockExerciseDAL);
 
-            // Assert
-            Assert.IsFalse(result);
+                // Assert
+                Assert.Fail();
+            }
+            catch (ArgumentException ex)
+            {
+                Assert.AreEqual("Name cannot be empty", ex.Message);
+            }
         }
 
         [TestMethod]
@@ -144,11 +195,18 @@ namespace TestAthleteTrack
             Exercise exercise = new Exercise();
             exercise.Name = "Test exercise";
 
-            // Act
-            bool result = trainingLogic.AddExercise(exercise, mockExerciseDAL);
+            try
+            {
+                // Act
+                bool result = trainingLogic.AddExercise(exercise, mockExerciseDAL);
 
-            // Assert
-            Assert.IsFalse(result);
+                // Assert
+                Assert.Fail();
+            }
+            catch (ArgumentException ex)
+            {
+                Assert.AreEqual("Description cannot be empty", ex.Message);
+            }
         }
     }
 }

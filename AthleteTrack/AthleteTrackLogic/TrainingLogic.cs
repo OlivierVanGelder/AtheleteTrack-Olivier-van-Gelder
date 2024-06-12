@@ -23,16 +23,16 @@ namespace AthleteTrackLogic
         {
 
             if (string.IsNullOrWhiteSpace(training.EndTime))
-                return false;
+                throw new ArgumentException("EndTime cannot be empty");
             if (string.IsNullOrWhiteSpace(training.StartTime))
-                return false;
+                throw new ArgumentException("StartTime cannot be empty");
             if (string.IsNullOrWhiteSpace(training.Name))
-                return false;
+                throw new ArgumentException("Name cannot be empty");
             foreach (Exercise exercise in training.Exercises)
             {
                 if (exercise.Repetitions <= 0)
                 {
-                    return false;
+                    throw new ArgumentException("Repetitions cannot be 0 or less");
                 }
             }
 
@@ -47,9 +47,9 @@ namespace AthleteTrackLogic
         public bool AddExercise(Exercise exercise, IExerciseDAL exerciseDAL)
         {
             if (string.IsNullOrWhiteSpace(exercise.Name))
-                return false;
+                throw new ArgumentException("Name cannot be empty");
             if (string.IsNullOrWhiteSpace(exercise.Description))
-                return false;
+                throw new ArgumentException("Description cannot be empty");
 
             exercise.Name = exercise.Name.Trim();
             exercise.Description = exercise.Description.Trim();

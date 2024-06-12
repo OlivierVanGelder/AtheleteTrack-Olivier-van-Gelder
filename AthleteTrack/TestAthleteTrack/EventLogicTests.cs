@@ -18,11 +18,18 @@ namespace TestAthleteTrack
             @event.EndTime = "12:00";
             @event.Name = "Test Event";
 
-            // Act
-            bool result = eventLogic.AddEvent(@event, mockEventDAL);
+            try
+            {
+                // Act
+                bool result = eventLogic.AddEvent(@event, mockEventDAL);
 
-            // Assert
-            Assert.IsTrue(result);
+                // Assert
+                Assert.IsTrue(result);
+            }
+            catch (ArgumentException)
+            {
+                Assert.Fail();
+            }
         }
 
         [TestMethod]
@@ -36,11 +43,18 @@ namespace TestAthleteTrack
             @event.StartTime = "10:00";
             @event.EndTime = "12:00";
 
-            // Act
-            bool result = eventLogic.AddEvent(@event, mockEventDAL);
+            try
+            {
+                // Act
+                bool result = eventLogic.AddEvent(@event, mockEventDAL);
 
-            // Assert
-            Assert.IsFalse(result);
+                // Assert
+                Assert.Fail();
+            }
+            catch (ArgumentException ex)
+            {
+                Assert.AreEqual("Name cannot be empty", ex.Message);
+            }
         }
 
         [TestMethod]
@@ -54,11 +68,18 @@ namespace TestAthleteTrack
             @event.EndTime = "12:00";
             @event.Name = "Test Event";
 
-            // Act
-            bool result = eventLogic.AddEvent(@event, mockEventDAL);
+            try
+            {
+                // Act
+                bool result = eventLogic.AddEvent(@event, mockEventDAL);
 
-            // Assert
-            Assert.IsFalse(result);
+                // Assert
+                Assert.Fail();
+            }
+            catch (ArgumentException ex)
+            {
+                Assert.AreEqual("Date cannot be empty", ex.Message);
+            }
         }
 
         [TestMethod]
@@ -72,11 +93,18 @@ namespace TestAthleteTrack
             @event.EndTime = "12:00";
             @event.Name = "Test Event";
 
-            // Act
-            bool result = eventLogic.AddEvent(@event, mockEventDAL);
+            try
+            {
+                // Act
+                bool result = eventLogic.AddEvent(@event, mockEventDAL);
 
-            // Assert
-            Assert.IsFalse(result);
+                // Assert
+                Assert.Fail();
+            }
+            catch (ArgumentException ex)
+            {
+                Assert.AreEqual("StartTime cannot be empty", ex.Message);
+            }
         }
 
         [TestMethod]
@@ -90,11 +118,18 @@ namespace TestAthleteTrack
             @event.StartTime = "10:00";
             @event.Name = "Test Event";
 
-            // Act
-            bool result = eventLogic.AddEvent(@event, mockEventDAL);
+            try
+            {
+                // Act
+                bool result = eventLogic.AddEvent(@event, mockEventDAL);
 
-            // Assert
-            Assert.IsFalse(result);
+                // Assert
+                Assert.Fail();
+            }
+            catch (ArgumentException ex)
+            {
+                Assert.AreEqual("EndTime cannot be empty", ex.Message);
+            }
         }
     }
 }

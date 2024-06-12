@@ -132,14 +132,22 @@ namespace AthleteTrack.Controllers
                 model.SuccesMessage = null;
                 @event.Disciplines = model.SelectedDisciplines;
 
-                if (!eventLogic.AddEvent(@event, eventDAL))
+                try
                 {
-                    model.ErrorMessage = "Wedstrijd toevoegen mislukt!";
-                    return View(model);
+                    if (!eventLogic.AddEvent(@event, eventDAL))
+                    {
+                        model.ErrorMessage = "Wedstrijd toevoegen mislukt!";
+                        return View(model);
+                    }
+                    else
+                    {
+                        model.SuccesMessage = "Wedstrijdschema is toegevoegd!";
+                        return View(model);
+                    }
                 }
-                else
+                catch (ArgumentException)
                 {
-                    model.SuccesMessage = "Wedstrijdschema is toegevoegd!";
+                    model.ErrorMessage = "Voer alle lege velden in A.U.B.";
                     return View(model);
                 }
             }
@@ -189,14 +197,22 @@ namespace AthleteTrack.Controllers
                 }
 
                 training.Exercises = model.SelectedExercises;
-                if (!trainingLogic.AddTraining(training, trainingDAL))
+                try
+                {
+                    if (!trainingLogic.AddTraining(training, trainingDAL))
+                    {
+                        model.ErrorMessage = "Voer alle lege velden in A.U.B. (geen negatieve getallen)";
+                        return View(model);
+                    }
+                    else
+                    {
+                        model.SuccesMessage = "Trainingsschema is toegevoegd!";
+                        return View(model);
+                    }
+                }
+                catch (ArgumentException)
                 {
                     model.ErrorMessage = "Voer alle lege velden in A.U.B. (geen negatieve getallen)";
-                    return View(model);
-                }
-                else
-                {
-                    model.SuccesMessage = "Trainingsschema is toegevoegd!";
                     return View(model);
                 }
             }
@@ -231,14 +247,20 @@ namespace AthleteTrack.Controllers
                 exercise.Description = model.NewExercise.Description;
                 exercise.Time = model.NewExercise.Time;
                 exercise.Repetitions = model.NewExercise.Repetitions;
-
-                if (!trainingLogic.AddExercise(exercise, exerciseDAL))
+                try
                 {
-                    model.ErrorMessage = "Oefening toevoegen mislukt!";
+                    if (!trainingLogic.AddExercise(exercise, exerciseDAL))
+                    {
+                        model.ErrorMessage = "Oefening toevoegen mislukt!";
+                    }
+                    else
+                    {
+                        model.SuccesMessage = "Oefening is toegevoegd!";
+                    }
                 }
-                else
+                catch (ArgumentException)
                 {
-                    model.SuccesMessage = "Oefening is toegevoegd!";
+                    model.ErrorMessage = "Voer alle lege velden in A.U.B.";
                 }
             }
 

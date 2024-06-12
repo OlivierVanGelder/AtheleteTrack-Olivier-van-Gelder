@@ -22,22 +22,20 @@ namespace AthleteTrackLogic
         public bool AddEvent(Event @event, IEventDAL eventDAL)
         {
             if (string.IsNullOrWhiteSpace(@event.Date))
-                return false;
-            if (string.IsNullOrWhiteSpace(@event.EndTime)) 
-                return false;
+                throw new ArgumentException("Date cannot be empty");
+            if (string.IsNullOrWhiteSpace(@event.EndTime))
+                throw new ArgumentException("EndTime cannot be empty");
             if (string.IsNullOrWhiteSpace(@event.StartTime))
-                return false;
+                throw new ArgumentException("StartTime cannot be empty");
             if (string.IsNullOrWhiteSpace(@event.Name))
-                return false;
+                throw new ArgumentException("Name cannot be empty");
 
             @event.Date = @event.Date.Trim();
             @event.EndTime = @event.EndTime.Trim();
             @event.StartTime = @event.StartTime.Trim();
             @event.Name = @event.Name.Trim();
 
-            if (!eventDAL.AddEvent(@event))
-                return false;
-            return true;
+            return eventDAL.AddEvent(@event);
         }
     }
 }
