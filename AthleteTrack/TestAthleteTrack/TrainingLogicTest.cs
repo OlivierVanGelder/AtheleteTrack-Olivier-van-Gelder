@@ -1,10 +1,5 @@
 ﻿using AthleteTrackLogic.Classes;
 using AthleteTrackLogic;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TestAthleteTrack
 {
@@ -102,6 +97,55 @@ namespace TestAthleteTrack
 
             // Act
             bool result = trainingLogic.AddTraining(training, mocktrainingDAL);
+
+            // Assert
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void TestAddExercise()
+        {
+            // Arrange
+            var mockExerciseDAL = new MockExerciseDAL();
+            var trainingLogic = new TrainingLogic();
+            Exercise exercise = new Exercise();
+            exercise.Description = "Test description";
+            exercise.Name = "Test exercise";
+
+            // Act
+            bool result = trainingLogic.AddExercise(exercise, mockExerciseDAL);
+
+            // Assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void TestAddExerciseNoName()
+        {
+            // Arrange
+            var mockExerciseDAL = new MockExerciseDAL();
+            var trainingLogic = new TrainingLogic();
+            Exercise exercise = new Exercise();
+            exercise.Description = "Test description";
+
+            // Act
+            bool result = trainingLogic.AddExercise(exercise, mockExerciseDAL);
+
+            // Assert
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void TestAddExerciseNoDescription()
+        {
+            // Arrange
+            var mockExerciseDAL = new MockExerciseDAL();
+            var trainingLogic = new TrainingLogic();
+            Exercise exercise = new Exercise();
+            exercise.Name = "Test exercise";
+
+            // Act
+            bool result = trainingLogic.AddExercise(exercise, mockExerciseDAL);
 
             // Assert
             Assert.IsFalse(result);
