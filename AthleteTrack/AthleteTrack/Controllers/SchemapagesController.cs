@@ -93,6 +93,12 @@ namespace AthleteTrack.Controllers
 
             if (model.Action == "Submit")
             {
+                if (string.IsNullOrWhiteSpace(model.Date) || string.IsNullOrWhiteSpace(model.EndTime) || string.IsNullOrWhiteSpace(model.StartTime) || string.IsNullOrWhiteSpace(model.Name))
+                {
+                    model.ErrorMessage = "Voer alle velden in A.U.B.";
+                    return View(model);
+                }
+
                 Event @event = new();
                 EventDAL eventDAL = new();
 
@@ -125,9 +131,10 @@ namespace AthleteTrack.Controllers
                 model.ErrorMessage = null;
                 model.SuccesMessage = null;
                 @event.Disciplines = model.SelectedDisciplines;
+
                 if (!eventLogic.AddEvent(@event, eventDAL))
                 {
-                    model.ErrorMessage = "Voer alle lege velden in A.U.B.";
+                    model.ErrorMessage = "Wedstrijd toevoegen mislukt!";
                     return View(model);
                 }
                 else
@@ -218,12 +225,21 @@ namespace AthleteTrack.Controllers
             else
             {
                 ExerciseDAL exerciseDAL = new ExerciseDAL();
+                TrainingLogic trainingLogic = new TrainingLogic();
                 Exercise exercise = new();
                 exercise.Name = model.NewExercise.Name;
                 exercise.Description = model.NewExercise.Description;
                 exercise.Time = model.NewExercise.Time;
                 exercise.Repetitions = model.NewExercise.Repetitions;
-                exerciseDAL.AddExercise(exercise);
+
+                if (!trainingLogic.AddExercise(exercise, exerciseDAL))
+                {
+                    model.ErrorMessage = "Oefening toevoegen mislukt!";
+                }
+                else
+                {
+                    model.SuccesMessage = "Oefening is toegevoegd!";
+                }
             }
 
             return View(model);

@@ -5,7 +5,7 @@
 @model CreateEventPageModel
 
 <form class="container" method="post">
-    @if (Model.ErrorMessage != null)
+    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
     {
         <div class="row text-center">
             <div class="col mx-5">
@@ -15,7 +15,7 @@
             </div>
         </div>
     }
-    @if (Model.SuccesMessage != null)
+    @if (!string.IsNullOrEmpty(Model.SuccesMessage))
     {
         <div class="row text-center">
             <div class="col mx-5">

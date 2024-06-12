@@ -43,5 +43,20 @@ namespace AthleteTrackLogic
             trainingDAL.AddTraining(training);
             return true;
         }
+
+        public bool AddExercise(Exercise exercise, IExerciseDAL exerciseDAL)
+        {
+            if (string.IsNullOrWhiteSpace(exercise.Name))
+                return false;
+            if (string.IsNullOrWhiteSpace(exercise.Description))
+                return false;
+
+            exercise.Name = exercise.Name.Trim();
+            exercise.Description = exercise.Description.Trim();
+
+            if (!exerciseDAL.AddExercise(exercise))
+                return false;
+            return true;
+        }
     }
 }
