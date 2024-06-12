@@ -1,5 +1,4 @@
-﻿using AthleteTrackDAL.DTO_s;
-using AthleteTrackLogic.Classes;
+﻿using AthleteTrackLogic.Classes;
 using AthleteTrackLogic.Interfaces;
 using Microsoft.Data.SqlClient;
 
