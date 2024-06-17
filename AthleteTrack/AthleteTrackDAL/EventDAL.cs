@@ -77,22 +77,42 @@ namespace AthleteTrackDAL
                     {
                         foreach (Athlete athlete in discipline.Athletes)
                         {
-                            SqlCommand insertathleteCmd = new("INSERT INTO Atleet(Naam) " +
-                            "VALUES(@name); ", conn);
-                            insertathleteCmd.Parameters.AddWithValue("@name", athlete.Name);
-                            insertathleteCmd.Transaction = transaction;
-                            insertathleteCmd.ExecuteNonQuery();
+                            SqlCommand checkAthleteCmd = new("SELECT TOP (1) [ID] " +
+                                "FROM Atleet " +
+                                "WHERE Atleet.Naam = @name; ", conn);
+                            checkAthleteCmd.Parameters.AddWithValue("@name", athlete.Name);
+                            checkAthleteCmd.Transaction = transaction;
+                            int? athleteID = (int)checkAthleteCmd.ExecuteScalar();
 
-                            SqlCommand athleteIDcmd = new("SELECT TOP 1 ID FROM Atleet ORDER BY ID DESC;", conn);
-                            athleteIDcmd.Transaction = transaction;
-                            athlete.ID = (int)athleteIDcmd.ExecuteScalar();
+                            if (athleteID == null)
+                            {
 
-                            SqlCommand athleteCmd = new("INSERT INTO WedstrijdschemaOnderdeelAtleet(WedstrijdschemaOnderdeel_ID, Atleet_ID)" +
-                                "VALUES (@eventdisciplineID, @athleteID);", conn);
-                            athleteCmd.Parameters.AddWithValue("@eventdisciplineID", eventdisciplineID);
-                            athleteCmd.Parameters.AddWithValue("@athleteID", athlete.ID);
-                            athleteCmd.Transaction = transaction;
-                            athleteCmd.ExecuteNonQuery();
+                                SqlCommand insertathleteCmd = new("INSERT INTO Atleet(Naam) " +
+                                "VALUES(@name); ", conn);
+                                insertathleteCmd.Parameters.AddWithValue("@name", athlete.Name);
+                                insertathleteCmd.Transaction = transaction;
+                                insertathleteCmd.ExecuteNonQuery();
+
+                                SqlCommand athleteIDcmd = new("SELECT TOP 1 ID FROM Atleet ORDER BY ID DESC;", conn);
+                                athleteIDcmd.Transaction = transaction;
+                                athlete.ID = (int)athleteIDcmd.ExecuteScalar();
+
+                                SqlCommand athleteCmd = new("INSERT INTO WedstrijdschemaOnderdeelAtleet(WedstrijdschemaOnderdeel_ID, Atleet_ID)" +
+                                    "VALUES (@eventdisciplineID, @athleteID);", conn);
+                                athleteCmd.Parameters.AddWithValue("@eventdisciplineID", eventdisciplineID);
+                                athleteCmd.Parameters.AddWithValue("@athleteID", athlete.ID);
+                                athleteCmd.Transaction = transaction;
+                                athleteCmd.ExecuteNonQuery();
+                            }
+                            else
+                            {
+                                SqlCommand athleteCmd = new("INSERT INTO WedstrijdschemaOnderdeelAtleet(WedstrijdschemaOnderdeel_ID, Atleet_ID)" +
+                                    "VALUES (@eventdisciplineID, @athleteID);", conn);
+                                athleteCmd.Parameters.AddWithValue("@eventdisciplineID", eventdisciplineID);
+                                athleteCmd.Parameters.AddWithValue("@athleteID", athleteID);
+                                athleteCmd.Transaction = transaction;
+                                athleteCmd.ExecuteNonQuery();
+                            }
                         }
                     }
                 }
